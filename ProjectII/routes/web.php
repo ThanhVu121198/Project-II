@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('front.index');
+    // return view('front.index');
+    return \App\Models\User::all();
 });
 Route::get('admin/users/login',[\App\Http\Controllers\Admin\User\loginController::class,'index']);
