@@ -2,6 +2,7 @@
 <html lang="zxx">
 <head>
 
+    <base href="{{ asset('/') }}">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>@yield('title')</title>
@@ -42,42 +43,6 @@
 
         <!-- Begin Main Header Area -->
         <header class="main-header-area">
-            <div class="header-top bg-pronia-primary d-none d-lg-block">
-                <div class="container">
-                    <div class="row align-items-center">
-                        <div class="col-6">
-                            <div class="header-top-left">
-                                <span class="pronia-offer">HELLO EVERYONE! 25% Off All Products</span>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="header-top-right">
-                                <ul class="dropdown-wrap">
-                                    <li class="dropdown">
-                                        <button class="btn btn-link dropdown-toggle ht-btn" type="button" id="currencyButton" data-bs-toggle="dropdown" aria-label="currency" aria-expanded="false">
-                                            USD
-                                        </button>
-                                        <ul class="dropdown-menu" aria-labelledby="currencyButton">
-                                            <li><a class="dropdown-item" href="#">GBP</a></li>
-                                            <li><a class="dropdown-item" href="#">ISO</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="dropdown">
-                                        <button class="btn btn-link dropdown-toggle ht-btn" type="button" id="languageButton" data-bs-toggle="dropdown" aria-label="language" aria-expanded="false">
-                                            English
-                                        </button>
-                                        <ul class="dropdown-menu" aria-labelledby="languageButton">
-                                            <li><a class="dropdown-item" href="#">French</a></li>
-                                            <li><a class="dropdown-item" href="#">Italian</a></li>
-                                            <li><a class="dropdown-item" href="#">Spanish</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <div class="header-middle py-30">
                 <div class="container">
                     <div class="row align-items-center">
@@ -87,8 +52,7 @@
                                     <i class="pe-7s-call"></i>
                                     <a href="tel://+00-123-456-789">+00 123 456 789</a>
                                 </div>
-
-                                <a href="index.html" class="header-logo">
+                                <a href="./" class="{{ (request()->segment(1) == '') ? 'header-logo' : '' }}">
                                     <img src="front/images/logo/dark.png" alt="Header Logo">
                                 </a>
 
@@ -104,13 +68,13 @@
                                                 <i class="pe-7s-users"></i>
                                             </button>
                                             <ul class="dropdown-menu" aria-labelledby="settingButton">
-                                                <li><a class="dropdown-item" href="my-account.html">My account</a></li>
-                                                <li><a class="dropdown-item" href="login-register.html">Login | Register</a>
+                                                <li class="{{ (request()->segment(1) == '') ? '' : '' }}"><a  class="dropdown-item"  href="./account">My account</a></li>
+                                                <li class="{{ (request()->segment(1) == '') ? '' : '' }}"><a class="dropdown-item"  href="./logout">Login | Register</a>
                                                 </li>
                                             </ul>
                                         </li>
-                                        <li class="d-none d-lg-block">
-                                            <a href="wishlist.html">
+                                        <li class="{{ (request()->segment(1) == '') ? 'd-none d-lg-block' : '' }}">
+                                            <a href="./wishList">
                                                 <i class="pe-7s-like"></i>
                                             </a>
                                         </li>
@@ -139,27 +103,20 @@
                             <div class="main-menu position-relative">
                                 <nav class="main-nav">
                                     <ul>
-                                        <li class="drop-holder">
-                                            <a href="index.html">Home</a>
-                                            <ul class="drop-menu">
-                                                <li>
-                                                    <a href="index.html">Home One</a>
-                                                </li>
-                                                <li>
-                                                    <a href="index-2.html">Home Two</a>
-                                                </li>
-                                            </ul>
+                                        <li class="{{ (request()->segment(1) == '') ? 'drop-holder' : '' }}">
+                                            <a href="./">Home</a>
                                         </li>
-                                        <li class="megamenu-holder">
-                                            <a href="shop.html">Shop</a>
+                                        <li class="{{ (request()->segment(1) == 'shop') ? 'megamenu-holder' : '' }}">
+                                            <a href="./shop">Shop</a>
                                             <ul class="drop-menu megamenu">
                                                 <li>
-                                                    <span class="title">Shop Layout</span>
                                                     <ul>
-                                                        <li>
-                                                            <a href="shop.html">Shop Default</a>
-                                                        </li>
-                                                        <li>
+                                                        @foreach($categoryProducts as $categoryProduct)
+                                                            <li>
+                                                                <a href="shop.html">{{$categoryProduct->name}}</a>
+                                                            </li>
+                                                        @endforeach
+                                                        {{-- <li>
                                                             <a href="shop-grid-fullwidth.html">Shop Grid Fullwidth</a>
                                                         </li>
                                                         <li>
@@ -173,10 +130,10 @@
                                                         </li>
                                                         <li>
                                                             <a href="shop-list-right-sidebar.html">Shop List Right Sidebar</a>
-                                                        </li>
+                                                        </li> --}}
                                                     </ul>
                                                 </li>
-                                                <li>
+                                                {{-- <li>
                                                     <span class="title">Product Style</span>
                                                     <ul>
                                                         <li>
@@ -221,36 +178,20 @@
                                                             <a href="checkout.html">Checkout</a>
                                                         </li>
                                                     </ul>
-                                                </li>
+                                                </li> --}}
                                             </ul>
                                         </li>
-                                        <li class="drop-holder">
-                                            <a href="blog.html">Blog</a>
-                                            <ul class="drop-menu">
-                                                <li>
-                                                    <a href="blog-listview.html">Blog List View</a>
-                                                </li>
-                                                <li>
-                                                    <a href="blog-detail.html">Blog Detail</a>
-                                                </li>
-                                            </ul>
+                                        <li class="{{ (request()->segment(1) == 'blog') ? 'drop-holder' : '' }}">
+                                            <a href="./blog">Blog</a>
                                         </li>
-                                        <li>
-                                            <a href="about.html">About Us</a>
+                                        <li class="{{ (request()->segment(1) == 'about') ? 'drop-holder' : '' }}">
+                                            <a href="./about">About Us</a>
                                         </li>
-                                        <li class="drop-holder">
-                                            <a href="#">Pages</a>
-                                            <ul class="drop-menu">
-                                                <li>
-                                                    <a href="faq.html">FAQ</a>
-                                                </li>
-                                                <li>
-                                                    <a href="404.html">Error 404</a>
-                                                </li>
-                                            </ul>
+                                        <li class="{{ (request()->segment(1) == 'faq') ? 'drop-holder' : '' }}">
+                                            <a href="./faq">FAQ</a>
                                         </li>
-                                        <li>
-                                            <a href="contact.html">Contact Us</a>
+                                        <li class="{{ (request()->segment(1) == 'contact') ? 'drop-holder' : '' }}">
+                                            <a href="./contact">Contact Us</a>
                                         </li>
                                     </ul>
                                 </nav>
@@ -265,7 +206,7 @@
                         <div class="row align-items-center">
                             <div class="col-lg-3 col-6">
 
-                                <a href="index.html" class="header-logo">
+                                <a href="./" class="{{ (request()->segment(1) == '') ? 'header-logo' : '' }}">
                                     <img src="front/images/logo/dark.png" alt="Header Logo">
                                 </a>
 
@@ -274,19 +215,11 @@
                                 <div class="main-menu">
                                     <nav class="main-nav">
                                         <ul>
-                                            <li class="drop-holder">
-                                                <a href="index.blade">Home</a>
-                                                <ul class="drop-menu">
-                                                    <li>
-                                                        <a href="index.blade">Home One</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="index-2.blade">Home Two</a>
-                                                    </li>
-                                                </ul>
+                                            <li class="{{ (request()->segment(1) == '') ? 'drop-holder' : '' }}">
+                                                <a href="./">Home</a>
                                             </li>
-                                            <li class="megamenu-holder">
-                                                <a href="shop.html">Shop</a>
+                                            <li class="{{ (request()->segment(1) == 'shop') ? 'megamenu-holder' : '' }}">
+                                                <a href="./shop">Shop</a>
                                                 <ul class="drop-menu megamenu">
                                                     <li>
                                                         <span class="title">Shop Layout</span>
@@ -362,33 +295,17 @@
                                                     </li>
                                                 </ul>
                                             </li>
-                                            <li class="drop-holder">
-                                                <a href="blog.html">Blog</a>
-                                                <ul class="drop-menu">
-                                                    <li>
-                                                        <a href="blog-listview.html">Blog List View</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="blog-detail.html">Blog Detail</a>
-                                                    </li>
-                                                </ul>
+                                            <li class="{{ (request()->segment(1) == 'blog') ? 'drop-holder' : '' }}">
+                                                <a href="./blog">Blog</a>
                                             </li>
-                                            <li>
-                                                <a href="about.html">About Us</a>
+                                            <li class="{{ (request()->segment(1) == 'about') ? 'drop-holder' : '' }}">
+                                                <a href="./about">About Us</a>
                                             </li>
-                                            <li class="drop-holder">
-                                                <a href="#">Pages</a>
-                                                <ul class="drop-menu">
-                                                    <li>
-                                                        <a href="faq.html">FAQ</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="404.html">Error 404</a>
-                                                    </li>
-                                                </ul>
+                                            <li class="{{ (request()->segment(1) == 'faq') ? 'drop-holder' : '' }}">
+                                                <a href="./faq">FAQ</a>
                                             </li>
-                                            <li>
-                                                <a href="contact.html">Contact Us</a>
+                                            <li class="{{ (request()->segment(1) == 'contact') ? 'drop-holder' : '' }}">
+                                                <a href="./contact">Contact Us</a>
                                             </li>
                                         </ul>
                                     </nav>
@@ -407,13 +324,13 @@
                                                 <i class="pe-7s-users"></i>
                                             </button>
                                             <ul class="dropdown-menu" aria-labelledby="stickysettingButton">
-                                                <li><a class="dropdown-item" href="my-account.html">My account</a></li>
-                                                <li><a class="dropdown-item" href="login-register.html">Login | Register</a>
+                                                <li class="{{ (request()->segment(1) == '') ? '' : '' }}"><a  class="dropdown-item"  href="./account">My account</a></li>
+                                                <li class="{{ (request()->segment(1) == '') ? '' : '' }}"><a class="dropdown-item"  href="./logout">Login | Register</a>
                                                 </li>
                                             </ul>
                                         </li>
-                                        <li class="d-none d-lg-block">
-                                            <a href="wishlist.html">
+                                        <li class="{{ (request()->segment(1) == '') ? 'd-none d-lg-block' : '' }}">
+                                            <a href="./wishList">
                                                 <i class="pe-7s-like"></i>
                                             </a>
                                         </li>
@@ -471,8 +388,8 @@
                                         <i class="pe-7s-users"></i>
                                     </button>
                                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="settingButtonTwo">
-                                        <li><a class="dropdown-item" href="my-account.html">My account</a></li>
-                                        <li><a class="dropdown-item" href="login-register.html">Login | Register</a></li>
+                                        <li class="{{ (request()->segment(1) == '') ? '' : '' }}"><a  class="dropdown-item"  href="./account">My account</a></li>
+                                                <li class="{{ (request()->segment(1) == '') ? '' : '' }}"><a class="dropdown-item"  href="./logout">Login | Register</a>
                                     </ul>
                                 </li>
                                 <li>
@@ -485,27 +402,15 @@
                         <div class="offcanvas-menu_area">
                             <nav class="offcanvas-navigation">
                                 <ul class="mobile-menu">
-                                    <li class="menu-item-has-children">
-                                        <a href="#">
+                                    <li class="{{ (request()->segment(1) == '') ? 'menu-item-has-children' : '' }}">
+                                        <a href="./">
                                             <span class="mm-text">Home
                                         <i class="pe-7s-angle-down"></i>
                                     </span>
                                         </a>
-                                        <ul class="sub-menu">
-                                            <li>
-                                                <a href="index.html">
-                                                    <span class="mm-text">Home One</span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="index-2.html">
-                                                    <span class="mm-text">Home Two</span>
-                                                </a>
-                                            </li>
-                                        </ul>
                                     </li>
-                                    <li class="menu-item-has-children">
-                                        <a href="#">
+                                    <li class="{{ (request()->segment(1) == 'shop') ? 'menu-item-has-children' : '' }}">
+                                        <a href="./shop">
                                             <span class="mm-text">Shop
                                         <i class="pe-7s-angle-down"></i>
                                     </span>
@@ -630,61 +535,27 @@
                                             </li>
                                         </ul>
                                     </li>
-                                    <li class="menu-item-has-children">
-                                        <a href="#">
+                                    <li class="{{ (request()->segment(1) == 'blog') ? 'menu-item-has-children' : '' }}">
+                                        <a href="./blog">
                                             <span class="mm-text">Blog
                                         <i class="pe-7s-angle-down"></i>
                                     </span>
                                         </a>
-                                        <ul class="sub-menu">
-                                            <li class="menu-item-has-children">
-                                                <a href="#">
-                                                    <span class="mm-text">Blog Holder
-                                                <i class="pe-7s-angle-down"></i>
-                                            </span>
-                                                </a>
-                                                <ul class="sub-menu">
-                                                    <li>
-                                                        <a href="blog.html">
-                                                            <span class="mm-text">Blog Default</span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="blog-listview.html">Blog List View</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="blog-detail.html">Blog Detail</a>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                        </ul>
                                     </li>
-                                    <li>
-                                        <a href="about.html">
+                                    <li class="{{ (request()->segment(1) == 'about') ? '' : '' }}">
+                                        <a href="./about">
                                             <span class="mm-text">About Us</span>
                                         </a>
                                     </li>
-                                    <li class="menu-item-has-children">
-                                        <a href="#">
-                                            <span class="mm-text">Pages
+                                    <li class="{{ (request()->segment(1) == 'faq') ? 'menu-item-has-children' : '' }}">
+                                        <a href="./faq">
+                                            <span class="mm-text">FAQ
                                         <i class="pe-7s-angle-down"></i>
                                     </span>
                                         </a>
-                                        <ul class="sub-menu">
-                                            <li>
-                                                <a href="faq.html">
-                                                    <span class="mm-text">Frequently Questions</span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="404.html">
-                                                    <span class="mm-text">Error 404</span>
-                                                </a>
-                                            </li>
-                                        </ul>
                                     </li>
-                                    <li>
-                                        <a href="contact.html">
+                                    <li class="{{ (request()->segment(1) == 'contact') ? '' : '' }}">
+                                        <a href="./contact">
                                             <span class="mm-text">Contact</span>
                                         </a>
                                     </li>
