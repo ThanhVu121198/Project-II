@@ -4,8 +4,13 @@ namespace App\Http\Controllers\Admin\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\c;
+use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use App\Models\User;
+use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\Route;
 class loginController extends Controller
 {
     /**
@@ -26,8 +31,16 @@ class loginController extends Controller
     public function create()
     {
         //
+       // $User = New User();
+    //         $User->shopping_cart_id = 0;
+    //         $User->name = 'quang anh';
+    //         $User->email = 'quanganhle.dev@gmail.com';
+    //         $User->password = Hash::make('123456');
+    //         $User->avatar = 'avatar.png';
+    //         $User->level=1;
+    //         $User->status = 0;
+    //         $User->save();
     }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -36,9 +49,38 @@ class loginController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+      $validated=$request->validate([
+            'email'=>'required|email:rfc,dns',
+            'password'=>'required'
+      ]);
+      if(Auth::attempt([
+            'email'=>$request->email,
+            'password'=>$request->password,
+            'level'=>1
+      ],$request->input('remember')
+      )){
+        return redirect()->route('admin');
+        // echo "oke";
+      }else{
+        // Session::flash('error', 'email or password not true');
+        return redirect()->back();
+      }
 
+    // if (Auth::attempt(['email' => $request->email, 'password' => $request->password,'level'=>0])) {
+    //       echo "ok";  
+    // }
+    // $User = New User();
+    //         $User->shopping_cart_id = 0;
+    //         $User->name = 'quang anh';
+    //         $User->email = 'quanganhle.dev@gmail.com';
+    //         $User->password = Hash::make('123456');
+    //         $User->avatar = 'avatar.png';
+    //         $User->level=1;
+    //         $User->status = 0;
+    //         $User->save();
+       
+    // }
+    }
     /**
      * Display the specified resource.
      *
