@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th5 27, 2022 lúc 03:21 AM
+-- Thời gian đã tạo: Th6 01, 2022 lúc 03:57 PM
 -- Phiên bản máy phục vụ: 10.4.24-MariaDB
 -- Phiên bản PHP: 8.1.4
 
@@ -244,6 +244,14 @@ CREATE TABLE `products` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Đang đổ dữ liệu cho bảng `products`
+--
+
+INSERT INTO `products` (`id`, `product_category_id`, `name`, `description`, `content`, `price`, `qty`, `discount`, `weight`, `sku`, `tag`, `featured`, `status`, `created_at`, `updated_at`) VALUES
+(1, 1, 'Betel nut milk', 'Hanging potted betel nut tree is often used to decorate cafes, small skylights, rooftop trusses, office decoration, etc. The color of the betel leaves looks fancy, the shape of the tree is very suitable for hanging pots.', NULL, 45, 50, 13, NULL, NULL, NULL, 0, 0, NULL, NULL),
+(2, 1, 'Wan Loc Tree', 'Help purify the air, absorb pathogens, suitable for desks, restaurant decoration', NULL, 50, 50, 13, NULL, NULL, NULL, 0, 0, NULL, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -257,6 +265,19 @@ CREATE TABLE `products_categories` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `products_categories`
+--
+
+INSERT INTO `products_categories` (`id`, `name`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'Desktop Bonsai', 0, NULL, NULL),
+(2, 'Feng Shui Tree', 0, NULL, NULL),
+(3, 'Office Tree', 0, NULL, NULL),
+(4, 'Hydroponic Plants', 0, NULL, NULL),
+(5, 'Lan Ho Diep', 0, NULL, NULL),
+(6, 'Balcony Tree', 0, NULL, NULL),
+(7, 'Outdoor flowers', 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -305,6 +326,16 @@ CREATE TABLE `product_images` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `product_images`
+--
+
+INSERT INTO `product_images` (`id`, `product_id`, `path`, `created_at`, `updated_at`) VALUES
+(1, 1, '', NULL, NULL),
+(2, 1, 'small-size/trau-ba-sua-1', NULL, NULL),
+(3, 1, 'small-size/trau-ba-sua-2', NULL, NULL),
+(4, 1, 'small-size/trau-ba-sua-3', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -526,13 +557,13 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT cho bảng `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT cho bảng `products_categories`
 --
 ALTER TABLE `products_categories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT cho bảng `product_comments`
@@ -550,7 +581,7 @@ ALTER TABLE `product_details`
 -- AUTO_INCREMENT cho bảng `product_images`
 --
 ALTER TABLE `product_images`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT cho bảng `shopping_cart`
