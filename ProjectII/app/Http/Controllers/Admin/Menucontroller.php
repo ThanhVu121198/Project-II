@@ -8,6 +8,7 @@ use App\Models\c;
 use Illuminate\Http\Request;
 use App\Http\Services\Menu\Menuservice;
 use App\Models\ProductCategory;
+use Illuminate\Foundation\Http\FormRequest;
 
 class Menucontroller extends Controller
 
@@ -28,8 +29,6 @@ class Menucontroller extends Controller
         return view('admin.categories.list',compact('data'),[
                 'title'=>'Categories List',
                 // 'products_categories'=>$this->menuService->getAll()
-
-
         ]);
     }
 
@@ -66,9 +65,15 @@ class Menucontroller extends Controller
      * @param  \App\Models\c  $c
      * @return \Illuminate\Http\Response
      */
-    public function show(c $c)
+    public function show(ProductCategory $menu)
     {
-        //
+        return view('admin.categories.edit',[
+            'title'=>'edit categories' . $menu->name,
+            'menu'=>$menu
+        ]
+
+        );
+     
     }
 
     /**
@@ -89,9 +94,10 @@ class Menucontroller extends Controller
      * @param  \App\Models\c  $c
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, c $c)
+    public function update(ProductCategory $menu,createfromrequest $request)
     {
-        //
+        $this->menuService->update($request,$menu);
+        return redirect('admin/menu/list');
     }
 
     /**
@@ -100,9 +106,19 @@ class Menucontroller extends Controller
      * @param  \App\Models\c  $c
      * @return \Illuminate\Http\Response
      */
-    public function destroy(c $c)
+    public function destroy(Request $request)
     {
-        //
-        dd($c);
+        $result = $this->menuService->destroy($request);
+
+        if ($result) {
+            return response()->json([
+                'error' => false,
+                'message' => 'Xóa thành công danh mục'
+            ]);
+        }
+
+        return response()->json([
+            'error' => true
+        ]);
     }
 }

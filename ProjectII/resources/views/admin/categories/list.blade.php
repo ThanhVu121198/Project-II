@@ -37,33 +37,32 @@
                    <td>{{$cat->updated_at->format('m-d-y')}}</td>
                    <td class="text-right">
                   
-                    <a class="btn btn-sm btn-success"> 
+                    <a class="btn btn-sm btn-success" 
+                    href="/admin/menu/edit/{{$cat->id}}"> 
                         <i class="fas fa-edit"></i>
                     </a>
-                    <a href="{{}}" class="btn btn-sm btn-danger btndelete"> 
-                        <i class="fas fa-trash"></i>
+                    <a href="#" class="btn btn-sm btn-danger" id="btndelete" onclick="removeRow({{$cat->id}},'/admin/menu/destroy')"> 
+                         <i class="fas fa-trash"></i>
                     </a>
                    </td>
                </tr>
            @endforeach
        </tbody>
    </table>
-   <form action="">
+{{-- <form action="" method="POST" id="form_delete">
     @csrf @method('DELETE')
-   </form>
-    <hr>
-    <div class="">
-        {{$data->appends(request()->all())->links()}}
-    </div>   
-@endsection
-@section('js')
+</form> --}}
+  
+ @endsection
+{{-- @section('js')
     <script>
-       $('.btndelete').click(
-           function(ev){
-            ev.prevenDefault();
-            var _href=$(this).attr('href')
-            alert(_href)
-           }
+       $('#btndelete').click(
+        //    function(ev){
+            // ev.prevenDefault();
+            // var _href=$(this).attr('href')
+            // alert(_href)
+            // alert(123)
+        //    }
        )
-        </script>
-@endsection
+        </script> --}}
+{{-- @endsection --}}
