@@ -33,8 +33,8 @@
                        <span class="badge bg-secondary">stop selling</span>
                        @endif
                    </td>
-                   <td>{{$cat->created_at->format('m-d-y')}}</td>
-                   <td>{{$cat->updated_at->format('m-d-y')}}</td>
+                   <td>{{$cat->created_at}}</td>
+                   <td>{{$cat->updated_at}}</td>
                    <td class="text-right">
                   
                     <a class="btn btn-sm btn-success" 

@@ -289,7 +289,7 @@
                                                                 <a href="compare.html">Compare</a>
                                                             </li>
                                                             <li>
-                                                                <a href="checkout.html">Checkout</a>
+                                                                <a href="./checkOut">Checkout</a>
                                                             </li>
                                                         </ul>
                                                     </li>
@@ -527,7 +527,7 @@
                                                         </a>
                                                     </li>
                                                     <li>
-                                                        <a href="checkout.html">
+                                                        <a href="./checkOut">
                                                             <span class="mm-text">Checkout</span>
                                                         </a>
                                                     </li>
@@ -641,8 +641,8 @@
                         <span class="ammount">$79.35</span>
                     </div>
                     <div class="group-btn_wrap d-grid gap-2">
-                        <a href="cart.html" class="btn btn-dark">View Cart</a>
-                        <a href="checkout.html" class="btn btn-dark">Checkout</a>
+                        <a href="./cart" class="btn btn-dark">View Cart</a>
+                        <a href="./checkOut" class="btn btn-dark">Checkout</a>
                     </div>
                 </div>
             </div>
@@ -744,13 +744,13 @@
                                     <h3 class="footer-widget-title">My Account</h3>
                                     <ul class="footer-widget-list-item">
                                         <li>
-                                            <a href="#">Sign In</a>
+                                            <a href="./logout">Sign In</a>
                                         </li>
                                         <li>
-                                            <a href="#">View Cart</a>
+                                            <a href="./cart">View Cart</a>
                                         </li>
                                         <li>
-                                            <a href="#">My Wishlist</a>
+                                            <a href="./wishList">My Wishlist</a>
                                         </li>
                                         <li>
                                             <a href="#">Track My Order</a>

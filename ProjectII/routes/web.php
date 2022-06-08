@@ -64,3 +64,7 @@ Route::get('/account', [Front\MyAccountController::class, 'index']);
 Route::get('/logout', [Front\LogoutController::class, 'index']);
 
 Route::get('/wishList', [Front\WishlistController::class, 'index']);
+
+Route::get('/checkOut', [Front\CheckOutController::class, 'index']);
+
+Route::get('/cart', [Front\CartController::class, 'index']);
