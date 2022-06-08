@@ -27,14 +27,14 @@ Route::prefix('shop')->group(function () {
     Route::get('/', [Front\ShopController::class, 'index']);
 });
 
-// admin 
+// admin
 Route::get('admin/users/login',
 [\App\Http\Controllers\Admin\User\loginController::class,'index'])->name('login');
 route::post('admin/users/login/store',[loginController::class,'store']);
 // route::get('admin/main',[Maincontroller::class,'index'])->name('admin')->middleware('aut');
 Route::middleware(['auth'])->group(function(){
 
-    route::prefix('admin')->group(function(){        
+    route::prefix('admin')->group(function(){
         route::get('main',[Maincontroller::class,'index']);
         route::get('/',[Maincontroller::class,'index'])->name('admin');
         Route::prefix('menu')->group(function(){
@@ -42,7 +42,7 @@ Route::middleware(['auth'])->group(function(){
             Route::post('add',[Menucontroller::class,'store']);
             Route::get('list',[Menucontroller::class,'index']);
 
-        }); 
+        });
     });
 });
 //admin
@@ -61,3 +61,5 @@ Route::get('/account', [Front\MyAccountController::class, 'index']);
 Route::get('/logout', [Front\LogoutController::class, 'index']);
 
 Route::get('/wishList', [Front\WishlistController::class, 'index']);
+
+Route::get('/cart', [Front\WishlistController::class, 'index']);
