@@ -2,10 +2,13 @@
 
 use App\Http\Controllers\Admin\Maincontroller;
 use App\Http\Controllers\Admin\Menucontroller;
+use App\Http\Controllers\Admin\ProductController;
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\Admin\User\loginController;
 use App\Http\Controllers\Front\HomeController;
 use App\Http\Controllers\Front;
+use App\Http\Controllers\Front\BlogController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -37,6 +40,7 @@ Route::middleware(['auth'])->group(function(){
     route::prefix('admin')->group(function(){        
         route::get('main',[Maincontroller::class,'index']);
         route::get('/',[Maincontroller::class,'index'])->name('admin');
+        // menu
         Route::prefix('menu')->group(function(){
             Route::get('add',[Menucontroller::class,'create']);
             Route::post('add',[Menucontroller::class,'store']);
@@ -45,10 +49,30 @@ Route::middleware(['auth'])->group(function(){
             Route::get('edit/{menu}',[Menucontroller::class,'show']);
             Route::post('edit/{menu}',[Menucontroller::class,'update']);
 
+       
         }); 
+        // product
+        route::prefix('product')->group(function(){
+            route::get('add',[ProductController::class,'create']);
+            Route::post('add',[ProductController::class,'store']);
+            Route::get('list',[ProductController::class,'index']);
+            Route::DELETE('destroy',[Menucontroller::class,'destroy']);
+            // Route::get('edit/{menu}',[Menucontroller::class,'show']);
+            // Route::post('edit/{menu}',[Menucontroller::class,'update']);
+        });
+        // blog
+        route::prefix('blog')->group(function(){
+            route::get('add',[BlogController::class,'create']);
+            Route::post('add',[BlogController::class,'store']);
+            Route::get('list',[BlogController::class,'index']);
+            Route::DELETE('destroy',[BlogControllerr::class,'destroy']);
+            Route::get('edit/{blog}',[BlogController::class,'show']);
+            Route::post('edit/{blog}',[BlogController::class,'update']);
+        });
+        
     });
 });
-//admin
+//end admin
 
 Route::get('/blog', [Front\BlogController::class, 'index']);
 

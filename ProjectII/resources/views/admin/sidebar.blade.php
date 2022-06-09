@@ -57,6 +57,29 @@
               </li>
             </ul>
           </li>
+          <li class="nav-item menu-open">
+            <a href="#" class="nav-link">
+              <i class="fas fa-bars"></i>
+              <p>
+                Product Controll
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/admin/product/add" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Add  Product</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/admin/product/list" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p> Product List</p>
+                </a>
+              </li>
+            </ul>
+          </li>
           
         </ul>
       </nav>

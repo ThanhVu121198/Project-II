@@ -4,7 +4,7 @@ $.ajaxSetup({
     }
 });
 function removeRow(id, url) {
-    if (confirm('Xóa mà không thể khôi phục. Bạn có chắc ?')) {
+    if (confirm('are you sure delete categories ?')) {
         $.ajax({
             type: 'DELETE',
             datatype: 'JSON',
@@ -15,7 +15,7 @@ function removeRow(id, url) {
                     alert(result.message);
                     location.reload();
                 } else {
-                    alert('Xóa lỗi vui lòng thử lại');
+                    alert('cant delete this categories  ');
                 }
             }
         })
