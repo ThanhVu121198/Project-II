@@ -39,13 +39,13 @@ class Productrequest extends FormRequest
         return[
             'name.required'=>'please enter product name',
             'categories.required'=>'please choose categories',
-            'img1.required'=>'please enter choose image input 1',
-            'img1.image'=>'this file only image input 1',
+            'img1.required'=>'please enter choose image',
+            'img1.image'=>'this file only image input',
             // 'img2.required'=>'please enter choose image input 2',
             // 'img2.image'=>'this file only image input 2',
             // 'img3.required'=>'please enter choose image input 3',
             // 'img3.image'=>'this file only image input 3',
-            'name. unique'=>'please enter product name',
+            'name.unique'=>'product name cannot matche',
             'price.required'=>'please enter product price'
         ];
     }

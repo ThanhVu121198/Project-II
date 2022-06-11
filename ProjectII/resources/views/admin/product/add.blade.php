@@ -15,12 +15,21 @@
             <!-- form start -->
             <form action="" method="POST" enctype="multipart/form-data">
               <div class="card-body">
-                <div class="row g-3">
-                  <div class="col mb-3">
+                <div class="row">
+                  <div class="col-6 mb-3">
                     <label for="exampleFormControlTextarea1"  class="form-label">product name</label>
                     <input type="text" class="form-control" name="name" placeholder="product name ... " >
                   </div>
-                  <div class="col mb-3">
+                  <div class="col-6">
+                    <label for="exampleFormControlTextarea1" class="form-label">Categories option</label>
+                    <br>
+                    <select class="form-select col-12" style="height: 38px;text-align:center;" name="categories" aria-label="Default select example">
+                      <option selected value="">please choose categories</option>
+                      @foreach ($cate as $item)
+                      <option value="{{$item->id}}">{{$item->name}}</option>
+                      @endforeach
+                      
+                    </select>
                   </div>
                 </div>
              
@@ -32,17 +41,7 @@
                   <label for="exampleFormControlTextarea1"  class="form-label">content</label>
                   <textarea class="form-control" id="content" name="content" rows="3"  placeholder="Content  of product..."></textarea>
                 </div>
-                <div class="mb-3">
-                <label for="exampleFormControlTextarea1" class="form-label">categories option</label>
-                <br>
-                <select class="form-select col-4 mb-3" name="categories" aria-label="Default select example">
-                  <option selected value="">please choose categories</option>
-                  @foreach ($cate as $item)
-                  <option value="{{$item->id}}">{{$item->name}}</option>
-                  @endforeach
-                  
-                </select>
-              </div>
+                
               <label for="exampleFormControlTextarea1" class="form-label">status</label>
                 <div class="form-check">
                   <input class="form-check-input" type="radio" name="status" value="0" id="status_on" checked>
@@ -76,13 +75,13 @@
               </div>
               <label style="margin-top:10px" for="exampleFormControlTextarea1" class="form-label">featured</label>
               <div class="form-check">
-                <input class="form-check-input" type="radio" name="featured" value="0" id="featuredon" checked>
+                <input class="form-check-input" type="radio" name="featured" value="0" id="featuredon">
                 <label class="form-check-label" for="flexRadioDefault1">
                   on featured
                 </label>
               </div>
               <div class="form-check mb-3">
-                <input class="form-check-input" type="radio" value="1" name="featured" id="featuredcanel" >
+                <input class="form-check-input" type="radio" value="1" name="featured" id="featuredcanel" checked>
                 <label class="form-check-label" for="flexRadioDefault2">
                   cancel featured
                 </label>
@@ -91,7 +90,7 @@
                 <div class="input-group">
                   <div class="custom-file col-4">
                     <input type="file" class="custom-file-input" name="img1" id="exampleInputFile">
-                    <label class="custom-file-label" for="exampleInputFile">Choose file 1</label>
+                    <label class="custom-file-label" for="exampleInputFile">Choose file</label>
                   </div>
                   {{-- <div class="custom-file col-4">
                     <input type="file" class="custom-file-input" name="img2" id="exampleInputFile">

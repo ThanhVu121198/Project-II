@@ -13,6 +13,11 @@ class ProductController extends Controller
 {
     //
     public function index(){
+    
+        $data= Product::orderBy('id','ASC')->search()->paginate(20);
+        return view('admin.product.list',compact('data'),[
+            'title'=>'Product list'
+        ]);
         
     }
     public function create(){
@@ -21,6 +26,10 @@ class ProductController extends Controller
             'title'=>'Add a new product'
         ]);
         
+    }
+    public function getcat(){
+        return Product::with('productCategory');
+
     }
     public function store(ProductRequest $request){
         $product = new Product();
@@ -38,14 +47,15 @@ class ProductController extends Controller
         $product->save(); 
         $product_id=$product->id;
         //
-
-
         $file_name1 = $request->file('img1')->getClientOriginalName();
         $product_img1= new ProductImage();
         $product_img1->product_id=$product_id;
         $product_img1->path=$file_name1;
         $request->file('img1')->move('front/images/product/small-size/',$file_name1);
         $product_img1->save();
+        $ids=(String)$product_id;
+        $link='admin/product/productget/'.$ids;
+        return redirect($link);
         //
         // $file_name2 = $request->file('img2')->getClientOriginalName();
         // $product_img2= new ProductImage();
@@ -62,5 +72,8 @@ class ProductController extends Controller
         // $request->file('img3')->move('public/front/images/product/small-size/',$file_name3);
         // $product_img3->save();
 
+    }
+    public function get(){
+        
     }
 }

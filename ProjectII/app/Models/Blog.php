@@ -16,4 +16,10 @@ class Blog extends Model
     public function blogComments() {
         return $this->hasMany(BlogComment::class, 'blog_id', 'id');
     }
+    public function scopeSearch($query){
+        if($key=request()->key){
+            $query=$query->where('title','like','%'.$key.'%');
+        }
+        return $query;
+    }
 }

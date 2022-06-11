@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\Blog\BlogAdmincontroller;
 use App\Http\Controllers\Admin\Maincontroller;
 use App\Http\Controllers\Admin\Menucontroller;
 use App\Http\Controllers\Admin\ProductController;
@@ -59,15 +60,19 @@ Route::middleware(['auth'])->group(function(){
             Route::DELETE('destroy',[Menucontroller::class,'destroy']);
             // Route::get('edit/{menu}',[Menucontroller::class,'show']);
             // Route::post('edit/{menu}',[Menucontroller::class,'update']);
+            route::get('productget/{id}',[ProductController::class,'get']);
         });
+        // productget
+
+
         // blog
         route::prefix('blog')->group(function(){
-            route::get('add',[BlogController::class,'create']);
-            Route::post('add',[BlogController::class,'store']);
-            Route::get('list',[BlogController::class,'index']);
-            Route::DELETE('destroy',[BlogControllerr::class,'destroy']);
-            Route::get('edit/{blog}',[BlogController::class,'show']);
-            Route::post('edit/{blog}',[BlogController::class,'update']);
+            route::get('add',[BlogAdmincontroller::class,'create']);
+            Route::post('add',[BlogAdmincontroller::class,'store']);
+            Route::get('list',[BlogAdmincontroller::class,'index']);
+            Route::DELETE('destroy',[BlogAdmincontroller::class,'destroy']);
+            Route::get('edit/{blog}',[BlogAdmincontroller::class,'show']);
+            Route::post('edit/{blog}',[BlogAdmincontroller::class,'update']);
         });
         
     });
