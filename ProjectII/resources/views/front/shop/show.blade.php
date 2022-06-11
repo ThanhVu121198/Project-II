@@ -30,12 +30,14 @@
                             <div class="single-product-img">
                                 <div class="swiper-container single-product-slider">
                                     <div class="swiper-wrapper">
+                                        @foreach($product->productImages as $productImage)
                                         <div class="swiper-slide">
                                             <a href="front/images/product/large-size/1-1-570x633.jpg" class="single-img gallery-popup">
-                                                <img class="img-full" src="front/images/product/large-size/1-1-570x633.jpg" alt="Product Image">
+                                                <img class="img-full" src="front/images/product/{{$productImage->path}}" alt="Product Image">
                                             </a>
                                         </div>
-                                        <div class="swiper-slide">
+                                        @endforeach
+                                        {{-- <div class="swiper-slide">
                                             <a href="front/images/product/large-size/1-2-570x633.jpg" class="single-img gallery-popup">
                                                 <img class="img-full" src="front/images/product/large-size/1-2-570x633.jpg" alt="Product Image">
                                             </a>
@@ -49,24 +51,17 @@
                                             <a href="front/images/product/large-size/1-4-570x633.jpg" class="single-img gallery-popup">
                                                 <img class="img-full" src="front/images/product/large-size/1-4-570x633.jpg" alt="Product Image">
                                             </a>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                 </div>
                                 <div class="thumbs-arrow-holder">
                                     <div class="swiper-container single-product-thumbs">
                                         <div class="swiper-wrapper">
-                                            <a href="#" class="swiper-slide">
-                                                <img class="img-full" src="front/images/product/large-size/1-1-570x633.jpg" alt="Product Thumnail">
+                                            @foreach($product->productImages as $productImage)
+                                            <a class="swiper-slide">
+                                                <img class="img-full" src="front/images/product/{{$productImage->path}}" alt="Product Thumnail">
                                             </a>
-                                            <a href="#" class="swiper-slide">
-                                                <img class="img-full" src="front/images/product/large-size/1-2-570x633.jpg" alt="Product Thumnail">
-                                            </a>
-                                            <a href="#" class="swiper-slide">
-                                                <img class="img-full" src="front/images/product/large-size/1-3-570x633.jpg" alt="Product Thumnail">
-                                            </a>
-                                            <a href="#" class="swiper-slide">
-                                                <img class="img-full" src="front/images/product/large-size/1-4-570x633.jpg" alt="Product Thumnail">
-                                            </a>
+                                            @endforeach
                                         </div>
                                         <!-- Add Arrows -->
                                         <div class=" thumbs-button-wrap d-none d-md-block">
@@ -83,28 +78,29 @@
                         </div>
                         <div class="col-lg-6 pt-5 pt-lg-0">
                             <div class="single-product-content">
-                                <h2 class="title">American Marigold</h2>
+                                <h2 class="title">{{$product->name}}</h2>
                                 <div class="price-box">
-                                    <span class="new-price">$23.45</span>
+                                    <span class="new-price">${{$product->price}}.00</span>
                                 </div>
                                 <div class="rating-box-wrap pb-4">
                                     <div class="rating-box">
                                         <ul>
+                                            @for($i = 1; $i <= 5; $i++)
+                                                @if($i <= $avgRating)
+                                                    <li><i class="fa fa-star"></i></li>
+                                                @endif
+                                            @endfor
+                                            {{-- <li><i class="fa fa-star"></i></li>
                                             <li><i class="fa fa-star"></i></li>
                                             <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
+                                            <li><i class="fa fa-star"></i></li> --}}
                                         </ul>
                                     </div>
                                     <div class="review-status">
-                                        <a href="#">( 1 Review )</a>
+                                        <a href="#">( {{count($product->productComments)}} Review )</a>
                                     </div>
                                 </div>
-                                <p class="short-desc">Lorem ipsum dolor sit amet, consectetur adipisic elit, sed do eiusmod
-                                    tempo incid ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostru
-                                    exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                                    in reprehenderit in voluptate</p>
+                                <p class="short-desc">{{$product->description}}</p>
                                 <ul class="quantity-with-btn">
                                     <li class="quantity">
                                         <div class="cart-plus-minus">
@@ -226,7 +222,7 @@
                                 </li>
                                 <li class="nav-item" role="presentation">
                                     <a class="tab-btn" id="reviews-tab" data-bs-toggle="tab" href="#reviews" role="tab" aria-controls="reviews" aria-selected="false">
-                                        Reviews(3)
+                                        Reviews({{count($product->productComments)}})
                                     </a>
                                 </li>
                             </ul>
@@ -251,44 +247,29 @@
                                 </div>
                                 <div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">
                                     <div class="product-description-body">
-                                        <p class="short-desc mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-                                            do eiusmod tempor incidid ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                                            fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa
-                                            qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste
-                                            natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam,
-                                            eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta
-                                            sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut
-                                            fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi
-                                            nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet,
-                                        </p>
+                                        <p class="short-desc mb-0">{{$product->description}}</p>
                                     </div>
                                 </div>
                                 <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
                                     <div class="product-review-body">
                                         <div class="blog-comment mt-0">
-                                            <h4 class="heading">Comments (03)</h4>
+                                            <h4 class="heading">Comments {{count($product->productComments)}}</h4>
+                                            @foreach($product->productComments as $productComment)
                                             <div class="blog-comment-item">
                                                 <div class="blog-comment-img">
-                                                    <img src="front/images/blog/avatar/1-1-120x120.png" alt="User Image">
+                                                    <img src="front/images/blog/avatar/{{$productComment->user->avatar}}" alt="User Image">
                                                 </div>
                                                 <div class="blog-comment-content">
                                                     <div class="user-meta">
-                                                        <h2 class="user-name">Donald Chavez</h2>
-                                                        <span class="date">21 July 2021</span>
+                                                        <h2 class="user-name">{{$productComment->name}}</h2>
+                                                        <span class="date">{{date('M d, Y',($productComment->created_at))}}</span>
                                                     </div>
-                                                    <p class="user-comment">Lorem ipsum dolor sit amet, consectetur adipisi
-                                                        elit, sed
-                                                        do eiusmod tempor incidid ut labore etl dolore magna aliqua. Ut enim ad
-                                                        minim
-                                                        veniam, quis nostrud exercitati ullamco laboris nisi ut aliquiex ea
-                                                        commodo
-                                                        consequat.
-                                                    </p>
+                                                    <p class="user-comment">{{$productComment->messages}}</p>
                                                     <a class="btn btn-custom-size comment-btn" href="#">Reply</a>
                                                 </div>
                                             </div>
+                                            @endforeach
+
                                             <div class="blog-comment-item relpy-item">
                                                 <div class="blog-comment-img">
                                                     <img src="front/images/blog/avatar/1-2-120x120.png" alt="User Image">
@@ -307,7 +288,7 @@
                                                     <a class="btn btn-custom-size comment-btn style-2" href="#">Reply</a>
                                                 </div>
                                             </div>
-                                            <div class="blog-comment-item">
+                                            {{-- <div class="blog-comment-item">
                                                 <div class="blog-comment-img">
                                                     <img src="front/images/blog/avatar/1-3-120x120.png" alt="User Image">
                                                 </div>
@@ -326,7 +307,7 @@
                                                     </p>
                                                     <a class="btn btn-custom-size comment-btn" href="#">Reply</a>
                                                 </div>
-                                            </div>
+                                            </div> --}}
                                         </div>
                                         <div class="feedback-area">
                                             <h2 class="heading">Leave a comment</h2>
