@@ -25,6 +25,8 @@ Route::prefix('shop')->group(function () {
     Route::get('/product/{id}', [Front\ShopController::class, 'show']);
 
     Route::get('/', [Front\ShopController::class, 'index']);
+
+    Route::post('/product/{id}', [Front\ShopController::class,'postComment']);
 });
 
 // admin 
@@ -32,9 +34,9 @@ Route::get('admin/users/login',
 [\App\Http\Controllers\Admin\User\loginController::class,'index'])->name('login');
 route::post('admin/users/login/store',[loginController::class,'store']);
 // route::get('admin/main',[Maincontroller::class,'index'])->name('admin')->middleware('aut');
-Route::middleware(['auth'])->group(function(){
+Route::middleware(['auth'])->group(function() {
 
-    route::prefix('admin')->group(function(){        
+    route::prefix('admin')->group(function() {
         route::get('main',[Maincontroller::class,'index']);
         route::get('/',[Maincontroller::class,'index'])->name('admin');
         Route::prefix('menu')->group(function(){

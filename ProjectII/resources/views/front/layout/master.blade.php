@@ -116,21 +116,6 @@
                                                                 <a href="shop.html">{{$categoryProduct->name}}</a>
                                                             </li>
                                                         @endforeach
-                                                        {{-- <li>
-                                                            <a href="shop-grid-fullwidth.html">Shop Grid Fullwidth</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop-right-sidebar.html">Shop Right Sidebar</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop-list-fullwidth.html">Shop List Fullwidth</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop-list-left-sidebar.html">Shop List Left Sidebar</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="shop-list-right-sidebar.html">Shop List Right Sidebar</a>
-                                                        </li> --}}
                                                     </ul>
                                                 </li>
                                                 {{-- <li>
@@ -221,78 +206,11 @@
                                             <li class="{{ (request()->segment(1) == 'shop') ? 'megamenu-holder' : '' }}">
                                                 <a href="./shop">Shop</a>
                                                 <ul class="drop-menu megamenu">
+                                                    @foreach($categoryProducts as $categoryProduct)
                                                     <li>
-                                                        <span class="title">Shop Layout</span>
-                                                        <ul>
-                                                            <li>
-                                                                <a href="shop.html">Shop Default</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="shop-grid-fullwidth.html">Shop Grid Fullwidth</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="shop-right-sidebar.html">Shop Right Sidebar</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="shop-list-fullwidth.html">Shop List Fullwidth</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="shop-list-left-sidebar.html">Shop List Left Sidebar</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="shop-list-right-sidebar.html">Shop List Right
-                                                                    Sidebar</a>
-                                                            </li>
-                                                        </ul>
+                                                        <a href="shop.html">{{$categoryProduct->name}}</a>
                                                     </li>
-                                                    <li>
-                                                        <span class="title">Product Style</span>
-                                                        <ul>
-                                                            <li>
-                                                                <a href="single-product-variable.html">Single Product
-                                                                    Variable</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="single-product-group.html">Single Product Group</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="single-product.html">Single Product Default</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="single-product-affiliate.html">Single Product
-                                                                    Affiliate</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="single-product-sale.html">Single Product Sale</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="single-product-sticky.html">Single Product Sticky</a>
-                                                            </li>
-                                                        </ul>
-                                                    </li>
-                                                    <li>
-                                                        <span class="title">Product Related</span>
-                                                        <ul>
-                                                            <li>
-                                                                <a href="my-account.html">My Account</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="login-register.html">Login | Register</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="cart.html">Shopping Cart</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="wishlist.html">Wishlist</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="compare.html">Compare</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="./checkOut">Checkout</a>
-                                                            </li>
-                                                        </ul>
-                                                    </li>
+                                                @endforeach
                                                 </ul>
                                             </li>
                                             <li class="{{ (request()->segment(1) == 'blog') ? 'drop-holder' : '' }}">
@@ -416,123 +334,11 @@
                                     </span>
                                         </a>
                                         <ul class="sub-menu">
-                                            <li class="menu-item-has-children">
-                                                <a href="#">
-                                                    <span class="mm-text">Shop Layout
-                                                <i class="pe-7s-angle-down"></i>
-                                            </span>
-                                                </a>
-                                                <ul class="sub-menu">
-                                                    <li>
-                                                        <a href="shop.html">
-                                                            <span class="mm-text">Shop Default</span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-grid-fullwidth.html">
-                                                            <span class="mm-text">Shop Grid Fullwidth</span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-right-sidebar.html">
-                                                            <span class="mm-text">Shop Right Sidebar</span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-list-fullwidth.html">
-                                                            <span class="mm-text">Shop List Fullwidth</span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-list-left-sidebar.html">
-                                                            <span class="mm-text">Shop List Left Sidebar</span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="shop-list-right-sidebar.html">
-                                                            <span class="mm-text">Shop List Right Sidebar</span>
-                                                        </a>
-                                                    </li>
-                                                </ul>
+                                            @foreach($categoryProducts as $categoryProduct)
+                                            <li>
+                                                <a href="shop.html">{{$categoryProduct->name}}</a>
                                             </li>
-                                            <li class="menu-item-has-children">
-                                                <a href="#">
-                                                    <span class="mm-text">Product Style
-                                                <i class="pe-7s-angle-down"></i>
-                                            </span>
-                                                </a>
-                                                <ul class="sub-menu">
-                                                    <li>
-                                                        <a href="single-product.html">
-                                                            <span class="mm-text">Single Product Default</span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="single-product-group.html">
-                                                            <span class="mm-text">Single Product Group</span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="single-product-variable.html">
-                                                            <span class="mm-text">Single Product Variable</span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="single-product-sale.html">
-                                                            <span class="mm-text">Single Product Sale</span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="single-product-sticky.html">
-                                                            <span class="mm-text">Single Product Sticky</span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="single-product-affiliate.html">
-                                                            <span class="mm-text">Single Product Affiliate</span>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li class="menu-item-has-children">
-                                                <a href="#">
-                                                    <span class="mm-text">Product Related
-                                                <i class="pe-7s-angle-down"></i>
-                                            </span>
-                                                </a>
-                                                <ul class="sub-menu">
-                                                    <li>
-                                                        <a href="my-account.html">
-                                                            <span class="mm-text">My Account</span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="login-register.html">
-                                                            <span class="mm-text">Login | Register</span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="cart.html">
-                                                            <span class="mm-text">Shopping Cart</span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="wishlist.html">
-                                                            <span class="mm-text">Wishlist</span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="compare.html">
-                                                            <span class="mm-text">Compare</span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="./checkOut">
-                                                            <span class="mm-text">Checkout</span>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </li>
+                                        @endforeach
                                         </ul>
                                     </li>
                                     <li class="{{ (request()->segment(1) == 'blog') ? 'menu-item-has-children' : '' }}">

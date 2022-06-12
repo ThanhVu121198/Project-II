@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Front;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\ProductComment;
 class ShopController extends Controller
 {
     public function show($id) {
@@ -19,6 +20,12 @@ class ShopController extends Controller
         }
 
         return view('front.shop.show', compact('product','avgRating'));
+    }
+
+    public function postComment(Request $request) {
+        ProductComment::create($request->all());
+
+        return redirect()->back();
     }
 
 
