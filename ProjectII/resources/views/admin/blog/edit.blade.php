@@ -38,7 +38,7 @@
                 </div>
                 <input type="hidden" value="{{$blog->image}}">
                 <div class="custom-file col-4">
-                    <input type="file" class="custom-file-input" value="{{$blog->image}}" name="img" id="exampleInputFile">
+                    <input type="file" class="custom-file-input" name="img" id="exampleInputFile">
                     <label class="custom-file-label" for="exampleInputFile">Choose image</label>
                   </div>
               <!-- /.card-body -->

@@ -92,14 +92,14 @@
                     <input type="file" class="custom-file-input" name="img1" id="exampleInputFile">
                     <label class="custom-file-label" for="exampleInputFile">Choose file</label>
                   </div>
-                  {{-- <div class="custom-file col-4">
+                  <div class="custom-file col-4">
                     <input type="file" class="custom-file-input" name="img2" id="exampleInputFile">
                     <label class="custom-file-label" for="exampleInputFile">Choose file 2</label>
                   </div>
                   <div class="custom-file col-4">
                     <input type="file" class="custom-file-input" name="img3" id="exampleInputFile">
                     <label class="custom-file-label" for="exampleInputFile">Choose file 3</label>
-                  </div> --}}
+                  </div>
               </div>
               </div>
               <!-- /.card-body -->

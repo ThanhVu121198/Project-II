@@ -67,8 +67,37 @@ class BlogAdmincontroller extends Controller
         );
 
     }
-    public function update(Blog $blog,BlogeditRequest $request){
-        $this->blogservice->update($request,$blog);
-        return redirect('admin/blog/list');
+    public function update($id){
+        $data =request()->validate([
+            'title'=>'required',
+            // 'img2'=> 'required',
+            // 'img3'=> 'required',
+  
+            'category'=>'required',
+            'content'=>'required',
+        ]);
+        $blog = Blog::find($id);
+        $image=request('img');
+        
+        if($image){
+            $destinal='front/images/blog/medium-size/'.$blog->image;
+            if(file_exists($destinal)){
+                unlink($destinal);
+            }
+            $file_name =request()->file('img')->getClientOriginalName();
+            $blog->title=$data['title'];
+            $blog->content=$data['content'];
+            $blog->category=$data['category'];
+            $blog->image=$file_name;
+            request()->file('img')->move('front/images/blog/medium-size/',$file_name);
+        }else{
+            $blog->title=$data['title'];
+            $blog->content=$data['content'];
+            $blog->category=$data['category'];
+        }
+        $blog->save();
+        // $this->blogservice->update($request,$blog);
+        // return redirect('admin/blog/list');
+       
     }
 }

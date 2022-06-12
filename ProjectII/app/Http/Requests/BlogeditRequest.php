@@ -36,7 +36,7 @@ class BlogeditRequest extends FormRequest
         return[
             'title.required'=>'please enter blog title',
             'category.required'=>'please enter category',
-            'img.required'=>'please enter choose image input',
+            // 'img.required'=>'please enter choose image input',
             'content.required'=>'please enter content',
         ];
     }
