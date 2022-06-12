@@ -41,6 +41,9 @@ Route::middleware(['auth'])->group(function(){
             Route::get('add',[Menucontroller::class,'create']);
             Route::post('add',[Menucontroller::class,'store']);
             Route::get('list',[Menucontroller::class,'index']);
+            Route::DELETE('destroy',[Menucontroller::class,'destroy']);
+            Route::get('edit/{menu}',[Menucontroller::class,'show']);
+            Route::post('edit/{menu}',[Menucontroller::class,'update']);
 
         });
     });
@@ -62,4 +65,8 @@ Route::get('/logout', [Front\LogoutController::class, 'index']);
 
 Route::get('/wishList', [Front\WishlistController::class, 'index']);
 
-Route::get('/cart', [Front\WishlistController::class, 'index']);
+
+Route::get('/checkOut', [Front\CheckOutController::class, 'index']);
+
+Route::get('/cart', [Front\CartController::class, 'index']);
+Route::get('/add-cart', [Front\CartController::class, 'index']);

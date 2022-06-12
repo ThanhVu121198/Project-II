@@ -13,6 +13,20 @@ class CartItems extends Model
     protected $primarykey = 'id';
     protected $guarded = [];
 
+    public $timestamps = false;
+    ///////////////////////////////
+    protected $fillable = [
+        'customer_id',
+        'product_id',
+        'pty',
+        'price'
+    ];
+    public function product()
+    {
+        return $this->hasOne(Product::class, 'id', 'product_id');
+    }
+    ////////////////////////////////////////////
+
     public function productDetails() {
         return $this->belongsTo(Product::class, 'product_id', 'id');
     }
@@ -20,4 +34,6 @@ class CartItems extends Model
     public function shopping_cart() {
         return $this->belongsTo(Product::class, 'shopping_cart_id', 'id');
     }
+
+
 }

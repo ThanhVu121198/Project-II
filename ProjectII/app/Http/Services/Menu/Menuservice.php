@@ -27,5 +27,22 @@ class Menuservice{
     // public function getAll(){
     //     return  ProductCategory::orderbyDesc('id')->paginate(20);
     // }
+    public function destroy($request) {
+        $id = $request->input('id');
+        $category = ProductCategory::where('id', $id)->first();
+
+        if ($category) {
+            return ProductCategory::where('id', $id)->delete();
+        }
+
+        return false;
+    }
+    public function update($request,$menu):bool{
+        $menu->name=(String) $request->input('categories_name');
+        $menu->status=(int) $request->input('status');
+        $menu->save();
+        session()->flash('success','update success');
+        return true;
+    }
     
 }
