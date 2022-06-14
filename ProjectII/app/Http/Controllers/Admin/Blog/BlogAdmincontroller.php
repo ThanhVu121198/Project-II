@@ -40,7 +40,7 @@ class BlogAdmincontroller extends Controller
         $blog->image =$file_name;
         $request->file('img')->move('front/images/blog/medium-size/',$file_name);
         $blog->save();
-        session()->flash('success','create a new categories success');
+        session()->flash('success','create a new blog success');
         return redirect('admin/blog/list');
     }
     public function destroy(Request $request)
@@ -96,8 +96,9 @@ class BlogAdmincontroller extends Controller
             $blog->category=$data['category'];
         }
         $blog->save();
+        session()->flash('success','update success');
         // $this->blogservice->update($request,$blog);
-        // return redirect('admin/blog/list');
+        return redirect('admin/blog/list');
        
     }
 }

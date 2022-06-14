@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests\Productrequest;
 use App\Models\Product;
 use App\Models\ProductImage;
+use App\Models\ProductDetail;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -27,10 +29,7 @@ class ProductController extends Controller
         ]);
         
     }
-    public function getcat(){
-        return Product::with('productCategory');
-
-    }
+  
     public function store(ProductRequest $request){
         $product = new Product();
         $product->name=$request->name;
@@ -50,7 +49,7 @@ class ProductController extends Controller
         $file_name1 = $request->file('img1')->getClientOriginalName();
         $product_img1= new ProductImage();
         $product_img1->product_id=$product_id;
-        $product_img1->path=$file_name1;
+        $product_img1->path='small-size/'.$file_name1;
         $request->file('img1')->move('front/images/product/small-size/',$file_name1);
         $product_img1->save();
         $ids=(String)$product_id;
@@ -73,7 +72,15 @@ class ProductController extends Controller
         // $product_img3->save();
 
     }
-    public function get(){
+    public function get($id){
+        $detail = DB::table('product_details')->where('product_id',$id)->get();
+        $img = DB::table('product_images')->where('product_id',$id)->get();
+        $product = Product:: find($id);
+        // dd($product);
+        return view('admin.product.detail',compact('detail','img','product'),[
+            'title'=>'product detil'
+        ]);
         
+
     }
 }

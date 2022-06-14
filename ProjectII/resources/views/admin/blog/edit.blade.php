@@ -36,7 +36,6 @@
                 <div class="col-4 mb-5">
                   <img class="col-12" src={{"/front/images/blog/medium-size/$blog->image"}}>
                 </div>
-                <input type="hidden" value="{{$blog->image}}">
                 <div class="custom-file col-4">
                     <input type="file" class="custom-file-input" name="img" id="exampleInputFile">
                     <label class="custom-file-label" for="exampleInputFile">Choose image</label>

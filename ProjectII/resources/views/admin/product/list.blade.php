@@ -23,7 +23,8 @@
                <th>featured</th>
                 <th>status</th>
                <th>create at</th>
-               <th class="text-right">actions</th>
+               <th>actions</th>
+               <th class="text-center">link</th>
            </tr>
        </thead>
        <tbody>
@@ -38,7 +39,6 @@
                    <td>{{$product->price}}</td>
                    <td>{{$product->qty}}</td>
                    <td>{{$product->discount}}</td>
-                   $product->featured
                    <td>
                     @if($product->featured==0)
                     <span class="badge bg-primary">featured</span>
@@ -58,7 +58,7 @@
                        echo \Carbon\Carbon::createFromTimeStamp(strtotime($product->created_at))->diffForHumans()
                        ?>
                        </td>
-                   <td class="text-right">
+                   <td>
                     <a class="btn btn-sm btn-success" 
                     href="/admin/blog/edit/{{$product->id}}"> 
                         <i class="fas fa-edit"></i>
@@ -68,6 +68,8 @@
                          <i class="fas fa-trash"></i>
                     </a>
                    </td>
+                   <td class="text-right">
+                    <a  href="/admin/product/productget/{{$product->id}}"><i class="fas fa-eye"></i> See details</a></td>
                </tr>
            @endforeach
        </tbody>
