@@ -6,7 +6,7 @@
         </p>
     @endforeach --}}
     <div class="row">
-    < class="col-md-8" style="border: 1px black solid">
+    <div class="col-md-8" style="border: 1px black solid">
         <h2 class="product_name" style="text-align: center"><span>Product Name:</span>{{$product->name}}</h2>
         <p><span>Product Name:</span> {{$product->description}}</p>
         <p>{{$product->content}}</p>
