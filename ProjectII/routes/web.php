@@ -1,13 +1,16 @@
 <?php
 
 use App\Http\Controllers\Admin\Blog\BlogAdmincontroller;
+use App\Http\Controllers\Admin\ImageController;
 use App\Http\Controllers\Admin\Maincontroller;
 use App\Http\Controllers\Admin\Menucontroller;
 use App\Http\Controllers\Admin\ProductController;
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\Admin\User\loginController;
+
 use App\Http\Controllers\Front\HomeController;
 use App\Http\Controllers\Front;
+use App\Http\Controllers\Admin\DetailController;
 use App\Http\Controllers\Front\BlogController;
 
 /*
@@ -59,13 +62,22 @@ Route::middleware(['auth'])->group(function() {
             route::get('add',[ProductController::class,'create']);
             Route::post('add',[ProductController::class,'store']);
             Route::get('list',[ProductController::class,'index']);
-            Route::DELETE('destroy',[Menucontroller::class,'destroy']);
-            // Route::get('edit/{menu}',[Menucontroller::class,'show']);
-            // Route::post('edit/{menu}',[Menucontroller::class,'update']);
+            Route::get('destroy/{id}',[ProductController::class,'destroy']);
+            Route::get('edit/{id}',[ProductController::class,'show']);
+            Route::post('edit/{id}',[ProductController::class,'update']);
+             // productget
             route::get('productget/{id}',[ProductController::class,'get']);
+            //img
+            Route::post('addimg/{id}',[ImageController::class,'store']);
+            Route::get('deleteimg/{id}',[ImageController::class,'destroy']);
+            //detail
+            Route::post('adddetail/{id}',[DetailController::class,'store']);
+            Route::get('deletedetail/{id}',[DetailController::class,'destroy']);
+            
+       
         });
-        // productget
-
+     
+        
 
         // blog
         route::prefix('blog')->group(function(){

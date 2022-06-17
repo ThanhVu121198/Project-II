@@ -60,11 +60,11 @@
                        </td>
                    <td>
                     <a class="btn btn-sm btn-success" 
-                    href="/admin/blog/edit/{{$product->id}}"> 
+                    href="/admin/product/edit/{{$product->id}}"> 
                         <i class="fas fa-edit"></i>
                     </a>
                     
-                    <a href="#" class="btn btn-sm btn-danger" id="btndelete" onclick="removeRowBlog({{$product->id}},'/admin/blog/destroy')" > 
+                    <a href="/admin/product/destroy/{{$product->id}}" class="btn btn-sm btn-danger" id="btndelete" onclick="return confirm('Continue?')"> 
                          <i class="fas fa-trash"></i>
                     </a>
                    </td>

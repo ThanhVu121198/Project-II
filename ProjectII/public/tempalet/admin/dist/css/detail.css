@@ -1,0 +1,29 @@
+.product{
+    padding: 20px;
+    width: 100%;
+    border: 2px solid #B5B5B5;
+    border-radius: 10px;
+}
+.product_name{
+    color:#808080;
+    text-align: left;
+    font-size: 25px;
+    line-height:12px;
+}
+.laber{
+    text-transform: capitalize;
+    font-weight: bold;
+}
+.price{
+    line-height: 30px;
+}
+.num{
+    width: 100%;
+    float: left;
+    box-sizing: border-box;
+}
+.cm{
+    margin-left: auto;
+    margin-right: auto;
+    float: none;
+}

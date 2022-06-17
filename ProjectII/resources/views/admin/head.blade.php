@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="/tempalet/admin/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
 <!-- Theme style -->
 <link rel="stylesheet" href="/tempalet/admin/dist/css/adminlte.min.css">
+<link rel="stylesheet" href="/tempalet/admin/dist/css/detail.css">
 <script src="//cdn.ckeditor.com/4.19.0/standard/ckeditor.js"></script>
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
