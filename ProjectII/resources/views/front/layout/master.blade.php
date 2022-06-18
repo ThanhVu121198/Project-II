@@ -113,7 +113,7 @@
                                                     <ul>
                                                         @foreach($categoryProducts as $categoryProduct)
                                                             <li>
-                                                                <a href="shop.html">{{$categoryProduct->name}}</a>
+                                                                <a href="shop/{{$categoryProduct->name}}">{{$categoryProduct->name}}</a>
                                                             </li>
                                                         @endforeach
                                                     </ul>
@@ -208,7 +208,7 @@
                                                 <ul class="drop-menu megamenu">
                                                     @foreach($categoryProducts as $categoryProduct)
                                                     <li>
-                                                        <a href="shop.html">{{$categoryProduct->name}}</a>
+                                                        <a href="shop/{{$categoryProduct->name}}">{{$categoryProduct->name}}</a>
                                                     </li>
                                                 @endforeach
                                                 </ul>
@@ -381,8 +381,8 @@
                         <div class="modal-body">
                             <div class="modal-search">
                                 <span class="searchbox-info">Start typing and press Enter to search or ESC to close</span>
-                                <form action="#" class="hm-searchbox">
-                                    <input type="text" name="Search..." value="Search..." onblur="if(this.value==''){this.value='Search...'}" onfocus="if(this.value=='Search...'){this.value=''}" autocomplete="off">
+                                <form action="shop" class="hm-searchbox">
+                                    <input type="text" name="search" value="Search..." onblur="if(this.value==''){this.value='Search...'}" onfocus="if(this.value=='Search...'){this.value=''}" autocomplete="off">
                                     <button class="search-btn" type="submit" aria-label="searchbtn">
                                         <i class="pe-7s-search"></i>
                                     </button>

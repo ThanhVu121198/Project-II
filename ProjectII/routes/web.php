@@ -31,6 +31,8 @@ Route::prefix('shop')->group(function () {
     Route::get('/', [Front\ShopController::class, 'index']);
 
     Route::post('/product/{id}', [Front\ShopController::class,'postComment']);
+
+    Route::get('/{categoryName}', [Front\ShopController::class, 'category']);
 });
 
 // admin 

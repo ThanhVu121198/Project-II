@@ -257,7 +257,7 @@
                                             @foreach($product->productComments as $productComment)
                                             <div class="blog-comment-item">
                                                 <div class="blog-comment-img">
-                                                    <img src="front/images/blog/avatar/{{$productComment->user->avatar ?? ''}}.png" alt="User Image">
+                                                    <img src="front/images/blog/avatar/{{$productComment->user->avatar ?? 'download'}}.png" alt="User Image">
                                                 </div>
                                                 <div class="blog-comment-content">
                                                     <div class="user-meta">
@@ -270,7 +270,7 @@
                                             </div>
                                             @endforeach
 
-                                            <div class="blog-comment-item relpy-item">
+                                            {{-- <div class="blog-comment-item relpy-item">
                                                 <div class="blog-comment-img">
                                                     <img src="front/images/blog/avatar/1-2-120x120.png" alt="User Image">
                                                 </div>
@@ -287,7 +287,7 @@
                                                     </p>
                                                     <a class="btn btn-custom-size comment-btn style-2" href="#">Reply</a>
                                                 </div>
-                                            </div>
+                                            </div> --}}
                                         </div>
                                         <div class="feedback-area">
                                             <h2 class="heading">Leave a comment</h2>
