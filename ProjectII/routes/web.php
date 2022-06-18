@@ -1,11 +1,15 @@
 <?php
 
+use App\Http\Controllers\Admin\Blog\BlogAdmincontroller;
 use App\Http\Controllers\Admin\Maincontroller;
 use App\Http\Controllers\Admin\Menucontroller;
+use App\Http\Controllers\Admin\ProductController;
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\Admin\User\loginController;
 use App\Http\Controllers\Front\HomeController;
 use App\Http\Controllers\Front;
+use App\Http\Controllers\Front\BlogController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,6 +29,10 @@ Route::prefix('shop')->group(function () {
     Route::get('/product/{id}', [Front\ShopController::class, 'show']);
 
     Route::get('/', [Front\ShopController::class, 'index']);
+
+    Route::post('/product/{id}', [Front\ShopController::class,'postComment']);
+
+    Route::get('/{categoryName}', [Front\ShopController::class, 'category']);
 });
 
 // admin
@@ -32,11 +40,12 @@ Route::get('admin/users/login',
 [\App\Http\Controllers\Admin\User\loginController::class,'index'])->name('login');
 route::post('admin/users/login/store',[loginController::class,'store']);
 // route::get('admin/main',[Maincontroller::class,'index'])->name('admin')->middleware('aut');
-Route::middleware(['auth'])->group(function(){
+Route::middleware(['auth'])->group(function() {
 
-    route::prefix('admin')->group(function(){
+    route::prefix('admin')->group(function() {
         route::get('main',[Maincontroller::class,'index']);
         route::get('/',[Maincontroller::class,'index'])->name('admin');
+        // menu
         Route::prefix('menu')->group(function(){
             Route::get('add',[Menucontroller::class,'create']);
             Route::post('add',[Menucontroller::class,'store']);
@@ -44,11 +53,31 @@ Route::middleware(['auth'])->group(function(){
             Route::DELETE('destroy',[Menucontroller::class,'destroy']);
             Route::get('edit/{menu}',[Menucontroller::class,'show']);
             Route::post('edit/{menu}',[Menucontroller::class,'update']);
-
         });
+        // product
+        route::prefix('product')->group(function(){
+            route::get('add',[ProductController::class,'create']);
+            Route::post('add',[ProductController::class,'store']);
+            Route::get('list',[ProductController::class,'index']);
+            Route::DELETE('destroy',[Menucontroller::class,'destroy']);
+            // Route::get('edit/{menu}',[Menucontroller::class,'show']);
+            // Route::post('edit/{menu}',[Menucontroller::class,'update']);
+            route::get('productget/{id}',[ProductController::class,'get']);
+        });
+        // productget
+        // blog
+        route::prefix('blog')->group(function(){
+            route::get('add',[BlogAdmincontroller::class,'create']);
+            Route::post('add',[BlogAdmincontroller::class,'store']);
+            Route::get('list',[BlogAdmincontroller::class,'index']);
+            Route::DELETE('destroy',[BlogAdmincontroller::class,'destroy']);
+            Route::get('edit/{blog}',[BlogAdmincontroller::class,'show']);
+            Route::post('edit/{blog}',[BlogAdmincontroller::class,'update']);
+        });
+
     });
 });
-//admin
+//end admin
 
 Route::get('/blog', [Front\BlogController::class, 'index']);
 

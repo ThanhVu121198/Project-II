@@ -12,36 +12,30 @@
        <thead>
            <tr>
                <th>id</th>
-               <th>name</th>
-               <th>Total product</th>
-               <th>status</th>
+               <th>tilte</th>
+               <th>category</th>
                <th>create at</th>
-               <th>update at</th>
                <th class="text-right">actions</th>
            </tr>
        </thead>
        <tbody>
-           @foreach ($data as $cat)
+           @foreach ($data as $blog)
                <tr>
-                   <td>{{$cat->id}}</td>
-                   <td>{{$cat->name}}</td>
-                   <td>{{$cat->products? $cat->products->count():0}}</td>
+                   <td>{{$blog->id}}</td>
+                   <td>{{$blog->title}}</td>
+                   <td>{{$blog->category}}</td>
                    <td>
-                       @if($cat->status==0)
-                       <span class="badge bg-primary">still selling</span>
-                       @else
-                       <span class="badge bg-secondary">stop selling</span>
-                       @endif
-                   </td>
-                   <td>{{$cat->created_at}}</td>
-                   <td>{{$cat->updated_at}}</td>
+                       <?php
+                       echo \Carbon\Carbon::createFromTimeStamp(strtotime($blog->created_at))->diffForHumans()
+                       ?>
+                       </td>
                    <td class="text-right">
-                  
                     <a class="btn btn-sm btn-success" 
-                    href="/admin/menu/edit/{{$cat->id}}"> 
+                    href="/admin/blog/edit/{{$blog->id}}"> 
                         <i class="fas fa-edit"></i>
                     </a>
-                    <a href="#" class="btn btn-sm btn-danger" id="btndelete" onclick="removeRow({{$cat->id}},'/admin/menu/destroy')"> 
+                    
+                    <a href="#" class="btn btn-sm btn-danger" id="btndelete" onclick="removeRowBlog({{$blog->id}},'/admin/blog/destroy')" > 
                          <i class="fas fa-trash"></i>
                     </a>
                    </td>
@@ -56,6 +50,7 @@
 <div class="">
     {{$data->appends(request()->all())->links()}}
 </div>
+  
  @endsection
 {{-- @section('js')
     <script>

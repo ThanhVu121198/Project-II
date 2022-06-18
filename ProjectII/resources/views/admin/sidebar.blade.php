@@ -31,12 +31,12 @@
 
       <!-- Sidebar Menu -->
       <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">y
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item menu-open">
-            <a href="#" class="nav-link active">
-              <i class="fas fa-bars"></i>
+            <a href="#" class="nav-link">
+              <i class="fas fa-list"></i>
               <p>
                 Categories Controll
                 <i class="right fas fa-angle-left"></i>
@@ -45,19 +45,65 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="/admin/menu/add" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="fas fa-calendar-plus"></i>
                   <p>Add Categories</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="/admin/menu/list" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="fas fa-list-ol"></i>
                   <p>Categories List</p>
                 </a>
               </li>
             </ul>
           </li>
+          <li class="nav-item menu-open">
+            <a href="#" class="nav-link">
+              <i class="fab fa-product-hunt"></i>
+              <p>
+                Product Controll
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/admin/product/add" class="nav-link">
+                  <i class="fas fa-calendar-plus"></i>
+                  <p>Add  Product</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/admin/product/list" class="nav-link">
+                  <i class="fas fa-list-ol"></i>
+                  <p> Product List</p>
+                </a>
+              </li>
+            </ul>
+          </li>
           
+          <li class="nav-item menu-open">
+            <a href="#" class="nav-link">
+            <i class="fas fa-blog"></i>
+              <p>
+                Blog Controll
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/admin/blog/add" class="nav-link">
+                  <i class="fas fa-calendar-plus"></i>
+                  <p>Add Blog</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/admin/blog/list" class="nav-link">
+                  <i class="fas fa-list-ol"></i>
+                  <p>Blog list</p>
+                </a>
+              </li>
+            </ul>
+          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

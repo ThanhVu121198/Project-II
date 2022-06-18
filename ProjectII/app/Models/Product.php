@@ -15,7 +15,7 @@ class Product extends Model
 
 
     public function productCategory() {
-        return $this->belongsTo(ProductCategory::class, 'product_category_id', 'id');
+        return $this->hasOne(ProductCategory::class, 'id', 'product_category_id');
     }
 
     public function productImages() {
@@ -33,4 +33,11 @@ class Product extends Model
     public function orderDetails() {
         return $this->hasMany(OrderDetail::class, 'product_id', 'id');
     }
+    public function scopeSearch($query){
+        if($key=request()->key){
+            $query=$query->where('name','like','%'.$key.'%');
+        }
+        return $query;
+    }
+  
 }

@@ -31,7 +31,6 @@ class Menucontroller extends Controller
                 // 'products_categories'=>$this->menuService->getAll()
         ]);
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -113,7 +112,7 @@ class Menucontroller extends Controller
         if ($result) {
             return response()->json([
                 'error' => false,
-                'message' => 'Xóa thành công danh mục'
+                'message' => 'delete success'
             ]);
         }
 

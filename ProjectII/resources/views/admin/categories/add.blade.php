@@ -2,7 +2,7 @@
 @section('content')
 <div class="card card-primary">
     <div class="card-header">
-      <h3 class="card-title">Categories form</h3>
+      <h3 class="card-title">Categories Form</h3>
     </div>
     <!-- /.card-header -->
     <!-- form start -->
@@ -12,7 +12,6 @@
           <label for="menu">Categories Name</label>
           <input type="text" class="form-control" id="name" name="categories_name" placeholder="Enter Name">
         </div>
-      
        
         <div class="form-check">
             <input class="form-check-input" type="radio" name="status" value="0" id="status_on" checked>
