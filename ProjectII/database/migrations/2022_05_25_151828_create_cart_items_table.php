@@ -22,9 +22,15 @@ return new class extends Migration
             $table->double('unit_price');
             $table->double('buy_price');
             $table->integer('buy_type');
-
+            $table->unsignedBigInteger('customer_id');
+            $table->foreign('customer_id')
+                ->references('id')
+                ->on('customers')
+                ->onDelete('cascade');
 
             $table->timestamps();
+
+
         });
     }
 

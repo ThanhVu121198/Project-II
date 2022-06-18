@@ -81,7 +81,7 @@
                                         <li class="minicart-wrap me-3 me-lg-0">
                                             <a href="#miniCart" class="minicart-btn toolbar-btn">
                                                 <i class="pe-7s-shopbag"></i>
-                                                <span class="quantity">3</span>
+                                                <span class="quantity">{{ !is_null(\Session::get('carts')) ? count(\Session::get('carts')) : 0 }}</span>
                                             </a>
                                         </li>
                                         <li class="mobile-menu_wrap d-block d-lg-none">
@@ -337,7 +337,7 @@
                                         <li class="minicart-wrap me-3 me-lg-0">
                                             <a href="#miniCart" class="minicart-btn toolbar-btn">
                                                 <i class="pe-7s-shopbag"></i>
-                                                <span class="quantity">3</span>
+                                                <span class="quantity">{{ !is_null(\Session::get('carts')) ? count(\Session::get('carts')) : 0 }}</span>
                                             </a>
                                         </li>
                                         <li class="mobile-menu_wrap d-block d-lg-none">
@@ -590,55 +590,40 @@
                 <div class="offcanvas-body">
                     <div class="minicart-content">
                         <div class="minicart-heading">
+                            @php
+                                $sumPriceCart = 0;
+                            @endphp
                             <h4 class="mb-0">Shopping Cart</h4>
                             <a href="#" class="button-close"><i class="pe-7s-close" data-tippy="Close" data-tippy-inertia="true"
                             data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true"
                             data-tippy-theme="sharpborder"></i></a>
                         </div>
                         <ul class="minicart-list">
+                            @if(Session::has('mini-carts'))
+                            @foreach(Session::get('mini-carts') as $product)
+                                @php
+                                    $priceEnd  = $product->price * $product->quantity_cart ;
+                                    $sumPriceCart += $priceEnd;
+                                @endphp
                             <li class="minicart-product">
-                                <a class="product-item_remove" href="#"><i class="pe-7s-close" data-tippy="Remove"
+                                <a class="product-item_remove" href="/cart/delete/{{ $product->id }}"><i class="pe-7s-close" data-tippy="Remove"
                                 data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50"
                                 data-tippy-arrow="true" data-tippy-theme="sharpborder"></i></a>
                                 <a href="single-product-variable.html" class="product-item_img">
                                     <img class="img-full" src="front/images/product/small-size/2-1-70x78.png" alt="Product Image">
                                 </a>
                                 <div class="product-item_content">
-                                    <a class="product-item_title" href="single-product-variable.html">American Marigold</a>
-                                    <span class="product-item_quantity">1 x $23.45</span>
+                                    <a class="product-item_title" href="single-product-variable.html">{{ $product->name }}</a>
+                                    <span class="product-item_quantity"> {{$product->quantity_cart}} x ${{ $product->price }}.00</span>
                                 </div>
-                            </li>
-                            <li class="minicart-product">
-                                <a class="product-item_remove" href="#"><i class="pe-7s-close" data-tippy="Remove"
-                                data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50"
-                                data-tippy-arrow="true" data-tippy-theme="sharpborder"></i></a>
-                                <a href="single-product-variable.html" class="product-item_img">
-                                    <img class="img-full" src="front/images/product/small-size/2-2-70x78.png" alt="Product Image">
-                                </a>
-                                <div class="product-item_content">
-                                    <a class="product-item_title" href="single-product-variable.html">Black Eyed Susan</a>
-                                    <span class="product-item_quantity">1 x $25.45</span>
-                                </div>
-                            </li>
-                            <li class="minicart-product">
-                                <a class="product-item_remove" href="#">
-                                    <i class="pe-7s-close" data-tippy="Remove" data-tippy-inertia="true"
-                                data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true"
-                                data-tippy-theme="sharpborder"></i>
-                                </a>
-                                <a href="single-product-variable.html" class="product-item_img">
-                                    <img class="img-full" src="front/images/product/small-size/2-3-70x78.png" alt="Product Image">
-                                </a>
-                                <div class="product-item_content">
-                                    <a class="product-item_title" href="single-product-variable.html">Bleeding Heart</a>
-                                    <span class="product-item_quantity">1 x $30.45</span>
-                                </div>
-                            </li>
+                                    </li>
+                            @endforeach
+                            @endif
                         </ul>
                     </div>
                     <div class="minicart-item_total">
                         <span>Subtotal</span>
-                        <span class="ammount">$79.35</span>
+                        <span class="ammount">${{$sumPriceCart}}.00</span>
                     </div>
                     <div class="group-btn_wrap d-grid gap-2">
                         <a href="./cart" class="btn btn-dark">View Cart</a>

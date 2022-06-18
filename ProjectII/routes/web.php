@@ -66,7 +66,13 @@ Route::get('/logout', [Front\LogoutController::class, 'index']);
 Route::get('/wishList', [Front\WishlistController::class, 'index']);
 
 
-Route::get('/checkOut', [Front\CheckOutController::class, 'index']);
 
-Route::get('/cart', [Front\CartController::class, 'index']);
-Route::get('/add-cart', [Front\CartController::class, 'index']);
+
+Route::get('/cart', [Front\CartController::class, 'show']);
+Route::post('/add-cart', [Front\CartController::class, 'index']);
+Route::post('/update-cart', [Front\CartController::class, 'update']);
+Route::get('/cart/delete/{id}', [Front\CartController::class, 'remove']);
+Route::post('carts', [Front\CartController::class, 'addCart']);
+
+Route::get('/checkOut', [Front\CheckOutController::class, 'index']);
+Route::post('/checkout2', [Front\CheckOutController::class, 'addCart']);

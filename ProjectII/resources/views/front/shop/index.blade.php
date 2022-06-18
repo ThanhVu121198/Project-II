@@ -1360,4 +1360,4 @@
         </main>
         <!-- Main Content Area End Here -->
 
-@endsection 
+@endsection

@@ -4,59 +4,82 @@ namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Product;
+use App\Http\Services\CartService;
+use Illuminate\Support\Facades\Session;
+
 
 class CartController extends Controller
 {
-    public function index() {
+    public function index1() {
         return view('front.cart.index');
     }
 
-    // protected $cartService;
+    protected $cartService;
 
-    // public function __construct(CartService $cartService)
-    // {
-    //     $this->cartService = $cartService;
-    // }
+    public function __construct(CartService $cartService)
+    {
+        $this->cartService = $cartService;
+    }
 
-    // public function index1(Request $request)
-    // {
-    //     $result = $this->cartService->create($request);
-    //     if ($result === false) {
-    //         return redirect()->back();
-    //     }
+    public function index(Request $request)
+    {
 
-    //     return redirect('/carts');
-    // }
+        $result = $this->cartService->create($request);
 
-    // public function show()
+        if ($result === false) {
+            return redirect()->back();
+        }
+        return redirect('/cart');
+    }
+
+    public function show()
+    {
+        $products = $this->cartService->getProduct();
+        // $carts = Session::get('carts')
+        // $productImg = Product::findOrFail();
+        return view('front.cart.index', [
+            'title' => 'Giỏ Hàng',
+            'products' => $products,
+            'carts' => Session::get('carts')
+
+        ]);
+    }
+
+    // public function showMaster()
     // {
     //     $products = $this->cartService->getProduct();
-
-    //     return view('carts.list', [
+    //     // $carts = Session::get('carts')
+    //     // $productImg = Product::findOrFail();
+    //     return view('front.layout.master', [
     //         'title' => 'Giỏ Hàng',
     //         'products' => $products,
     //         'carts' => Session::get('carts')
+    //         'minicarts' => Session::get('mini-carts')
     //     ]);
     // }
 
-    // public function update(Request $request)
-    // {
-    //     $this->cartService->update($request);
+    public function update(Request $request)
+    {
 
-    //     return redirect('/carts');
-    // }
+        $this->cartService->update($request);
 
-    // public function remove($id = 0)
-    // {
-    //     $this->cartService->remove($id);
+        return redirect('/cart');
+    }
 
-    //     return redirect('/carts');
-    // }
+    public function remove($id = 0)
+    {
+        $this->cartService->remove($id);
 
-    // public function addCart(Request $request)
-    // {
-    //     $this->cartService->addCart($request);
+        return redirect('/cart');
+    }
 
-    //     return redirect()->back();
-    // }
+    public function addCart(Request $request)
+    {
+        $name = $request->input('address');
+        dd($request->input('address'));
+        // $this->cartService->addCart($request);
+        //dd($request->input());
+        // return redirect()->back();
+    }
 }

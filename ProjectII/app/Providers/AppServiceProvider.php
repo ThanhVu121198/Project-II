@@ -21,8 +21,9 @@ class AppServiceProvider extends ServiceProvider
     {
         Paginator::useBootstrap();
         // $categoryProducts =  \DB::table('products_categories')->where('status', '=', 0)->get();
+    
         view()->composer(
-            'front.layout.master', 
+            'front.layout.master',
             function ($view) {
                 $view->with('categoryProducts', \DB::table('products_categories')->where('status', '=', 0)->get());
             }
