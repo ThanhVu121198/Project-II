@@ -30,10 +30,10 @@ class Productrequest extends FormRequest
             // 'img2'=> 'required',
             // 'img3'=> 'required',
             'categories'=>'required',
-            'price'=>'required',
-            'color'=>'required',
-            'size'=>'required',
-            'qtydetail'=>'required'
+            // 'price'=>'required',
+            // 'color'=>'required',
+            // 'size'=>'required',
+            // 'qtydetail'=>'required'
           
         ];
     }
@@ -48,9 +48,9 @@ class Productrequest extends FormRequest
             // 'img2.image'=>'this file only image input 2',
             // 'img3.required'=>'please enter choose image input 3',
             // 'img3.image'=>'this file only image input 3',
-            'color.required'=>'please enter color detail',
-            'size.required'=>'please enter size detail',
-            'qtydetail.required'=>'please qty detail',
+            // 'color.required'=>'please enter color detail',
+            // 'size.required'=>'please enter size detail',
+            // 'qtydetail.required'=>'please qty detail',
             'name.unique'=>'product name cannot matche',
             'price.required'=>'please enter product price'
         ];

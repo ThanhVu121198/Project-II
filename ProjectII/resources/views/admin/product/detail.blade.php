@@ -34,9 +34,8 @@
                     ?></p>
     </div>
 
-    <hr>
 
-    <div class="table_detail col-12">
+    {{-- <div class="table_detail col-12">
         <h4>product Detail</h4>
         <table class="table">
             <thead>
@@ -57,9 +56,7 @@
                         <td>{{$dt->size}}</td>
                         <td>{{$dt->qty}}</td>
                         <td>
-                        <?php
-                       echo \Carbon\Carbon::createFromTimeStamp(strtotime($dt->created_at))->diffForHumans()
-                       ?>
+                     
                        </td>
                        <td class="text-right">
                         <a href="/admin/product/deletedetail/{{$dt->id}}" class="btn btn-sm btn-danger" id="btndeletr" onclick="return confirm('are you sure ?')"> 
@@ -77,8 +74,8 @@
     
    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Add Detail</button>
   
-  <!-- Modal -->
-    <form action="/admin/product/adddetail/{{$product->id}}" method="POST">
+  <!-- Modal --> --}}
+    {{-- <form action="/admin/product/adddetail/{{$product->id}}" method="POST">
   <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
@@ -101,7 +98,7 @@
           <label for="size" class="">size:</label>
           <input type="number" name="size" class="form-control">
         </div>
-           
+            {{-- 
         </div>
         <div class="modal-footer">
           <button type="submit" class="btn btn-primary">submit</button>
@@ -112,7 +109,7 @@
     </div>
   </div>
   @csrf
-</form>
+</form> --}}
         {{-- <a href="/admin/product/addimg/{{$product->id}}" class="btn btn-primary">add a new image</a> --}}
     
     </div>
@@ -132,7 +129,7 @@
             </div>
         @endforeach
         <!-- Button trigger modal -->
-<hr>
+{{-- <hr> --}}
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter2">Add Image</button>
   
   <!-- Modal -->

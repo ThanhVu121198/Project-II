@@ -37,8 +37,7 @@ Route::prefix('shop')->group(function () {
 });
 
 // admin 
-Route::get('admin/users/login',
-[\App\Http\Controllers\Admin\User\loginController::class,'index'])->name('login');
+Route::get('admin/users/login',[\App\Http\Controllers\Admin\User\loginController::class,'index'])->name('login');
 route::post('admin/users/login/store',[loginController::class,'store']);
 // route::get('admin/main',[Maincontroller::class,'index'])->name('admin')->middleware('aut');
 Route::middleware(['auth'])->group(function() {
@@ -71,8 +70,8 @@ Route::middleware(['auth'])->group(function() {
             Route::post('addimg/{id}',[ImageController::class,'store']);
             Route::get('deleteimg/{id}',[ImageController::class,'destroy']);
             //detail
-            Route::post('adddetail/{id}',[DetailController::class,'store']);
-            Route::get('deletedetail/{id}',[DetailController::class,'destroy']);
+            // Route::post('adddetail/{id}',[DetailController::class,'store']);
+            // Route::get('deletedetail/{id}',[DetailController::class,'destroy']);
             
        
         });
@@ -88,7 +87,11 @@ Route::middleware(['auth'])->group(function() {
             Route::get('edit/{blog}',[BlogAdmincontroller::class,'show']);
             Route::post('edit/{blog}',[BlogAdmincontroller::class,'update']);
         });
-        
+        // 
+
+         Route::get('logout',[loginController::class,'logout']);
+         Route::get('register',[loginController::class,'create']);
+         Route::post('register',[loginController::class,'request']);
     });
 });
 //end admin

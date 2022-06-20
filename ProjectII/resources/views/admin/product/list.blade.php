@@ -14,7 +14,7 @@
                <th>id</th>
                <th>product name</th>
                <th>category</th>
-               <th>detail total</th>
+               {{-- <th>detail total</th> --}}
                <th>image total</th>
                {{-- <th>content</th> --}}
                <th>price</th>
@@ -33,10 +33,10 @@
                    <td>{{$product->id}}</td>
                    <td>{{$product->name}}</td>
                    <td>{{$product->ProductCategory->name}}</td>
-                   <td>{{$product->productDetails ? $product->productDetails->count():0}}</td>
+                   {{-- <td>{{$product->productDetails ? $product->productDetails->count():0}}</td> --}}
                    <td>{{$product->productImages ? $product->productImages->count():0}}</td>
                    {{-- <td>{{$product->content}}</td> --}}
-                   <td>{{$product->price}}</td>
+                   <td style="color: red">{{$product->price}}<span>$</span></td>
                    <td>{{$product->qty}}</td>
                    <td>{{$product->discount}}</td>
                    <td>
