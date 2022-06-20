@@ -3,6 +3,8 @@
 @section('title', 'Home')
 
 @section('body')
+@include('front.alert')
+
         <!-- Begin Slider Area -->
         <div class="slider-area">
 

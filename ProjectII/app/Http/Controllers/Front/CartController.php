@@ -76,7 +76,7 @@ class CartController extends Controller
 
     public function addCart(Request $request)
     {
-        $name = $request->input('address');
+        
         dd($request->input('address'));
         // $this->cartService->addCart($request);
         //dd($request->input());

@@ -23,9 +23,8 @@ class CheckOutController extends Controller
 
     public function addCart(Request $request)
     {
-        $name = $request->input('address');
-        // $this->cartService->addCart($request);
-        dd($request->all());
-        // return redirect()->back();
+        // dd($request->all());
+        $this->cartService->addCart($request);
+        return redirect()->route('home');
     }
 }

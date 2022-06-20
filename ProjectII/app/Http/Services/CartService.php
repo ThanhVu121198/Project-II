@@ -106,62 +106,67 @@ class CartService
         return true;
     }
 
-    // public function addCart($request)
-    // {
-    //     try {
-    //         DB::beginTransaction();
+    public function addCart($request)
+    {
+        try {
+            DB::beginTransaction();
 
-    //         $carts = Session::get('carts');
+            $carts = Session::get('carts');
 
-    //         if (is_null($carts))
-    //             return false;
+            if (is_null($carts))
+                return false;
 
-    //         $customer = Customer::create([
-    //             'name' => $request->input('name'),
-    //             'phone' => $request->input('phone'),
-    //             'address' => $request->input('address'),
-    //             'email' => $request->input('email'),
-    //             'content' => $request->input('content')
-    //         ]);
+            $customer = Customer::create([
 
-    //         $this->infoProductCart($carts, $customer->id);
+                'first_name' => $request->input('first_name'),
+                'last_name' => $request->input('last_name'),
+                'company_name' => $request->input('company_name'),
+                'address' => $request->input('address'),
+                'town' => $request->input('town'),
+                'phone' => $request->input('phone'),
+                'email' => $request->input('email'),
+                'checkout-mess' => $request->input('checkout-mess')
+            ]);
 
-    //         DB::commit();
-    //         Session::flash('success', 'Đặt Hàng Thành Công');
+            $this->infoProductCart($carts, $customer->id);
 
-    //         #Queue
-    //         SendMail::dispatch($request->input('email'))->delay(now()->addSeconds(2));
+            DB::commit();
+            Session::flash('success', 'Đặt Hàng Thành Công');
 
-    //         Session::forget('carts');
-    //     } catch (\Exception $err) {
-    //         DB::rollBack();
-    //         Session::flash('error', 'Đặt Hàng Lỗi, Vui lòng thử lại sau');
-    //         return false;
-    //     }
+            #Queue
+            // SendMail::dispatch($request->input('email'))->delay(now()->addSeconds(2));
 
-    //     return true;
-    // }
+            Session::forget('carts');
+            Session::forget('mini-carts');
 
-    // protected function infoProductCart($carts, $customer_id)
-    // {
-    //     $productId = array_keys($carts);
-    //     $products = Product::select('id', 'name', 'price', 'price_sale', 'thumb')
-    //         ->where('active', 1)
-    //         ->whereIn('id', $productId)
-    //         ->get();
+        } catch (\Exception $err) {
+            DB::rollBack();
+            Session::flash('error', 'Đặt Hàng Lỗi, Vui lòng thử lại sau');
+            return false;
+        }
 
-    //     $data = [];
-    //     foreach ($products as $product) {
-    //         $data[] = [
-    //             'customer_id' => $customer_id,
-    //             'product_id' => $product->id,
-    //             'pty'   => $carts[$product->id],
-    //             'price' => $product->price_sale != 0 ? $product->price_sale : $product->price
-    //         ];
-    //     }
+        return true;
+    }
 
-    //     return Cart::insert($data);
-    // }
+    protected function infoProductCart($carts, $customer_id)
+    {
+        $productId = array_keys($carts);
+        $products = Product::select('id', 'name', 'price','img')
+            ->whereIn('id', $productId)
+            ->get();
+
+        $data = [];
+        foreach ($products as $product) {
+            $data[] = [
+                'customer_id' => $customer_id,
+                'product_id' => $product->id,
+                'quantity'   => $carts[$product->id],
+                'buy_price' => $product->price
+            ];
+        }
+
+        return Cart::insert($data);
+    }
 
     // public function getCustomer()
     // {
@@ -173,5 +178,5 @@ class CartService
     //     return $customer->carts()->with(['product' => function ($query) {
     //         $query->select('id', 'name', 'thumb');
     //     }])->get();
-    //}
+    // }
 }

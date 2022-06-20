@@ -26,6 +26,7 @@
                 </div>
             </div>
             <form action="/checkout2" method="post">
+            
             @csrf
                 <div class="checkout-area section-space-y-axis-100">
                     <div class="container">

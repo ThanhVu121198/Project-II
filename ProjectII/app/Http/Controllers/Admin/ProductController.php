@@ -3,20 +3,23 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ProducteditRequest;
 use App\Models\ProductCategory;
 use Illuminate\Http\Request;
 use App\Http\Requests\Productrequest;
 use App\Models\Product;
 use App\Models\ProductImage;
 use App\Models\ProductDetail;
+use Faker\Core\File;
 use Illuminate\Support\Facades\DB;
+use delete;
 
 class ProductController extends Controller
 {
     //
     public function index(){
     
-        $data= Product::orderBy('id','ASC')->search()->paginate(20);
+        $data= Product::orderBy('id','DESC')->search()->paginate(20);
         return view('admin.product.list',compact('data'),[
             'title'=>'Product list'
         ]);
@@ -46,6 +49,12 @@ class ProductController extends Controller
         $product->save(); 
         $product_id=$product->id;
         //
+        $detail=new ProductDetail();
+        $detail->color=$request->color;
+        $detail->size=$request->size;
+        $detail->product_id=$product_id;
+        $detail->qty=$request->qtydetail;
+        $detail->save();
         $file_name1 = $request->file('img1')->getClientOriginalName();
         $product_img1= new ProductImage();
         $product_img1->product_id=$product_id;
@@ -54,6 +63,7 @@ class ProductController extends Controller
         $product_img1->save();
         $ids=(String)$product_id;
         $link='admin/product/productget/'.$ids;
+        session()->flash('success','create product detail success');
         return redirect($link);
         //
         // $file_name2 = $request->file('img2')->getClientOriginalName();
@@ -78,9 +88,47 @@ class ProductController extends Controller
         $product = Product:: find($id);
         // dd($product);
         return view('admin.product.detail',compact('detail','img','product'),[
-            'title'=>'product detil'
+            'title'=>'product '.$product->name
         ]);
-        
-
+    }
+    public function show($id){
+        $cate = ProductCategory::all();
+        $product= Product::find($id);
+        return view('admin.product.edit',compact('cate','product'),[
+            'title'=>'Edit product'
+        ]);
+    }
+    public function update($id,ProducteditRequest $request){
+        $product=Product::find($id);
+        $product->name=$request->name;
+        $product->product_category_id=$request->categories;
+        $product->description=$request->desc;
+        $product->content=$request->content;
+        $product->price=$request->price;
+        $product->qty=$request->qty;
+        $product->weight=$request->weight;
+        $product->featured=$request->featured;
+        $product->status=$request->status;
+        $product->save();
+        session()->flash('success','Update product success');
+        return redirect('admin/product/list');
+    }
+    public function destroy($id){
+        $product_img = Product::find($id)->productImages;
+     foreach($product_img as $value){
+        $destinal='front/images/product/'.$value->path;
+        if(file_exists($destinal)){
+            unlink($destinal);
+        }
+        ProductImage::where('id', $value->id)->delete();
+     }
+        $product_detail=Product::find($id)->productDetails;
+        foreach($product_detail as $detail){
+            ProductDetail::where('id', $detail->id)->delete();  
+        }
+        $product=Product::find($id);
+        session()->flash('success','delete product success');
+        $product->delete($id);
+        return redirect()->back();
     }
 }

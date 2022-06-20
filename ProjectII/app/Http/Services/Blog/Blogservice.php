@@ -14,11 +14,12 @@ class Blogservice{
     public function destroy($request) {
         $id = $request->input('id');
         $blog = Blog::where('id', $id)->first();
-        $destinal='front/images/blog/medium-size/'.$blog->image;
-        if(file_exists($destinal)){
-            unlink($destinal);
-        }
+       
         if ($blog) {
+            $destinal='front/images/blog/medium-size/'.$blog->image;
+            if(file_exists($destinal)){
+                unlink($destinal);
+            }
             return Blog::where('id', $id)->delete();
         }
 

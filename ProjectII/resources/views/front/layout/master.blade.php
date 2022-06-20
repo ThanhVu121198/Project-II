@@ -416,7 +416,7 @@
                                 data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50"
                                 data-tippy-arrow="true" data-tippy-theme="sharpborder"></i></a>
                                 <a href="single-product-variable.html" class="product-item_img">
-                                    <img class="img-full" src="front/images/product/small-size/2-1-70x78.png" alt="Product Image">
+                                    <img class="img-full" src="front/images/product/{{ $product->img }}" alt="Product Image">
                                 </a>
                                 <div class="product-item_content">
                                     <a class="product-item_title" href="single-product-variable.html">{{ $product->name }}</a>
@@ -776,6 +776,7 @@
 
         <!--Main JS (Common Activation Codes)-->
         <script src="front/js/main.js"></script>
+
 
     </body>
     </html>
