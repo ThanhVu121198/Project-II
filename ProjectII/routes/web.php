@@ -25,6 +25,7 @@ use App\Http\Controllers\Front\BlogController;
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/addCartHome/{id}', [HomeController::class, 'addCart']);
 
 // Route::get('/category', [Front\CategoryController::class, 'index']);
 
@@ -73,13 +74,8 @@ Route::middleware(['auth'])->group(function() {
             //detail
             Route::post('adddetail/{id}',[DetailController::class,'store']);
             Route::get('deletedetail/{id}',[DetailController::class,'destroy']);
-
-
         });
         // productget
-
-
-
         // blog
         route::prefix('blog')->group(function(){
             route::get('add',[BlogAdmincontroller::class,'create']);
@@ -100,7 +96,6 @@ Route::get('/about', [Front\AboutController::class, 'index']);
 
 Route::get('/faq', [Front\FAQController::class, 'index']);
 
-
 Route::get('/contact', [Front\ContactController::class, 'index']);
 
 Route::get('/account', [Front\MyAccountController::class, 'index']);
@@ -111,7 +106,7 @@ Route::get('/wishList', [Front\WishlistController::class, 'index']);
 
 
 
-
+// cart -
 Route::get('/cart', [Front\CartController::class, 'show']);
 Route::post('/add-cart', [Front\CartController::class, 'index']);
 Route::post('/update-cart', [Front\CartController::class, 'update']);
