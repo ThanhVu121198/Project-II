@@ -197,7 +197,7 @@
                                                                         <i class="pe-7s-like"></i>
                                                                     </a>
                                                                 </li>
-                                                                <li class="quuickview-btn" data-bs-toggle="modal" data-bs-target="#quickModal">
+                                                                <li class="quuickview-btn" data-bs-toggle="" data-bs-target="#quickModal">
                                                                     <a href="shop/product/{{$product->id}}" data-tippy="Quickview" data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder">
                                                                         <i class="pe-7s-look"></i>
                                                                     </a>
