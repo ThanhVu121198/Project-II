@@ -3,6 +3,8 @@
 @section('title', 'Home')
 
 @section('body')
+@include('front.alert')
+
         <!-- Begin Slider Area -->
         <div class="slider-area">
 
@@ -152,9 +154,11 @@
                                     <div class="col-xl-3 col-md-4 col-sm-6">
                                         <div class="product-item">
                                             <div class="product-img">
-                                                <a href="shop.html">
-                                                    <img class="primary-img" src="front/images/product/{{ $featureProduct->productImages[0]->path }}" alt="Product Images">
-                                                    <img class="secondary-img" src="front/images/product/{{ $featureProduct->productImages[1]->path }}" alt="Product Images">
+                                                <a href="shop/product/{{ $featureProduct->id }}">
+                                                    <P>
+                                                        <img class="primary-img" src="front/images/product/{{ $featureProduct->productImages[0]->path }}" alt="Product Images">
+                                                        <img class="secondary-img" src="front/images/product/{{ $featureProduct->productImages[1]->path }}" alt="Product Images">
+                                                    </P>
                                                 </a>
                                                 <div class="product-add-action">
                                                     <ul>

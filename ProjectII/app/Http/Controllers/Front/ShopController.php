@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\ProductComment;
+use App\Models\ProductCategory;
 class ShopController extends Controller
 {
     public function show($id) {
@@ -31,11 +32,60 @@ class ShopController extends Controller
     }
 
 
-    public function index() {
-        
-        $products = Product::all();
+    public function index(Request $request) {
 
-        return view('front.shop.index', compact('products'));
+        $categories = ProductCategory::all();
+
+        $perPage = $request->show ?? 3;
+        $sortBy = $request->sort_by ?? '1';
+        $search = $request->search ?? '';
+
+        $products = Product::where('name', 'like', '%' . $search . '%');
+
+        $products = $this->sortAndPagination($products,$sortBy,$perPage);
+
+        return view('front.shop.index', compact('categories','products'));
+    }
+
+    public function category($categoryName, Request $request) {
+        $categories = ProductCategory::all();
+
+        $perPage = $request->show ?? 3;
+        $sortBy = $request->sort_by ?? '1';
+
+        $products = ProductCategory::where('name', $categoryName)->first()->products->toQuery();
+
+        $products = $this->sortAndPagination($products,$sortBy,$perPage);
+        return view('front.shop.index', compact('categories','products'));
+    }
+
+    public function sortAndPagination($products,$sortBy,$perPage) {
+        switch ($sortBy) {
+            case '1':
+            case '2':
+                $products = $products->orderBy('id');
+                Break;  
+            case '3':
+                $products = $products->orderBy('id');
+                Break; 
+            case '4':
+                $products = $products->orderBy('id');
+                Break;  
+            case '5':
+                $products = $products->orderByDesc('price');
+                Break; 
+            case '6':
+                $products = $products->orderBy('price');
+                Break;  
+            default: 
+                $products = $products->orderBy('id');
+        }
+
+        
+        $products = $products->paginate(12);
+
+        $products->appends(['sort_by' => $sortBy, 'show' => $perPage]);
+        return $products;
     }
 
 }

@@ -6,6 +6,7 @@
         <!-- Main Header Area End Here -->
 
         <!-- Begin Main Content Area -->
+        <!-- @if(count($products) != 0) -->
         <main class="main-content">
             <div class="breadcrumb-area breadcrumb-height" data-bg-image="front/images/breadcrumb/bg/1-1-1919x388.jpg">
                 <div class="container h-100">
@@ -28,8 +29,9 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-12">
-                            <form action="javascript:void(0)">
+                            <form action="javascript:void(0)" method="post" >
                                 <div class="table-content table-responsive">
+                                @php $total = 0; @endphp
                                     <table class="table">
                                         <thead>
                                             <tr>
@@ -42,9 +44,15 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                        @foreach($products as $key => $product)
+                                            @php
+                                                $price = $product->price;
+                                                $priceEnd = $price * $carts[$product->id];
+                                                $total += $priceEnd;
+                                            @endphp
                                             <tr>
                                                 <td class="product_remove">
-                                                    <a href="#">
+                                                    <a href="/cart/delete/{{ $product->id }}">
                                                         <i class="pe-7s-close" data-tippy="Remove" data-tippy-inertia="true"
                                                     data-tippy-animation="shift-away" data-tippy-delay="50"
                                                     data-tippy-arrow="true" data-tippy-theme="sharpborder"></i>
@@ -52,14 +60,14 @@
                                                 </td>
                                                 <td class="product-thumbnail">
                                                     <a href="#">
-                                                        <img src="front/images/product/small-size/1-1-112x124.png" alt="Cart Thumbnail">
+                                                        <img style="max-height: 200px" src="front/images/product/{{ $product->img }}" alt="Cart Thumbnail">
                                                     </a>
                                                 </td>
-                                                <td class="product-name"><a href="#">American Marigold</a></td>
-                                                <td class="product-price"><span class="amount">$23.45</span></td>
+                                                <td class="product-name"><a href="#">{{ $product->name }}</a></td>
+                                                <td class="product-price"><span class="amount">${{ number_format($product->price, 0, '', '.') }}.00</span></td>
                                                 <td class="quantity">
                                                     <div class="cart-plus-minus">
-                                                        <input class="cart-plus-minus-box" value="1" type="text">
+                                                        <input class="cart-plus-minus-box" name="num_product[{{ $product->id }}]" value="{{ $carts[$product->id] }}" type="text">
                                                         <div class="dec qtybutton">
                                                             <i class="fa fa-minus"></i>
                                                         </div>
@@ -68,66 +76,12 @@
                                                         </div>
                                                     </div>
                                                 </td>
-                                                <td class="product-subtotal"><span class="amount">$23.45</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td class="product_remove">
-                                                    <a href="#">
-                                                        <i class="pe-7s-close" data-tippy="Remove" data-tippy-inertia="true"
-                                                    data-tippy-animation="shift-away" data-tippy-delay="50"
-                                                    data-tippy-arrow="true" data-tippy-theme="sharpborder"></i>
-                                                    </a>
-                                                </td>
-                                                <td class="product-thumbnail">
-                                                    <a href="#">
-                                                        <img src="front/images/product/small-size/1-2-112x124.png" alt="Cart Thumbnail">
-                                                    </a>
-                                                </td>
-                                                <td class="product-name"><a href="#">Black Eyed Susan</a></td>
-                                                <td class="product-price"><span class="amount">$25.45</span></td>
-                                                <td class="quantity">
-                                                    <div class="cart-plus-minus">
-                                                        <input class="cart-plus-minus-box" value="1" type="text">
-                                                        <div class="dec qtybutton">
-                                                            <i class="fa fa-minus"></i>
-                                                        </div>
-                                                        <div class="inc qtybutton">
-                                                            <i class="fa fa-plus"></i>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td class="product-subtotal"><span class="amount">$25.45</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td class="product_remove">
-                                                    <a href="#">
-                                                        <i class="pe-7s-close" data-tippy="Remove" data-tippy-inertia="true"
-                                                    data-tippy-animation="shift-away" data-tippy-delay="50"
-                                                    data-tippy-arrow="true" data-tippy-theme="sharpborder"></i>
-                                                    </a>
-                                                </td>
-                                                <td class="product-thumbnail">
-                                                    <a href="#">
-                                                        <img src="front/images/product/small-size/1-3-112x124.png" alt="Cart Thumbnail">
-                                                    </a>
-                                                </td>
-                                                <td class="product-name"><a href="#">Bleeding Heart</a></td>
-                                                <td class="product-price"><span class="amount">$30.45</span></td>
-                                                <td class="quantity">
-                                                    <div class="cart-plus-minus">
-                                                        <input class="cart-plus-minus-box" value="1" type="text">
-                                                        <div class="dec qtybutton">
-                                                            <i class="fa fa-minus"></i>
-                                                        </div>
-                                                        <div class="inc qtybutton">
-                                                            <i class="fa fa-plus"></i>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td class="product-subtotal"><span class="amount">$30.45</span></td>
+                                                <td class="product-subtotal"><span class="amount">${{ $priceEnd }}.00</span></td>
                                             </tr>
                                         </tbody>
+                                        @endforeach
                                     </table>
+
                                 </div>
                                 <div class="row">
                                     <div class="col-12">
@@ -137,8 +91,10 @@
                                                 <input class="button mt-xxs-30" name="apply_coupon" value="Apply coupon" type="submit">
                                             </div>
                                             <div class="coupon2">
-                                                <input class="button" name="update_cart" value="Update cart" type="submit">
+                                                <input class="button" name="update_cart" value="Update cart" type="submit" formaction="/update-cart">
+
                                             </div>
+                                            @csrf
                                         </div>
                                     </div>
                                 </div>
@@ -147,10 +103,10 @@
                                         <div class="cart-page-total">
                                             <h2>Cart totals</h2>
                                             <ul>
-                                                <li>Subtotal <span>$79.35</span></li>
-                                                <li>Total <span>$79.35</span></li>
+                                                <li>Subtotal <span>${{ $total }}.00</span></li>
+                                                <li>Total <span>${{ $total }}.00</span></li>
                                             </ul>
-                                            <a href="#">Proceed to checkout</a>
+                                            <a href="./checkOut">Proceed to checkout</a>
                                         </div>
                                     </div>
                                 </div>
@@ -160,7 +116,9 @@
                 </div>
             </div>
         </main>
+        @else
+            <div style ><h2>Giỏ hàng trống</h2></div>
+        @endif
         <!-- Main Content Area End Here -->
-        @endsection 
+        @endsection
         <!-- Begin Footer Area -->
-        

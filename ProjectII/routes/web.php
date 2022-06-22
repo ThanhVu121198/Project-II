@@ -11,6 +11,7 @@ use \App\Http\Controllers\Admin\User\loginController;
 use App\Http\Controllers\Front\HomeController;
 use App\Http\Controllers\Front;
 use App\Http\Controllers\Admin\DetailController;
+use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Front\BlogController;
 
 /*
@@ -24,7 +25,7 @@ use App\Http\Controllers\Front\BlogController;
 |
 */
 
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 // Route::get('/category', [Front\CategoryController::class, 'index']);
 
@@ -34,6 +35,8 @@ Route::prefix('shop')->group(function () {
     Route::get('/', [Front\ShopController::class, 'index']);
 
     Route::post('/product/{id}', [Front\ShopController::class,'postComment']);
+
+    Route::get('/{categoryName}', [Front\ShopController::class, 'category']);
 });
 
 // admin 
@@ -53,9 +56,7 @@ Route::middleware(['auth'])->group(function() {
             Route::DELETE('destroy',[Menucontroller::class,'destroy']);
             Route::get('edit/{menu}',[Menucontroller::class,'show']);
             Route::post('edit/{menu}',[Menucontroller::class,'update']);
-
-       
-        }); 
+        });
         // product
         route::prefix('product')->group(function(){
             route::get('add',[ProductController::class,'create']);
@@ -70,13 +71,25 @@ Route::middleware(['auth'])->group(function() {
             Route::post('addimg/{id}',[ImageController::class,'store']);
             Route::get('deleteimg/{id}',[ImageController::class,'destroy']);
             //detail
-            // Route::post('adddetail/{id}',[DetailController::class,'store']);
-            // Route::get('deletedetail/{id}',[DetailController::class,'destroy']);
-            
-       
+            Route::post('adddetail/{id}',[DetailController::class,'store']);
+            Route::get('deletedetail/{id}',[DetailController::class,'destroy']);
+
+
         });
-     
-        
+        route::prefix('order')->group(function(){
+            route::get('new',[OrderController::class,'new']);
+            route::get('handle',[OrderController::class,'handle']);
+            route::get('complete',[OrderController::class,'complete']);
+            route::get('detail/{id}',[OrderController::class,'orderdetail']);
+            route::get('delete/{id}',[OrderController::class,'destroy']);
+            route::get('cd/{id}',[OrderController::class,'confirmhandle']);
+            route::get('pc/{id}',[OrderController::class,'paymentconfirmation']);
+
+          
+        });
+        // productget
+
+
 
         // blog
         route::prefix('blog')->group(function(){
@@ -111,6 +124,14 @@ Route::get('/logout', [Front\LogoutController::class, 'index']);
 
 Route::get('/wishList', [Front\WishlistController::class, 'index']);
 
-Route::get('/checkOut', [Front\CheckOutController::class, 'index']);
 
-Route::get('/cart', [Front\CartController::class, 'index']);
+
+
+Route::get('/cart', [Front\CartController::class, 'show']);
+Route::post('/add-cart', [Front\CartController::class, 'index']);
+Route::post('/update-cart', [Front\CartController::class, 'update']);
+Route::get('/cart/delete/{id}', [Front\CartController::class, 'remove']);
+Route::post('carts', [Front\CartController::class, 'addCart']);
+
+Route::get('/checkOut', [Front\CheckOutController::class, 'index']);
+Route::post('/checkout2', [Front\CheckOutController::class, 'addCart']);

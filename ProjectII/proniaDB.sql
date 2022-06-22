@@ -2,23 +2,23 @@
 -- version 5.1.3
 -- https://www.phpmyadmin.net/
 --
--- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th6 12, 2022 lúc 04:14 PM
--- Phiên bản máy phục vụ: 10.4.24-MariaDB
--- Phiên bản PHP: 8.1.4
+-- Host: 127.0.0.1
+-- Generation Time: Jun 20, 2022 at 03:35 PM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 8.1.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
 
 --
--- Cơ sở dữ liệu: `proniadb`
+-- Database: `proniadb`
 --
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `admin`
+-- Table structure for table `admin`
 --
 
 CREATE TABLE `admin` (
@@ -27,13 +27,21 @@ CREATE TABLE `admin` (
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `level` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`id`, `name`, `email`, `password`, `created_at`, `updated_at`, `level`) VALUES
+(1, 'hung', 'hung123@gmail.com', '$2y$10$hm64mD40sVuf90D5vBUXiuXgAP20JvyB79QYd8d0OHQCRdxYISEmu', NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `blogs`
+-- Table structure for table `blogs`
 --
 
 CREATE TABLE `blogs` (
@@ -50,7 +58,7 @@ CREATE TABLE `blogs` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `blogs_comments`
+-- Table structure for table `blogs_comments`
 --
 
 CREATE TABLE `blogs_comments` (
@@ -67,25 +75,83 @@ CREATE TABLE `blogs_comments` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `cart_items`
+-- Table structure for table `carts`
 --
 
-CREATE TABLE `cart_items` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `shopping_cart_id` int(10) UNSIGNED NOT NULL,
-  `product_id` int(10) UNSIGNED DEFAULT NULL,
+CREATE TABLE `carts` (
+  `id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
   `quantity` int(11) NOT NULL,
-  `unit_price` double NOT NULL,
-  `buy_price` double NOT NULL,
-  `buy_type` int(11) NOT NULL,
+  `buy_price` int(11) NOT NULL,
+  `customer_id` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-----------------------------------------------------------
+--
+-- Dumping data for table `carts`
+--
+
+INSERT INTO `carts` (`id`, `product_id`, `quantity`, `buy_price`, `customer_id`, `created_at`, `updated_at`) VALUES
+(1, 1, 1, 45, 3, NULL, NULL),
+(2, 2, 1, 50, 3, NULL, NULL),
+(3, 1, 1, 45, 4, NULL, NULL),
+(4, 1, 1, 45, 5, NULL, NULL),
+(5, 1, 1, 45, 6, NULL, NULL),
+(6, 1, 1, 45, 7, NULL, NULL),
+(7, 1, 1, 45, 8, NULL, NULL),
+(8, 1, 1, 45, 9, NULL, NULL),
+(9, 1, 1, 45, 10, NULL, NULL),
+(10, 1, 1, 45, 11, NULL, NULL),
+(11, 1, 1, 45, 12, NULL, NULL),
+(12, 2, 1, 50, 12, NULL, NULL),
+(13, 1, 2, 45, 13, NULL, NULL),
+(14, 6, 1, 45, 14, NULL, NULL);
+
+-- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `failed_jobs`
+-- Table structure for table `customers`
+--
+
+CREATE TABLE `customers` (
+  `id` int(11) NOT NULL,
+  `first_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `last_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `company_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `address` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `town` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `phone` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `checkout-mess` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` tinyint(4) DEFAULT 0,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `customers`
+--
+
+INSERT INTO `customers` (`id`, `first_name`, `last_name`, `company_name`, `address`, `town`, `phone`, `email`, `checkout-mess`, `status`, `updated_at`, `created_at`) VALUES
+(1, 'Duc Hung', 'Nguyen', 'Dai hoc cong nghiep  Ha Noi', 'HaNoi', 'HaNoi', '0365109267', 'hnguyenduchung014@gmail.com', 'dcsdcs', NULL, '2022-06-19 20:07:50', '2022-06-19 20:07:50'),
+(3, 'Duc Hung', 'Nguyen', 'Dai hoc cong nghiep  Ha Noi', 'HaNoi', 'HaNoi', '0365109267', 'hnguyenduchung014@gmail.com', 'dcsdcs', NULL, '2022-06-19 20:09:03', '2022-06-19 20:09:03'),
+(4, 'Duc Hung', 'Nguyen', 'Dai hoc cong nghiep  Ha Noi', 'America', 'HaNoi', '0365109267', 'hnguyenduchung014@gmail.com', 'axsdc', NULL, '2022-06-19 20:12:32', '2022-06-19 20:12:32'),
+(5, 'Duc Hung', 'Nguyen', 'Dai hoc cong nghiep  Ha Noi', 'HaNoi', 'HaNoi', '0365109267', 'hnguyenduchung014@gmail.com', 'ghjg', NULL, '2022-06-19 20:52:50', '2022-06-19 20:52:50'),
+(6, 'Duc Hung', 'Nguyen', 'Dai hoc cong nghiep  Ha Noi', 'HaNoi', 'HaNoi', '0365109267', 'hnguyenduchung014@gmail.com', 'fhg', NULL, '2022-06-19 20:54:51', '2022-06-19 20:54:51'),
+(7, 'Duc Hung', 'Nguyen', 'Dai hoc cong nghiep  Ha Noi', 'HaNoi', 'HaNoi', '0365109267', 'hnguyenduchung014@gmail.com', 'hfgh', NULL, '2022-06-19 21:00:45', '2022-06-19 21:00:45'),
+(8, 'Duc Hung', 'Nguyen', 'Dai hoc cong nghiep  Ha Noi', 'HaNoi', 'HaNoi', '0365109267', 'hnguyenduchung014@gmail.com', 'jhkhjkh', NULL, '2022-06-19 21:06:46', '2022-06-19 21:06:46'),
+(9, 'Duc Hung', 'Nguyen', 'Dai hoc cong nghiep  Ha Noi', 'HaNoi', 'HaNoi', '0365109267', 'hnguyenduchung014@gmail.com', 'ertet', NULL, '2022-06-19 21:09:33', '2022-06-19 21:09:33'),
+(10, 'Duc Hung', 'Nguyen', 'Dai hoc cong nghiep  Ha Noi', 'HaNoi', 'HaNoi', '0365109267', 'hnguyenduchung014@gmail.com', 'weqwe', NULL, '2022-06-19 21:11:29', '2022-06-19 21:11:29'),
+(11, 'Duc Hung', 'Nguyen', 'Dai hoc cong nghiep  Ha Noi', 'HaNoi', 'HaNoi', '0365109267', 'hnguyenduchung014@gmail.com', 'sdfs', NULL, '2022-06-19 21:14:13', '2022-06-19 21:14:13'),
+(12, 'Duc Hung1', 'Nguyen', 'Dai hoc cong nghiep  Ha Noi', 'HaNoiAmerica', 'HaNoi', '0365109267', 'hnguyenduchung014@gmail.com', 'dhgchjd', NULL, '2022-06-20 06:14:57', '2022-06-20 06:14:57'),
+(13, 'Duc Hung', 'Nguyen', 'Dai hoc cong nghiep  Ha Noi', 'HaNoi', 'HaNoi', '0365109267', 'hnguyenduchung014@gmail.com', 'test status', NULL, '2022-06-20 06:27:48', '2022-06-20 06:27:48'),
+(14, 'Duc Hung', 'Nguyen', 'Dai hoc cong nghiep  Ha Noi', 'HaNoi', 'HaNoi', '0365109267', 'hnguyenduchung014@gmail.com', 'test status lan 2', 0, '2022-06-20 06:34:09', '2022-06-20 06:34:09');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `failed_jobs`
 --
 
 CREATE TABLE `failed_jobs` (
@@ -98,10 +164,10 @@ CREATE TABLE `failed_jobs` (
   `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-----------------------------------------------------------
+-- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `migrations`
+-- Table structure for table `migrations`
 --
 
 CREATE TABLE `migrations` (
@@ -111,7 +177,7 @@ CREATE TABLE `migrations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `migrations`
+-- Dumping data for table `migrations`
 --
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
@@ -129,14 +195,13 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (12, '2022_05_25_145845_create_blogs_table', 1),
 (13, '2022_05_25_150554_create_blogs_comments_table', 1),
 (14, '2022_05_25_151539_create_shopping_cart_table', 1),
-(15, '2022_05_25_151828_create_cart_items_table', 1),
 (16, '2022_05_25_152549_create_payment_details_table', 1),
 (17, '2022_05_25_152844_create_admin_table', 1);
 
-----------------------------------------------------------
+-- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `orders`
+-- Table structure for table `orders`
 --
 
 CREATE TABLE `orders` (
@@ -159,10 +224,10 @@ CREATE TABLE `orders` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-----------------------------------------------------------
+-- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `order_details`
+-- Table structure for table `order_details`
 --
 
 CREATE TABLE `order_details` (
@@ -175,10 +240,10 @@ CREATE TABLE `order_details` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-----------------------------------------------------------
+-- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `password_resets`
+-- Table structure for table `password_resets`
 --
 
 CREATE TABLE `password_resets` (
@@ -187,10 +252,10 @@ CREATE TABLE `password_resets` (
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-----------------------------------------------------------
+-- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `payment_details`
+-- Table structure for table `payment_details`
 --
 
 CREATE TABLE `payment_details` (
@@ -202,10 +267,10 @@ CREATE TABLE `payment_details` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-----------------------------------------------------------
+-- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `personal_access_tokens`
+-- Table structure for table `personal_access_tokens`
 --
 
 CREATE TABLE `personal_access_tokens` (
@@ -220,10 +285,10 @@ CREATE TABLE `personal_access_tokens` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-----------------------------------------------------------
+-- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `products`
+-- Table structure for table `products`
 --
 
 CREATE TABLE `products` (
@@ -243,95 +308,96 @@ CREATE TABLE `products` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `best_seller` int(10) DEFAULT NULL,
-  `latest` int(11) DEFAULT NULL
+  `latest` int(11) DEFAULT NULL,
+  `img` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `products`
+-- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`id`, `product_category_id`, `name`, `description`, `content`, `price`, `qty`, `discount`, `weight`, `sku`, `tag`, `featured`, `status`, `created_at`, `updated_at`, `best_seller`, `latest`) VALUES
-(1, 1, 'Betel nut milk', 'Hanging potted betel nut tree is often used to decorate cafes, small skylights, rooftop trusses, office decoration, etc. The color of the betel leaves looks fancy, the shape of the tree is very suitable for hanging pots.', NULL, 45, 50, 13, NULL, NULL, NULL, 0, 0, NULL, NULL, NULL, 0),
-(2, 1, 'Wan Loc Tree', 'Help purify the air, absorb pathogens, suitable for desks, restaurant decoration', NULL, 50, 50, 13, NULL, NULL, NULL, 0, 0, NULL, NULL, NULL, 0),
-(3, 1, 'Phat Loc', 'Phat fortune in feng shui is a tree that brings good luck and happiness for your family. In addition, Phat Loc tree is also known as Pha Filter tree, Truc Phat Loc .. The popular bonsai is used in the office and home decoration.', NULL, 33, 12, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL),
-(4, 1, 'Mau Don', 'The peony tree belongs to the trees for miraculous flowers. This is not only a tree that symbolizes wealth, prosperity and beauty, but it also symbolizes happy life.', NULL, 30, 14, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL),
-(5, 1, 'La Burn', 'Burns or burns of burns are called life plants (two -part nomenclature: Kalanto Pinnata, SYN. ​​Bryophyllum Calycinum, Bryophyllum Pinnatum) is a native tree of Madagascar. According to Oriental medicine, the burning leaves have a light taste, slightly sour, cool, non -toxic, have the effect of eliminating inflammation, pain relief, poisoning, helping the wound quickly on the skin ... Many regions of Asia, Pacific and Caribbean.', NULL, 30, 22, NULL, NULL, NULL, NULL, 0, 0, NULL, NULL, NULL, NULL),
-(6, 2, 'Kim Phat Tai', 'This is a wooden orchid (a talented or fragrant tree) is a woody bonsai, many leaves originating from West Africa, a family of Dracaenaceae. The unique feature of this tree is that when crossed, young shoots will grow more around the cut.', NULL, 45, 50, NULL, NULL, NULL, NULL, 0, 0, NULL, NULL, NULL, NULL),
-(7, 2, 'Hong Mon', 'Hong Mon is a perennial tree, often grows in dust and has very healthy vitality. Petulin is cylindrical, height from 30 - 60 cm. Large leaves and dark green heart shape, young leaves will be lighter color spread throughout the bush. Hong Mon tree flowering all year round, the flowers of the tree grow in a long cluster and attached on the flower trailer. Flower mo is usually pink, red and heart -shaped.', NULL, 35, 50, NULL, NULL, NULL, NULL, 0, 0, NULL, NULL, NULL, NULL),
-(8, 2, 'Tiger tree', 'With another name tiger tongue, also known as tiger tongue and tiger, its scientific name Sansevieria trifasciata, belongs to the asparagus family, has a height of 50 to 60cm.', NULL, 30, 50, NULL, NULL, NULL, NULL, 0, 0, NULL, NULL, NULL, NULL),
-(9, 2, 'Set of Mulan', 'Mulan tree (talented or fragrant tree) is a woody bonsai, many leaves originating from West Africa, belonging to the Dracaenaceae family. The unique feature of this tree is that when crossed, young shoots will grow more around the cut.', NULL, 63, 50, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL),
-(10, 2, 'Kim Tien', 'Kim Tien Kim, also known as a needle, is a meaningful tree that brings fortune and good luck if you know how to plant, take care and place the money properly. In this article, KHBVPTr will share how to take care of the money to grow well with less pests and bring fortune, luck to the family, the meaning of feng shui and how to grow this favorite bonsai.', NULL, 45, 34, NULL, NULL, NULL, NULL, 0, 0, NULL, NULL, NULL, NULL),
-(11, 2, 'Phu Quy Singapore', 'The rich tree also has the English name Agraonema Red, which is an easy -to -grow and developed tree. It can live in both soil and water environments. In the form of shrubs, spreading spreads very quickly, can propagate by separating the dust.', NULL, 35, 50, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL),
-(12, 2, 'Mold chrysanthemum', 'This is a very suitable tree to make ornamental garden decoration very well. Unique trees to decorate the living space more vivid and more beautiful.', NULL, 30, 0, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL),
-(13, 2, 'Dai Phu Gia', 'As the name implies the rich or rich, rich and rich tree. Dai Phu Gia tree is a shade tree, cool climate, suitable for growing indoors, offices, lobby ...', NULL, 63, 50, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL),
-(14, 2, 'Van Loc', 'Help purify the air, absorb pathogenic substances, suitable for desks, decorate the shop', NULL, 30, 50, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL),
-(15, 2, 'Happy tree', 'Happiness tree has a scientific name of Radermachera Sinica, of Heteropanax. They are derived from subtropical regions in southern China ...', NULL, 35, 50, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL),
-(16, 3, 'Minii brush', 'Bringing peace and protection: large brush canopy, pointed leaves that imply the meaning of protection. Bringing durability: The intense vitality of mini ornamental palm plants', NULL, 45, 50, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL),
-(17, 3, 'Jackfruit Taiwan', 'Taiwanese jackfruit trees are new ornamental plants shaped like the fruit trees of our country. But this bonsai grows slowly, and gives you green space.', NULL, 63, 42, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL),
-(18, 3, 'Prince on a white horse', 'The prince or white horse tree has a scientific name Agraonema pseudobreatum. This tree is derived from Asian countries, often growing in dust. In nature, the tree can be about 1m5 tall, white stems, white veins. The prince\'s white horse used in decoration and garden design is usually only 40cm average.', NULL, 20, 44, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL),
-(19, 3, 'Nhat Huong Huong', 'Nhat Mat Huong is a beautiful, small ornamental tree that many people love to plant decoration. Not only has many useful effects but also means symbolizing luck and fortune. Find out detailed information about the characteristics, meaning, how to plant and care for the most incense tree in the article below!', NULL, 26, 43, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, 0),
-(20, 3, 'Ngoc Ngan', 'Ngoc Ngan tree, also known as Valentine tree, has the name of the French name Dieffenbachia Picta, belongs to the rodium, originating in the tropical American America, Central America, Brazil, ... and in Southeast Asia, the tree is grown in many China, Vietnam, ...', NULL, 30, 34, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, 0),
-(21, 3, 'Japanese embankment', 'Japanese embankments have the meaning of their talent. Therefore, Japanese embankments put on the desk, indoors contributing to bringing wealth to homeowners. The office green tree is very popular.', NULL, 63, 16, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, 0),
-(22, 3, 'She takes jackfruit leaves', 'According to the five elements, the best ornamental plants in the South or South are the best - where there is a lot of light shining on. The better light and temperature conditions make the color of the leaves more bright. You can place the tree in the position such as: entrance, apartment, office area, ...', NULL, 33, 0, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, 0),
-(23, 3, 'Florida Beauty Alba', 'Japanese embankments have the meaning of their talent. Therefore, Japanese embankments put on the desk, indoors contributing to bringing wealth to homeowners. The office green tree is very popular.', NULL, 35, 42, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL),
-(24, 3, 'Da Ngoc Minh Chau', 'Ngoc Minh Chau is not only a beautiful ornamental tree but also a feng shui tree with a very profound meaning. The type of flower is a symbol of fortune, luck', NULL, 33, 34, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, 0),
-(25, 3, 'Betel lady climbing column\r\n\r\n\r\n', 'Betel tree, also known as Ba Vang betel nut or perennial, climbed by many people playing aquatic plants thanks to the ability to purify the air, bringing feng shui fortune. Betel is an easy -to -grow ornamental tree variety, does not need to spend too much care and have many types. It can be mentioned that the betel nuts she often meets such as the betel nut tree, the betel nut, the red king, the green king, recently appeared the betel of her betel.', NULL, 26, 50, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL),
-(26, 4, 'Bach Thuy Tien', 'Bach Thuy Tien belongs to aquatic plants with good feng shui meaning, so it is not only popular but also becomes a delicate gift given.', NULL, 46, 50, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, 0),
-(27, 4, 'Van Loc grows water', 'Walk of aquaticians (scientific name: Aglaonema Rotundum Pink) has a fast growth rate, easy to care for, suitable for interior decoration, office, symbolizing luck, full energy and carrying the prosperity, full for homeowners ...', NULL, 33, 50, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL),
-(28, 4, 'Kim Ngan', 'In the name Kim Ngan, \"Ngan\" means Ngan Luong and money, so the honeysuckle is often associated with luck, wishing to be rich in life. The English name of the tree is Pachira Money Tree also related to money. The scientific name is Parachi Aquatica. Kim Ngan is said to originate from Central - South America.', NULL, 20, 34, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL),
-(29, 4, 'Emperor', 'Among the popular feng shui trees today, it is impossible not to mention the emperor. In this article, Duc Khang Furniture (DKF) will send you information about: origin, characteristics, effects, how to care, ... this tree. Especially the age and destiny with the Great Emperor.', NULL, 63, 50, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL),
-(30, 4, 'Thanh Tam', 'Among the popular feng shui trees today, it is impossible not to mention the emperor. In this article, Duc Khang Furniture (DKF) will send you information about: origin, characteristics, effects, how to care, ... this tree. Especially the age and destiny with the Great Emperor.', NULL, 20, 12, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, 0, NULL),
-(31, 4, 'Trau Ba Emperor Vuong', 'Betel of the Emperor is a tree with a scientific name Philodendron. This is a suitable species to decorate in interior design, especially for luck in money and power for the host family. The betel nut tree is native to Solomon Island. This plant has two main colors: blue and red', NULL, 35, 16, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL),
-(32, 4, 'Van Nien Thanh', 'The perpetual tree is a favorite ornamental tree thanks to the ability to filter good air and bring good luck to the family. Besides, the tree also has many other benefits such as medicinal plants and feng shui plants for the family.', NULL, 33, 0, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, 0, NULL),
-(33, 4, 'Tongue tree', 'Cat tongue is a small size bonsai. When mature trees can only reach 10cm to 15cm. Therefore, they are very suitable for desktops, decoration ...', NULL, 33, 50, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL),
-(34, 4, 'Hong Mon', 'Hong Mon is a perennial tree, often grows in dust and has very healthy vitality. Petulin is cylindrical, height from 30 - 60 cm. Large leaves and heart shaped ..', NULL, 45, 14, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL),
-(35, 4, 'Co Dong Tien', 'Have you ever heard this name? It sounds strange, right? In fact, the coin tree is another name of that coin plants that you probably feel more familiar. Currently, the plants and plants are the most popular interior tree, the young people because of the beautiful, fancy tree design and especially it looks cute.', NULL, 63, 42, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, 0, NULL),
-(36, 5, 'Phalaenopsis orchids', 'According to Oriental Feng Shui, Phalaenopsis orchids represent the luck, fortune, elegance and prosperity. As for European countries, Phalaenopsis orchids are considered a symbol of intense love. In addition, Phalaenopsis also represents the beauty of a woman, towards perfection and charm.', NULL, 30, 50, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL),
-(37, 5, 'Phalaenopsis orchids (Kq.lhd.044)', 'According to Oriental Feng Shui, Phalaenopsis orchids represent the luck, fortune, elegance and prosperity. As for European countries, Phalaenopsis orchids are considered a symbol of intense love. In addition, Phalaenopsis also represents the beauty of a woman, towards perfection and charm.', NULL, 35, 43, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL),
-(38, 5, 'Phalaenopsis orchids (Kq.lhd.039)', 'According to Oriental Feng Shui, Phalaenopsis orchids represent the luck, fortune, elegance and prosperity. As for European countries, Phalaenopsis orchids are considered a symbol of intense love. In addition, Phalaenopsis also represents the beauty of a woman, towards perfection and charm.', NULL, 45, 50, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL),
-(39, 5, 'Phalaenopsis orchids (Kq.lhd.037)', 'According to Oriental Feng Shui, Phalaenopsis orchids represent the luck, fortune, elegance and prosperity. As for European countries, Phalaenopsis orchids are considered a symbol of intense love. In addition, Phalaenopsis also represents the beauty of a woman, towards perfection and charm.', NULL, 26, 50, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, 0, NULL),
-(40, 5, 'Phalaenopsis orchids (Kq.lhd.033)', 'According to Oriental Feng Shui, Phalaenopsis orchids represent the luck, fortune, elegance and prosperity. As for European countries, Phalaenopsis orchids are considered a symbol of intense love. In addition, Phalaenopsis also represents the beauty of a woman, towards perfection and charm.', NULL, 45, 14, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, 0, NULL),
-(41, 5, 'Phalaenopsis orchids (Kq.lhd.032)', 'According to Oriental Feng Shui, Phalaenopsis orchids represent the luck, fortune, elegance and prosperity. As for European countries, Phalaenopsis orchids are considered a symbol of intense love. In addition, Phalaenopsis also represents the beauty of a woman, towards perfection and charm.', NULL, 26, 50, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL),
-(42, 5, 'Phalaenopsis orchids (KQ.LHD.031)', 'According to Oriental Feng Shui, Phalaenopsis orchids represent the luck, fortune, elegance and prosperity. As for European countries, Phalaenopsis orchids are considered a symbol of intense love. In addition, Phalaenopsis also represents the beauty of a woman, towards perfection and charm.', NULL, 41, 50, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, 0, NULL),
-(43, 5, 'Phalaenopsis orchids (Kq.lhd.038)', 'According to Oriental Feng Shui, Phalaenopsis orchids represent the luck, fortune, elegance and prosperity. As for European countries, Phalaenopsis orchids are considered a symbol of intense love. In addition, Phalaenopsis also represents the beauty of a woman, towards perfection and charm.', NULL, 63, 48, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL),
-(44, 5, 'Phalaenopsis orchids (Kq.lhd.036)', 'According to Oriental Feng Shui, Phalaenopsis orchids represent the luck, fortune, elegance and prosperity. As for European countries, Phalaenopsis orchids are considered a symbol of intense love. In addition, Phalaenopsis also represents the beauty of a woman, towards perfection and charm.', NULL, 59, 50, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL),
-(45, 5, 'Phalaenopsis orchids (Kq.lhd.043)', 'According to Oriental Feng Shui, Phalaenopsis orchids represent the luck, fortune, elegance and prosperity. As for European countries, Phalaenopsis orchids are considered a symbol of intense love. In addition, Phalaenopsis also represents the beauty of a woman, towards perfection and charm.', NULL, 35, 50, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL),
-(46, 6, 'Women\'s hair tree', 'Air purification', NULL, 45, 34, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL),
-(47, 6, 'Sam flower tree, ten o\'clock', 'This tree is easy to grow, easy to take care of and can withstand external influences. The tree has a small shape, grown in pots and grows well without having to take much care.', NULL, 26, 16, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL),
-(48, 6, 'Dollar', 'This tree has nothing special. However, the tree also has simple and elegant beauty. This tree means feng shui to bring wealth and wealth to the homeowner.', NULL, 45, 44, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, 0, NULL),
-(49, 6, 'Bamboo tree', 'This tree usually appears in townhouses but can also be used for balconies to have good feng shui as well as good meanings.', NULL, 63, 42, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, 0, NULL),
-(50, 6, 'Kale', 'The tree has long canopy and many small leaves, the green stems are very solid but also quite supple. Trees can live well in the outdoor environment and are easy to take care of, without much fertilization. However, people need to trim the branches to avoid long -standing trees.', NULL, 0, 14, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL),
-(51, 6, 'Japanese palm tree', 'This is a woody tree, grows into dust, leaves spread into a fan shape. The tree grows slowly but grows well in many different environments. The tree is easy to take care of and withstand good heat, living well in outdoor lighting environments.', NULL, 33, 43, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL),
-(52, 6, 'Aloe', 'This plant is grown on the apartment balcony, not only beauty but also with many benefits such as beauty, clean food for good use. Planting this type of tree does not need much effort to take care of, the tree is easy to live.', NULL, 33, 12, NULL, NULL, NULL, NULL, 0, 0, NULL, NULL, NULL, NULL),
-(53, 6, 'Ivy', 'The ivy tree is also a favorite ornamental tree for many people. This plant only needs a little water to grow strongly. The tree can have long foliage quickly so people can trim the tree more compact and beautify the space.', NULL, 35, 16, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL),
-(54, 6, 'Fern', 'The tree has been existed for many years in the rocky mountains, tropical forests, where wet can grow well. This is a vines, with rolls, very beautiful comb, easy to live, so many people prefer to grow on their balconies, in addition to ferns also have the ability to filter dust very well Also create beautiful landscapes with cool green water', NULL, 20, 44, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL),
-(55, 6, 'Coconut flower', 'There is flowers all year round, withstand sunshine, harsh wind', NULL, 35, 48, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL),
-(56, 7, 'Rose', 'Roses are a popular tree ever because of their beautiful petals. Roses are often grown in the West but today they are bred many types of colorful roses are widely grown in Vietnam.', NULL, 30, 34, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL),
-(57, 7, 'Cotton tree', 'The cotton tree has many different colors such as red pages, pink pages, yellow pages, white pages they are planted to make landscapes or create a beautiful flower fence', NULL, 63, 16, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL),
-(58, 7, 'Paper flowers', 'Paper flower plants are easy to grow, drought well and flower all year round. Paper flowers are diverse in type as well as color. There are 2 common types of confetti: climbing body and column body, climbing body is often used to grow fences, make climbing trusses ,. .. The body of the column is usually grown as a flowerpot decoration of park, garden, ...', NULL, 45, 44, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL),
-(59, 7, 'Huynh Lien tree', 'Hanh Lien is a flowering tree all year round, easy to care for, yellow flowers and wipe. Trees are often used in the garden of villas, parks ...', NULL, 35, 16, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL),
-(60, 7, 'Morality tree ', 'Mai lady is a small white flower tree, flowering all year round, they grow into clusters and are trimmed into circles, cylinders, ...', NULL, 20, 0, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL),
-(61, 7, 'Hibiscus', 'As a popular plant today, they have been bred into many different types and have very large and colorful flowers.', NULL, 26, 43, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL),
-(62, 7, 'Banana tree', 'Banana tree is a colorful plant with colorful flowers often grown near the lake, pond bank, ...', NULL, 20, 44, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL),
-(63, 7, 'Thien Dieu flower tree', 'Thien Dieu flower tree, also known as the beak, is very water -like banana tree.', NULL, 33, 42, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL),
-(64, 7, 'Jasmine', 'Laurel is a small woody tree, white and fragrant flowers are very pleasant.', NULL, 20, 12, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL),
-(65, 7, 'Laurel', 'The jasmine tree is a tree with a faint white and fragrant flower. Western jasmine can live well in the shade but will at least flowers than in the sun.', NULL, 26, 43, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL),
-(66, 7, 'Lan Y', 'Lan Y is a shade -loving tree, they have white flowers and wipe away. Orchids are often planted in places that hide in sunlight, can be planted as a beautiful flower bed.', NULL, 46, 22, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL),
-(67, 7, 'Coconut flower shallow', 'Coconut is a tree grown in the parks and garden today, they are easy to grow and give flowers all year round, shallow coconut flowers have many different colorful colors.', NULL, 26, 43, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL),
-(68, 7, 'Portulaca grandiflora', 'There are many types of flowers such as: ten hours, ten o\'clock, ten hours, ... They have many diverse colors and are often grown into a carpet to create a beautiful carpet or grown as a highlight for small landscape, ...', NULL, 45, 14, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL),
-(69, 7, 'Cam Tu Mai', 'Cam Tu is a small shrub with purple flowers and year round. Cam Tu is often used to decorate the garden landscape, garden walkway. Sam Tu is often used to decorate the garden landscape, garden walkway. Cam Tu is easy to take care of as well as easy to grow.', NULL, 33, 16, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL),
-(70, 7, 'Tiger tree', 'Also known as the tiger tongue, it stands out with the ability to live intensely, heat resistance, drought tolerance, and harsh tolerance. The color of the tiger tongue is also quite impressive with the yellow border on the outside, the inside is dark green. In addition to decoration purposes, tiger tongue can also be used as acne medicine, hemostasis, coughing up blood, difficulty urinating, poor digestion ...', NULL, 33, 0, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL),
-(71, 7, 'Her betel tree', 'Her betel tree belongs to the vines family with soft stems, easy to live, without too much care. Her betel leaf has a pretty heart shape. In particular, betel nuts bring quite large health benefits: absorbing toxins in the air and electromagnetic waves such as computers, wifi, induction cookers ... This tree grows fast, good green leaves, so it makes sense Feng shui helps to multiply, convenient about the children and bring prosperous fortune.', NULL, 33, 16, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL),
-(72, 7, 'Cam Tu Mai', 'The plants are green all year round, with purple pink flowers quite eye -catching. This tree is easy to grow, easy to care for and often used to make borders for the garden.', NULL, 30, 12, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL),
-(73, 7, 'Purple', 'Purple afternoon tree is a light -loving tree, often used to make borders for flower beds, under large trees. This tree helps the garden more colorful, cool, faithful and attached. In particular, purple afternoon trees have the effect of preventing dust, filtering air, helping to protect the fresh living space for the family.', NULL, 63, 43, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL),
-(74, 7, 'Barringtonia acutangula', 'This is a woody tree, wide but not too high, blooming in the summer, red flowers and very beautiful. The tree grows and produces green leaves all year round, has good drought tolerance, does not need to take care of or water, fertilize too much. A few years ago, sesame buds belong to the hot bonsai group with the price of up to hundreds of millions if the tree was beautiful.', NULL, 66, 49, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL),
-(75, 7, 'Purple', 'Purple afternoon tree is a light -loving tree, often used to make borders for flower beds, under large trees. This tree helps the garden more colorful, cool, faithful and attached. In particular, purple afternoon trees have the effect of preventing dust, filtering air, helping to protect the fresh living space for the family.', NULL, 45, 50, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL),
-(76, 7, 'Barringtonia acutangula', 'This is a woody tree, wide but not too high, blooming in the summer, red flowers and very beautiful. The tree grows and produces green leaves all year round, has good drought tolerance, does not need to take care of or water, fertilize too much. A few years ago, sesame buds belong to the hot bonsai group with the price of up to hundreds of millions if the tree was beautiful.', NULL, 63, 50, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL);
+INSERT INTO `products` (`id`, `product_category_id`, `name`, `description`, `content`, `price`, `qty`, `discount`, `weight`, `sku`, `tag`, `featured`, `status`, `created_at`, `updated_at`, `best_seller`, `latest`, `img`) VALUES
+(1, 1, 'Betel nut milk', 'Hanging potted betel nut tree is often used to decorate cafes, small skylights, rooftop trusses, office decoration, etc. The color of the betel leaves looks fancy, the shape of the tree is very suitable for hanging pots.', NULL, 45, 50, 13, NULL, NULL, NULL, 0, 0, NULL, NULL, NULL, 0, 'small-size\\cay-trau-ba-sua.jpg'),
+(2, 1, 'Wan Loc Tree', 'Help purify the air, absorb pathogens, suitable for desks, restaurant decoration', NULL, 50, 50, 13, NULL, NULL, NULL, 0, 0, NULL, NULL, NULL, 0, ''),
+(3, 1, 'Phat Loc', 'Phat fortune in feng shui is a tree that brings good luck and happiness for your family. In addition, Phat Loc tree is also known as Pha Filter tree, Truc Phat Loc .. The popular bonsai is used in the office and home decoration.', NULL, 33, 12, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL, ''),
+(4, 1, 'Mau Don', 'The peony tree belongs to the trees for miraculous flowers. This is not only a tree that symbolizes wealth, prosperity and beauty, but it also symbolizes happy life.', NULL, 30, 14, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL, ''),
+(5, 1, 'La Burn', 'Burns or burns of burns are called life plants (two -part nomenclature: Kalanto Pinnata, SYN. ​​Bryophyllum Calycinum, Bryophyllum Pinnatum) is a native tree of Madagascar. According to Oriental medicine, the burning leaves have a light taste, slightly sour, cool, non -toxic, have the effect of eliminating inflammation, pain relief, poisoning, helping the wound quickly on the skin ... Many regions of Asia, Pacific and Caribbean.', NULL, 30, 22, NULL, NULL, NULL, NULL, 0, 0, NULL, NULL, NULL, NULL, ''),
+(6, 2, 'Kim Phat Tai', 'This is a wooden orchid (a talented or fragrant tree) is a woody bonsai, many leaves originating from West Africa, a family of Dracaenaceae. The unique feature of this tree is that when crossed, young shoots will grow more around the cut.', NULL, 45, 50, NULL, NULL, NULL, NULL, 0, 0, NULL, NULL, NULL, NULL, ''),
+(7, 2, 'Hong Mon', 'Hong Mon is a perennial tree, often grows in dust and has very healthy vitality. Petulin is cylindrical, height from 30 - 60 cm. Large leaves and dark green heart shape, young leaves will be lighter color spread throughout the bush. Hong Mon tree flowering all year round, the flowers of the tree grow in a long cluster and attached on the flower trailer. Flower mo is usually pink, red and heart -shaped.', NULL, 35, 50, NULL, NULL, NULL, NULL, 0, 0, NULL, NULL, NULL, NULL, ''),
+(8, 2, 'Tiger tree', 'With another name tiger tongue, also known as tiger tongue and tiger, its scientific name Sansevieria trifasciata, belongs to the asparagus family, has a height of 50 to 60cm.', NULL, 30, 50, NULL, NULL, NULL, NULL, 0, 0, NULL, NULL, NULL, NULL, ''),
+(9, 2, 'Set of Mulan', 'Mulan tree (talented or fragrant tree) is a woody bonsai, many leaves originating from West Africa, belonging to the Dracaenaceae family. The unique feature of this tree is that when crossed, young shoots will grow more around the cut.', NULL, 63, 50, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL, ''),
+(10, 2, 'Kim Tien', 'Kim Tien Kim, also known as a needle, is a meaningful tree that brings fortune and good luck if you know how to plant, take care and place the money properly. In this article, KHBVPTr will share how to take care of the money to grow well with less pests and bring fortune, luck to the family, the meaning of feng shui and how to grow this favorite bonsai.', NULL, 45, 34, NULL, NULL, NULL, NULL, 0, 0, NULL, NULL, NULL, NULL, ''),
+(11, 2, 'Phu Quy Singapore', 'The rich tree also has the English name Agraonema Red, which is an easy -to -grow and developed tree. It can live in both soil and water environments. In the form of shrubs, spreading spreads very quickly, can propagate by separating the dust.', NULL, 35, 50, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL, ''),
+(12, 2, 'Mold chrysanthemum', 'This is a very suitable tree to make ornamental garden decoration very well. Unique trees to decorate the living space more vivid and more beautiful.', NULL, 30, 0, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL, ''),
+(13, 2, 'Dai Phu Gia', 'As the name implies the rich or rich, rich and rich tree. Dai Phu Gia tree is a shade tree, cool climate, suitable for growing indoors, offices, lobby ...', NULL, 63, 50, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL, ''),
+(14, 2, 'Van Loc', 'Help purify the air, absorb pathogenic substances, suitable for desks, decorate the shop', NULL, 30, 50, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL, ''),
+(15, 2, 'Happy tree', 'Happiness tree has a scientific name of Radermachera Sinica, of Heteropanax. They are derived from subtropical regions in southern China ...', NULL, 35, 50, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL, ''),
+(16, 3, 'Minii brush', 'Bringing peace and protection: large brush canopy, pointed leaves that imply the meaning of protection. Bringing durability: The intense vitality of mini ornamental palm plants', NULL, 45, 50, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL, ''),
+(17, 3, 'Jackfruit Taiwan', 'Taiwanese jackfruit trees are new ornamental plants shaped like the fruit trees of our country. But this bonsai grows slowly, and gives you green space.', NULL, 63, 42, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL, ''),
+(18, 3, 'Prince on a white horse', 'The prince or white horse tree has a scientific name Agraonema pseudobreatum. This tree is derived from Asian countries, often growing in dust. In nature, the tree can be about 1m5 tall, white stems, white veins. The prince\'s white horse used in decoration and garden design is usually only 40cm average.', NULL, 20, 44, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL, ''),
+(19, 3, 'Nhat Huong Huong', 'Nhat Mat Huong is a beautiful, small ornamental tree that many people love to plant decoration. Not only has many useful effects but also means symbolizing luck and fortune. Find out detailed information about the characteristics, meaning, how to plant and care for the most incense tree in the article below!', NULL, 26, 43, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, 0, ''),
+(20, 3, 'Ngoc Ngan', 'Ngoc Ngan tree, also known as Valentine tree, has the name of the French name Dieffenbachia Picta, belongs to the rodium, originating in the tropical American America, Central America, Brazil, ... and in Southeast Asia, the tree is grown in many China, Vietnam, ...', NULL, 30, 34, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, 0, ''),
+(21, 3, 'Japanese embankment', 'Japanese embankments have the meaning of their talent. Therefore, Japanese embankments put on the desk, indoors contributing to bringing wealth to homeowners. The office green tree is very popular.', NULL, 63, 16, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, 0, ''),
+(22, 3, 'She takes jackfruit leaves', 'According to the five elements, the best ornamental plants in the South or South are the best - where there is a lot of light shining on. The better light and temperature conditions make the color of the leaves more bright. You can place the tree in the position such as: entrance, apartment, office area, ...', NULL, 33, 0, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, 0, ''),
+(23, 3, 'Florida Beauty Alba', 'Japanese embankments have the meaning of their talent. Therefore, Japanese embankments put on the desk, indoors contributing to bringing wealth to homeowners. The office green tree is very popular.', NULL, 35, 42, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL, ''),
+(24, 3, 'Da Ngoc Minh Chau', 'Ngoc Minh Chau is not only a beautiful ornamental tree but also a feng shui tree with a very profound meaning. The type of flower is a symbol of fortune, luck', NULL, 33, 34, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, 0, ''),
+(25, 3, 'Betel lady climbing column\r\n\r\n\r\n', 'Betel tree, also known as Ba Vang betel nut or perennial, climbed by many people playing aquatic plants thanks to the ability to purify the air, bringing feng shui fortune. Betel is an easy -to -grow ornamental tree variety, does not need to spend too much care and have many types. It can be mentioned that the betel nuts she often meets such as the betel nut tree, the betel nut, the red king, the green king, recently appeared the betel of her betel.', NULL, 26, 50, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL, ''),
+(26, 4, 'Bach Thuy Tien', 'Bach Thuy Tien belongs to aquatic plants with good feng shui meaning, so it is not only popular but also becomes a delicate gift given.', NULL, 46, 50, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, 0, ''),
+(27, 4, 'Van Loc grows water', 'Walk of aquaticians (scientific name: Aglaonema Rotundum Pink) has a fast growth rate, easy to care for, suitable for interior decoration, office, symbolizing luck, full energy and carrying the prosperity, full for homeowners ...', NULL, 33, 50, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL, ''),
+(28, 4, 'Kim Ngan', 'In the name Kim Ngan, \"Ngan\" means Ngan Luong and money, so the honeysuckle is often associated with luck, wishing to be rich in life. The English name of the tree is Pachira Money Tree also related to money. The scientific name is Parachi Aquatica. Kim Ngan is said to originate from Central - South America.', NULL, 20, 34, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL, ''),
+(29, 4, 'Emperor', 'Among the popular feng shui trees today, it is impossible not to mention the emperor. In this article, Duc Khang Furniture (DKF) will send you information about: origin, characteristics, effects, how to care, ... this tree. Especially the age and destiny with the Great Emperor.', NULL, 63, 50, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL, ''),
+(30, 4, 'Thanh Tam', 'Among the popular feng shui trees today, it is impossible not to mention the emperor. In this article, Duc Khang Furniture (DKF) will send you information about: origin, characteristics, effects, how to care, ... this tree. Especially the age and destiny with the Great Emperor.', NULL, 20, 12, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, 0, NULL, ''),
+(31, 4, 'Trau Ba Emperor Vuong', 'Betel of the Emperor is a tree with a scientific name Philodendron. This is a suitable species to decorate in interior design, especially for luck in money and power for the host family. The betel nut tree is native to Solomon Island. This plant has two main colors: blue and red', NULL, 35, 16, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL, ''),
+(32, 4, 'Van Nien Thanh', 'The perpetual tree is a favorite ornamental tree thanks to the ability to filter good air and bring good luck to the family. Besides, the tree also has many other benefits such as medicinal plants and feng shui plants for the family.', NULL, 33, 0, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, 0, NULL, ''),
+(33, 4, 'Tongue tree', 'Cat tongue is a small size bonsai. When mature trees can only reach 10cm to 15cm. Therefore, they are very suitable for desktops, decoration ...', NULL, 33, 50, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL, ''),
+(34, 4, 'Hong Mon', 'Hong Mon is a perennial tree, often grows in dust and has very healthy vitality. Petulin is cylindrical, height from 30 - 60 cm. Large leaves and heart shaped ..', NULL, 45, 14, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL, ''),
+(35, 4, 'Co Dong Tien', 'Have you ever heard this name? It sounds strange, right? In fact, the coin tree is another name of that coin plants that you probably feel more familiar. Currently, the plants and plants are the most popular interior tree, the young people because of the beautiful, fancy tree design and especially it looks cute.', NULL, 63, 42, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, 0, NULL, ''),
+(36, 5, 'Phalaenopsis orchids', 'According to Oriental Feng Shui, Phalaenopsis orchids represent the luck, fortune, elegance and prosperity. As for European countries, Phalaenopsis orchids are considered a symbol of intense love. In addition, Phalaenopsis also represents the beauty of a woman, towards perfection and charm.', NULL, 30, 50, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL, ''),
+(37, 5, 'Phalaenopsis orchids (Kq.lhd.044)', 'According to Oriental Feng Shui, Phalaenopsis orchids represent the luck, fortune, elegance and prosperity. As for European countries, Phalaenopsis orchids are considered a symbol of intense love. In addition, Phalaenopsis also represents the beauty of a woman, towards perfection and charm.', NULL, 35, 43, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL, ''),
+(38, 5, 'Phalaenopsis orchids (Kq.lhd.039)', 'According to Oriental Feng Shui, Phalaenopsis orchids represent the luck, fortune, elegance and prosperity. As for European countries, Phalaenopsis orchids are considered a symbol of intense love. In addition, Phalaenopsis also represents the beauty of a woman, towards perfection and charm.', NULL, 45, 50, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL, ''),
+(39, 5, 'Phalaenopsis orchids (Kq.lhd.037)', 'According to Oriental Feng Shui, Phalaenopsis orchids represent the luck, fortune, elegance and prosperity. As for European countries, Phalaenopsis orchids are considered a symbol of intense love. In addition, Phalaenopsis also represents the beauty of a woman, towards perfection and charm.', NULL, 26, 50, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, 0, NULL, ''),
+(40, 5, 'Phalaenopsis orchids (Kq.lhd.033)', 'According to Oriental Feng Shui, Phalaenopsis orchids represent the luck, fortune, elegance and prosperity. As for European countries, Phalaenopsis orchids are considered a symbol of intense love. In addition, Phalaenopsis also represents the beauty of a woman, towards perfection and charm.', NULL, 45, 14, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, 0, NULL, ''),
+(41, 5, 'Phalaenopsis orchids (Kq.lhd.032)', 'According to Oriental Feng Shui, Phalaenopsis orchids represent the luck, fortune, elegance and prosperity. As for European countries, Phalaenopsis orchids are considered a symbol of intense love. In addition, Phalaenopsis also represents the beauty of a woman, towards perfection and charm.', NULL, 26, 50, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL, ''),
+(42, 5, 'Phalaenopsis orchids (KQ.LHD.031)', 'According to Oriental Feng Shui, Phalaenopsis orchids represent the luck, fortune, elegance and prosperity. As for European countries, Phalaenopsis orchids are considered a symbol of intense love. In addition, Phalaenopsis also represents the beauty of a woman, towards perfection and charm.', NULL, 41, 50, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, 0, NULL, ''),
+(43, 5, 'Phalaenopsis orchids (Kq.lhd.038)', 'According to Oriental Feng Shui, Phalaenopsis orchids represent the luck, fortune, elegance and prosperity. As for European countries, Phalaenopsis orchids are considered a symbol of intense love. In addition, Phalaenopsis also represents the beauty of a woman, towards perfection and charm.', NULL, 63, 48, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL, ''),
+(44, 5, 'Phalaenopsis orchids (Kq.lhd.036)', 'According to Oriental Feng Shui, Phalaenopsis orchids represent the luck, fortune, elegance and prosperity. As for European countries, Phalaenopsis orchids are considered a symbol of intense love. In addition, Phalaenopsis also represents the beauty of a woman, towards perfection and charm.', NULL, 59, 50, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL, ''),
+(45, 5, 'Phalaenopsis orchids (Kq.lhd.043)', 'According to Oriental Feng Shui, Phalaenopsis orchids represent the luck, fortune, elegance and prosperity. As for European countries, Phalaenopsis orchids are considered a symbol of intense love. In addition, Phalaenopsis also represents the beauty of a woman, towards perfection and charm.', NULL, 35, 50, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL, ''),
+(46, 6, 'Women\'s hair tree', 'Air purification', NULL, 45, 34, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL, ''),
+(47, 6, 'Sam flower tree, ten o\'clock', 'This tree is easy to grow, easy to take care of and can withstand external influences. The tree has a small shape, grown in pots and grows well without having to take much care.', NULL, 26, 16, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL, ''),
+(48, 6, 'Dollar', 'This tree has nothing special. However, the tree also has simple and elegant beauty. This tree means feng shui to bring wealth and wealth to the homeowner.', NULL, 45, 44, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, 0, NULL, ''),
+(49, 6, 'Bamboo tree', 'This tree usually appears in townhouses but can also be used for balconies to have good feng shui as well as good meanings.', NULL, 63, 42, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, 0, NULL, ''),
+(50, 6, 'Kale', 'The tree has long canopy and many small leaves, the green stems are very solid but also quite supple. Trees can live well in the outdoor environment and are easy to take care of, without much fertilization. However, people need to trim the branches to avoid long -standing trees.', NULL, 0, 14, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL, ''),
+(51, 6, 'Japanese palm tree', 'This is a woody tree, grows into dust, leaves spread into a fan shape. The tree grows slowly but grows well in many different environments. The tree is easy to take care of and withstand good heat, living well in outdoor lighting environments.', NULL, 33, 43, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL, ''),
+(52, 6, 'Aloe', 'This plant is grown on the apartment balcony, not only beauty but also with many benefits such as beauty, clean food for good use. Planting this type of tree does not need much effort to take care of, the tree is easy to live.', NULL, 33, 12, NULL, NULL, NULL, NULL, 0, 0, NULL, NULL, NULL, NULL, ''),
+(53, 6, 'Ivy', 'The ivy tree is also a favorite ornamental tree for many people. This plant only needs a little water to grow strongly. The tree can have long foliage quickly so people can trim the tree more compact and beautify the space.', NULL, 35, 16, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL, ''),
+(54, 6, 'Fern', 'The tree has been existed for many years in the rocky mountains, tropical forests, where wet can grow well. This is a vines, with rolls, very beautiful comb, easy to live, so many people prefer to grow on their balconies, in addition to ferns also have the ability to filter dust very well Also create beautiful landscapes with cool green water', NULL, 20, 44, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL, ''),
+(55, 6, 'Coconut flower', 'There is flowers all year round, withstand sunshine, harsh wind', NULL, 35, 48, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL, ''),
+(56, 7, 'Rose', 'Roses are a popular tree ever because of their beautiful petals. Roses are often grown in the West but today they are bred many types of colorful roses are widely grown in Vietnam.', NULL, 30, 34, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL, ''),
+(57, 7, 'Cotton tree', 'The cotton tree has many different colors such as red pages, pink pages, yellow pages, white pages they are planted to make landscapes or create a beautiful flower fence', NULL, 63, 16, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL, ''),
+(58, 7, 'Paper flowers', 'Paper flower plants are easy to grow, drought well and flower all year round. Paper flowers are diverse in type as well as color. There are 2 common types of confetti: climbing body and column body, climbing body is often used to grow fences, make climbing trusses ,. .. The body of the column is usually grown as a flowerpot decoration of park, garden, ...', NULL, 45, 44, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL, ''),
+(59, 7, 'Huynh Lien tree', 'Hanh Lien is a flowering tree all year round, easy to care for, yellow flowers and wipe. Trees are often used in the garden of villas, parks ...', NULL, 35, 16, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL, ''),
+(60, 7, 'Morality tree ', 'Mai lady is a small white flower tree, flowering all year round, they grow into clusters and are trimmed into circles, cylinders, ...', NULL, 20, 0, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL, ''),
+(61, 7, 'Hibiscus', 'As a popular plant today, they have been bred into many different types and have very large and colorful flowers.', NULL, 26, 43, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL, ''),
+(62, 7, 'Banana tree', 'Banana tree is a colorful plant with colorful flowers often grown near the lake, pond bank, ...', NULL, 20, 44, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL, ''),
+(63, 7, 'Thien Dieu flower tree', 'Thien Dieu flower tree, also known as the beak, is very water -like banana tree.', NULL, 33, 42, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL, ''),
+(64, 7, 'Jasmine', 'Laurel is a small woody tree, white and fragrant flowers are very pleasant.', NULL, 20, 12, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL, ''),
+(65, 7, 'Laurel', 'The jasmine tree is a tree with a faint white and fragrant flower. Western jasmine can live well in the shade but will at least flowers than in the sun.', NULL, 26, 43, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL, ''),
+(66, 7, 'Lan Y', 'Lan Y is a shade -loving tree, they have white flowers and wipe away. Orchids are often planted in places that hide in sunlight, can be planted as a beautiful flower bed.', NULL, 46, 22, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL, ''),
+(67, 7, 'Coconut flower shallow', 'Coconut is a tree grown in the parks and garden today, they are easy to grow and give flowers all year round, shallow coconut flowers have many different colorful colors.', NULL, 26, 43, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL, ''),
+(68, 7, 'Portulaca grandiflora', 'There are many types of flowers such as: ten hours, ten o\'clock, ten hours, ... They have many diverse colors and are often grown into a carpet to create a beautiful carpet or grown as a highlight for small landscape, ...', NULL, 45, 14, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL, ''),
+(69, 7, 'Cam Tu Mai', 'Cam Tu is a small shrub with purple flowers and year round. Cam Tu is often used to decorate the garden landscape, garden walkway. Sam Tu is often used to decorate the garden landscape, garden walkway. Cam Tu is easy to take care of as well as easy to grow.', NULL, 33, 16, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL, ''),
+(70, 7, 'Tiger tree', 'Also known as the tiger tongue, it stands out with the ability to live intensely, heat resistance, drought tolerance, and harsh tolerance. The color of the tiger tongue is also quite impressive with the yellow border on the outside, the inside is dark green. In addition to decoration purposes, tiger tongue can also be used as acne medicine, hemostasis, coughing up blood, difficulty urinating, poor digestion ...', NULL, 33, 0, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL, ''),
+(71, 7, 'Her betel tree', 'Her betel tree belongs to the vines family with soft stems, easy to live, without too much care. Her betel leaf has a pretty heart shape. In particular, betel nuts bring quite large health benefits: absorbing toxins in the air and electromagnetic waves such as computers, wifi, induction cookers ... This tree grows fast, good green leaves, so it makes sense Feng shui helps to multiply, convenient about the children and bring prosperous fortune.', NULL, 33, 16, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL, ''),
+(72, 7, 'Cam Tu Mai', 'The plants are green all year round, with purple pink flowers quite eye -catching. This tree is easy to grow, easy to care for and often used to make borders for the garden.', NULL, 30, 12, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL, ''),
+(73, 7, 'Purple', 'Purple afternoon tree is a light -loving tree, often used to make borders for flower beds, under large trees. This tree helps the garden more colorful, cool, faithful and attached. In particular, purple afternoon trees have the effect of preventing dust, filtering air, helping to protect the fresh living space for the family.', NULL, 63, 43, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL, ''),
+(74, 7, 'Barringtonia acutangula', 'This is a woody tree, wide but not too high, blooming in the summer, red flowers and very beautiful. The tree grows and produces green leaves all year round, has good drought tolerance, does not need to take care of or water, fertilize too much. A few years ago, sesame buds belong to the hot bonsai group with the price of up to hundreds of millions if the tree was beautiful.', NULL, 66, 49, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL, ''),
+(75, 7, 'Purple', 'Purple afternoon tree is a light -loving tree, often used to make borders for flower beds, under large trees. This tree helps the garden more colorful, cool, faithful and attached. In particular, purple afternoon trees have the effect of preventing dust, filtering air, helping to protect the fresh living space for the family.', NULL, 45, 50, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL, ''),
+(76, 7, 'Barringtonia acutangula', 'This is a woody tree, wide but not too high, blooming in the summer, red flowers and very beautiful. The tree grows and produces green leaves all year round, has good drought tolerance, does not need to take care of or water, fertilize too much. A few years ago, sesame buds belong to the hot bonsai group with the price of up to hundreds of millions if the tree was beautiful.', NULL, 63, 50, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL, '');
 
-----------------------------------------------------------
+-- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `products_categories`
+-- Table structure for table `products_categories`
 --
 
 CREATE TABLE `products_categories` (
@@ -343,7 +409,7 @@ CREATE TABLE `products_categories` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `products_categories`
+-- Dumping data for table `products_categories`
 --
 
 INSERT INTO `products_categories` (`id`, `name`, `status`, `created_at`, `updated_at`) VALUES
@@ -355,10 +421,10 @@ INSERT INTO `products_categories` (`id`, `name`, `status`, `created_at`, `update
 (6, 'Balcony Tree', 0, NULL, NULL),
 (7, 'Outdoor flowers', 0, NULL, NULL);
 
------------------------------------------------------------
+-- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `product_comments`
+-- Table structure for table `product_comments`
 --
 
 CREATE TABLE `product_comments` (
@@ -374,17 +440,17 @@ CREATE TABLE `product_comments` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `product_comments`
+-- Dumping data for table `product_comments`
 --
 
 INSERT INTO `product_comments` (`id`, `product_id`, `user_id`, `email`, `name`, `messages`, `rating`, `created_at`, `updated_at`) VALUES
 (1, 1, 1, 'Thanhvu121198@gmail.com', 'Vu Duc Thanh', 'Nice!!!', 5, NULL, NULL),
 (2, 1, 2, 'Quanganh1234@gmail.com', 'Le Quang Anh', 'Very Good:3', 4, NULL, NULL);
 
------------------------------------------------------------
+-- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `product_details`
+-- Table structure for table `product_details`
 --
 
 CREATE TABLE `product_details` (
@@ -397,10 +463,10 @@ CREATE TABLE `product_details` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
------------------------------------------------------------
+-- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `product_images`
+-- Table structure for table `product_images`
 --
 
 CREATE TABLE `product_images` (
@@ -412,7 +478,7 @@ CREATE TABLE `product_images` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `product_images`
+-- Dumping data for table `product_images`
 --
 
 INSERT INTO `product_images` (`id`, `product_id`, `path`, `created_at`, `updated_at`) VALUES
@@ -643,10 +709,10 @@ INSERT INTO `product_images` (`id`, `product_id`, `path`, `created_at`, `updated
 (225, 75, 'small-size\\cay-loc-vung-2.jpg', NULL, NULL),
 (226, 75, 'small-size\\cay-loc-vung-3.jpg', NULL, NULL);
 
------------------------------------------------------------
+-- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `shopping_cart`
+-- Table structure for table `shopping_cart`
 --
 
 CREATE TABLE `shopping_cart` (
@@ -657,10 +723,10 @@ CREATE TABLE `shopping_cart` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
------------------------------------------------------------
+-- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `users`
+-- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
@@ -680,80 +746,87 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `users`
+-- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `shopping_cart_id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `avatar`, `level`, `description`, `status`, `created_at`, `updated_at`) VALUES
 (1, 1, 'Vu Duc Thanh', 'Thanhvu121198@gmail.com', NULL, 'thanh121198', NULL, 'Thanh', 0, NULL, 0, NULL, NULL),
-(2, 2, 'Le Quang Anh', 'Quanganh1234@gmail.com', NULL, 'quanganh1234', NULL, 'Quanganh', 0, NULL, 0, NULL, NULL);
+(2, 2, 'Le Quang Anh', 'Quanganh1234@gmail.com', NULL, '$2y$10$hm64mD40sVuf90D5vBUXiuXgAP20JvyB79QYd8d0OHQCRdxYISEmu', NULL, 'Quanganh', 1, NULL, 0, NULL, NULL);
 
 --
--- Chỉ mục cho các bảng đã đổ
+-- Indexes for dumped tables
 --
 
 --
--- Chỉ mục cho bảng `admin`
+-- Indexes for table `admin`
 --
 ALTER TABLE `admin`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `blogs`
+-- Indexes for table `blogs`
 --
 ALTER TABLE `blogs`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `blogs_comments`
+-- Indexes for table `blogs_comments`
 --
 ALTER TABLE `blogs_comments`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `cart_items`
+-- Indexes for table `carts`
 --
-ALTER TABLE `cart_items`
+ALTER TABLE `carts`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `customer_id` (`customer_id`);
+
+--
+-- Indexes for table `customers`
+--
+ALTER TABLE `customers`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `failed_jobs`
+-- Indexes for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
 
 --
--- Chỉ mục cho bảng `migrations`
+-- Indexes for table `migrations`
 --
 ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `orders`
+-- Indexes for table `orders`
 --
 ALTER TABLE `orders`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `order_details`
+-- Indexes for table `order_details`
 --
 ALTER TABLE `order_details`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `password_resets`
+-- Indexes for table `password_resets`
 --
 ALTER TABLE `password_resets`
   ADD KEY `password_resets_email_index` (`email`);
 
 --
--- Chỉ mục cho bảng `payment_details`
+-- Indexes for table `payment_details`
 --
 ALTER TABLE `payment_details`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `personal_access_tokens`
+-- Indexes for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
   ADD PRIMARY KEY (`id`),
@@ -761,151 +834,167 @@ ALTER TABLE `personal_access_tokens`
   ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
 
 --
--- Chỉ mục cho bảng `products`
+-- Indexes for table `products`
 --
 ALTER TABLE `products`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `products_categories`
+-- Indexes for table `products_categories`
 --
 ALTER TABLE `products_categories`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `product_comments`
+-- Indexes for table `product_comments`
 --
 ALTER TABLE `product_comments`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `product_details`
+-- Indexes for table `product_details`
 --
 ALTER TABLE `product_details`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `product_images`
+-- Indexes for table `product_images`
 --
 ALTER TABLE `product_images`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `shopping_cart`
+-- Indexes for table `shopping_cart`
 --
 ALTER TABLE `shopping_cart`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `users`
+-- Indexes for table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `users_email_unique` (`email`);
 
 --
--- AUTO_INCREMENT cho các bảng đã đổ
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT cho bảng `admin`
+-- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT cho bảng `blogs`
+-- AUTO_INCREMENT for table `blogs`
 --
 ALTER TABLE `blogs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT cho bảng `blogs_comments`
+-- AUTO_INCREMENT for table `blogs_comments`
 --
 ALTER TABLE `blogs_comments`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT cho bảng `cart_items`
+-- AUTO_INCREMENT for table `carts`
 --
-ALTER TABLE `cart_items`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+ALTER TABLE `carts`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
--- AUTO_INCREMENT cho bảng `failed_jobs`
+-- AUTO_INCREMENT for table `customers`
+--
+ALTER TABLE `customers`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT cho bảng `migrations`
+-- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
--- AUTO_INCREMENT cho bảng `orders`
+-- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT cho bảng `order_details`
+-- AUTO_INCREMENT for table `order_details`
 --
 ALTER TABLE `order_details`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT cho bảng `payment_details`
+-- AUTO_INCREMENT for table `payment_details`
 --
 ALTER TABLE `payment_details`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT cho bảng `personal_access_tokens`
+-- AUTO_INCREMENT for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT cho bảng `products`
+-- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=90;
 
 --
--- AUTO_INCREMENT cho bảng `products_categories`
+-- AUTO_INCREMENT for table `products_categories`
 --
 ALTER TABLE `products_categories`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT cho bảng `product_comments`
+-- AUTO_INCREMENT for table `product_comments`
 --
 ALTER TABLE `product_comments`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT cho bảng `product_details`
+-- AUTO_INCREMENT for table `product_details`
 --
 ALTER TABLE `product_details`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT cho bảng `product_images`
+-- AUTO_INCREMENT for table `product_images`
 --
 ALTER TABLE `product_images`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=227;
 
 --
--- AUTO_INCREMENT cho bảng `shopping_cart`
+-- AUTO_INCREMENT for table `shopping_cart`
 --
 ALTER TABLE `shopping_cart`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT cho bảng `users`
+-- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `carts`
+--
+ALTER TABLE `carts`
+  ADD CONSTRAINT `carts_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`);
 COMMIT;

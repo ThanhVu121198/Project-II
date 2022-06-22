@@ -22,6 +22,7 @@
                <th>discount</th>
                <th>featured</th>
                 <th>status</th>
+                {{-- <th>img</th> --}}
                <th>create at</th>
                <th>actions</th>
                <th class="text-center">link</th>
@@ -53,6 +54,7 @@
                     <span class="badge bg-secondary">stop selling</span>
                     @endif
                 </td>
+                {{-- <td>{{$product->productImages[0]->path}}</td> --}}
                    <td>
                        <?php
                        echo \Carbon\Carbon::createFromTimeStamp(strtotime($product->created_at))->diffForHumans()
@@ -64,7 +66,7 @@
                         <i class="fas fa-edit"></i>
                     </a>
                     
-                    <a href="/admin/product/destroy/{{$product->id}}" class="btn btn-sm btn-danger" id="btndelete" onclick="return confirm('Continue?')"> 
+                    <a href="/admin/product/destroy/{{$product->id}}" class="btn btn-sm btn-danger" id="btndelete" onclick="return confirm('Do you want to delete this product and all images without being able to recover ?')"> 
                          <i class="fas fa-trash"></i>
                     </a>
                    </td>

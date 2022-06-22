@@ -104,7 +104,35 @@
               </li>
             </ul>
           </li>
-            
+          <li class="nav-item menu">
+            <a href="#" class="nav-link">
+            <i class="fas fa-blog"></i>
+              <p>
+               Order Controll
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/admin/order/new" class="nav-link">
+                  <i class="fas fa-calendar-plus"></i>
+                  <p>New Order</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/admin/order/handle" class="nav-link">
+                  <i class="fas fa-shipping-fast"></i>
+                  <p>Order being processed</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/admin/order/complete" class="nav-link">
+                  <i class="fas fa-check"></i>
+                  <p>Completed Order</p>
+                </a>
+              </li>
+            </ul>
+          </li>
           <li class="nav-item">
             <a href="/admin/register" class="nav-link">
               <i class="fas fa-registered"></i>
