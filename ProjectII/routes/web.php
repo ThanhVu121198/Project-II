@@ -11,6 +11,7 @@ use \App\Http\Controllers\Admin\User\loginController;
 use App\Http\Controllers\Front\HomeController;
 use App\Http\Controllers\Front;
 use App\Http\Controllers\Admin\DetailController;
+use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Front\BlogController;
 
 /*
@@ -38,9 +39,8 @@ Route::prefix('shop')->group(function () {
     Route::get('/{categoryName}', [Front\ShopController::class, 'category']);
 });
 
-// admin
-Route::get('admin/users/login',
-[\App\Http\Controllers\Admin\User\loginController::class,'index'])->name('login');
+// admin 
+Route::get('admin/users/login',[\App\Http\Controllers\Admin\User\loginController::class,'index'])->name('login');
 route::post('admin/users/login/store',[loginController::class,'store']);
 // route::get('admin/main',[Maincontroller::class,'index'])->name('admin')->middleware('aut');
 Route::middleware(['auth'])->group(function() {
@@ -76,6 +76,17 @@ Route::middleware(['auth'])->group(function() {
 
 
         });
+        route::prefix('order')->group(function(){
+            route::get('new',[OrderController::class,'new']);
+            route::get('handle',[OrderController::class,'handle']);
+            route::get('complete',[OrderController::class,'complete']);
+            route::get('detail/{id}',[OrderController::class,'orderdetail']);
+            route::get('delete/{id}',[OrderController::class,'destroy']);
+            route::get('cd/{id}',[OrderController::class,'confirmhandle']);
+            route::get('pc/{id}',[OrderController::class,'paymentconfirmation']);
+
+          
+        });
         // productget
 
 
@@ -89,7 +100,11 @@ Route::middleware(['auth'])->group(function() {
             Route::get('edit/{blog}',[BlogAdmincontroller::class,'show']);
             Route::post('edit/{blog}',[BlogAdmincontroller::class,'update']);
         });
+        // 
 
+         Route::get('logout',[loginController::class,'logout']);
+         Route::get('register',[loginController::class,'create']);
+         Route::post('register',[loginController::class,'request']);
     });
 });
 //end admin

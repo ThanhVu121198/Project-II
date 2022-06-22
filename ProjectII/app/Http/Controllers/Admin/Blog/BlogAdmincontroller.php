@@ -19,7 +19,7 @@ class BlogAdmincontroller extends Controller
         $this->blogservice = $blogservice;
     }
     public function index(){
-        $data= Blog::orderBy('id','ASC')->search()->paginate(10);
+        $data= Blog::orderBy('id','DESC')->search()->paginate(10);
         return view('admin.blog.list',compact('data'),[
             'title'=>'List blog'
         ]);
