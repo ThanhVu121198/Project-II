@@ -200,6 +200,7 @@
                             <div class="tab-content">
                                 <div class="tab-pane fade show active" id="grid-view" role="tabpanel" aria-labelledby="grid-view-tab">
                                     <div class="product-grid-view row g-y-20">
+<<<<<<< HEAD
                                         <div class="col-md-4 col-sm-6">
                                             <div class="product-item">
                                                 <div class="product-img">
@@ -644,6 +645,57 @@
                                                             <li><i class="fa fa-star"></i></li>
                                                             <li><i class="fa fa-star"></i></li>
                                                         </ul>
+=======
+                                        @foreach($products as $product)
+                                            <div class="col-md-4 col-sm-6">
+                                                <div class="product-item">
+                                                    <div class="product-img">
+                                                        <a href="shop/product/{{$product->id}}">
+                                                            @if(isset($product->productImages))
+                                                               @foreach($product->productImages as $key => $image)
+                                                                @if ($key == 0)
+                                                                    <img class="primary-img" src="front/images/product/{{$image->path}}" alt="Product Images">
+                                                                @elseif ($key == 1)
+                                                                <img class="secondary-img" src="front/images/product/{{$image->path}}" alt="Product Images">
+                                                                @endif
+                                                               @endforeach
+                                                            @endif
+                                                        </a>
+                                                        <div class="product-add-action">
+                                                            <ul>
+                                                                <li>
+                                                                    <a href="wishlist.html" data-tippy="Add to wishlist" data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder">
+                                                                        <i class="pe-7s-like"></i>
+                                                                    </a>
+                                                                </li>
+                                                                <li class="quuickview-btn" data-bs-toggle="" data-bs-target="#quickModal">
+                                                                    <a href="shop/product/{{$product->id}}" data-tippy="Quickview" data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder">
+                                                                        <i class="pe-7s-look"></i>
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="cart.html" data-tippy="Add to cart" data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder">
+                                                                        <i class="pe-7s-cart"></i>
+                                                                    </a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <div class="product-content">
+                                                        <a class="product-name" href="shop/product/{{$product->id}}">{{$product->name}}</a>
+                                                        <div class="price-box pb-1">
+                                                            <span class="new-price">${{$product->price}}.00</span>
+                                                        </div>
+                                                        <div class="rating-box">
+                                                            <ul>
+                                                                <li><i class="fa fa-star"></i></li>
+                                                                <li><i class="fa fa-star"></i></li>
+                                                                <li><i class="fa fa-star"></i></li>
+                                                                <li><i class="fa fa-star"></i></li>
+                                                                <li><i class="fa fa-star"></i></li>
+                                                            </ul>
+                                                        </div>
+>>>>>>> main
                                                     </div>
                                                 </div>
                                             </div>

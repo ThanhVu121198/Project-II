@@ -67,8 +67,6 @@
                 @endforeach
             </tbody>
         </table>
-
-
     </div>
     <hr>
     

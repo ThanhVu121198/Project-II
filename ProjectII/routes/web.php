@@ -11,6 +11,7 @@ use \App\Http\Controllers\Admin\User\loginController;
 use App\Http\Controllers\Front\HomeController;
 use App\Http\Controllers\Front;
 use App\Http\Controllers\Admin\DetailController;
+use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Front\BlogController;
 
 /*
@@ -72,8 +73,19 @@ Route::middleware(['auth'])->group(function() {
             //detail
             // Route::post('adddetail/{id}',[DetailController::class,'store']);
             // Route::get('deletedetail/{id}',[DetailController::class,'destroy']);
-            
-       
+
+
+        });
+        route::prefix('order')->group(function(){
+            route::get('new',[OrderController::class,'new']);
+            route::get('handle',[OrderController::class,'handle']);
+            route::get('complete',[OrderController::class,'complete']);
+            route::get('detail/{id}',[OrderController::class,'orderdetail']);
+            route::get('delete/{id}',[OrderController::class,'destroy']);
+            route::get('cd/{id}',[OrderController::class,'confirmhandle']);
+            route::get('pc/{id}',[OrderController::class,'paymentconfirmation']);
+
+          
         });
      
         
