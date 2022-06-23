@@ -94,7 +94,7 @@
                   </div>
               </div>
               </div>
-              <div class="row">
+              {{-- <div class="row">
                 <h5 class="col-12">detail</h5>
                 <hr>
                 <div class="col-4">
@@ -109,7 +109,7 @@
                   <label for="exampleFormControlTextarea1"  class="form-label">Qty detail</label>
                   <input type="number" class="form-control" name="qtydetail" placeholder="Qty detail" >
                 </div>
-              </div>
+              </div> --}}
               <!-- /.card-body -->
               </div>
               <div class="card-footer">

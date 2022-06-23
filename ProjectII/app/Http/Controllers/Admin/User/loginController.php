@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\RegisterRequest;
 use App\Models\c;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
@@ -27,21 +28,7 @@ class loginController extends Controller
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-       // $User = New User();
-    //         $User->shopping_cart_id = 0;
-    //         $User->name = 'quang anh';
-    //         $User->email = 'quanganhle.dev@gmail.com';
-    //         $User->password = Hash::make('123456');
-    //         $User->avatar = 'avatar.png';
-    //         $User->level=1;
-    //         $User->status = 0;
-    //         $User->save();
-    }
-    /**
+
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -124,5 +111,30 @@ class loginController extends Controller
     public function destroy(c $c)
     {
         //
+    }
+    public function logout(){
+      Auth::logout();
+      return redirect('admin/users/login');
+    }
+ 
+    public function create()
+    {
+      return view('admin.users.register', ['title'=>'register admin']);
+    }
+    public function request(RegisterRequest $request){
+      $User = New User();
+            $file_name = $request->file('avatar')->getClientOriginalName();
+            $User->shopping_cart_id = 0;
+            $User->name = $request->name;
+            $User->email = $request->email;
+            $User->password =Hash::make($request->password);
+            $User->avatar = $file_name;
+            $User->level=1;
+            $User->description =$request->desc;
+            $User->status = 0;
+            $request->file('avatar')->move('front/images/avatar/',$file_name);
+            $User->save();
+            session()->flash('success','register new admin success');
+            return redirect()->back();
     }
 }
