@@ -12,6 +12,7 @@
        <thead>
            <tr>
                <th>id</th>
+               {{-- <th>product name</th> --}}
                <th>product name</th>
                <th>category</th>
                {{-- <th>detail total</th> --}}
@@ -32,6 +33,8 @@
            @foreach ($data as $product)
                <tr>
                    <td>{{$product->id}}</td>
+                   {{-- <td>   <img style="max-height: 200px" src="front/images/product/{{ $product->productImages[0]->path }}" alt="Cart Thumbnail"></td> --}}
+                   {{-- <td>{{$product->productImages[0]->id}}</td> --}}
                    <td>{{$product->name}}</td>
                    <td>{{$product->ProductCategory->name}}</td>
                    {{-- <td>{{$product->productDetails ? $product->productDetails->count():0}}</td> --}}

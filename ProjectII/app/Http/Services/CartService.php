@@ -18,8 +18,57 @@ class CartService
 {
     public function create($request)
     {
+
         $qty = (int)$request->input('num_product');
         $product_id = (int)$request->input('product_id');
+
+        if ($qty <= 0 || $product_id <= 0) {
+            Session::flash('error', 'Số lượng hoặc Sản phẩm không chính xác');
+            return false;
+        }
+
+        //Session::forget('carts');
+        $carts = Session::get('carts');
+
+        if (is_null($carts)) {
+            Session::put('carts', [
+                $product_id => $qty
+            ]);
+            //$carts = session('carts');
+            return true;
+        }
+        //$carts = session('carts');
+
+        //dd($carts);
+
+
+        $exists = Arr::exists($carts, $product_id);
+        //dd($exists);
+        if ($exists) {
+            // $carts[$product_id] = $carts[$product_id] + $qty;
+            $carts[$product_id] = $carts[$product_id] + $qty;
+            Session::put('carts', $carts);
+            //$carts = session('carts');
+            return true;
+        }
+
+        // Session::put('carts', [
+        //     $product_id => $qty
+        // ]);
+
+        // return true;
+
+        $carts[$product_id] = $qty;
+        Session::put('carts', $carts);
+
+        return true;
+    }
+
+    public function createHome($data)
+    {
+
+        $qty = (int)$data[1];
+        $product_id = (int)$data[0];
 
         if ($qty <= 0 || $product_id <= 0) {
             Session::flash('error', 'Số lượng hoặc Sản phẩm không chính xác');
@@ -66,27 +115,18 @@ class CartService
     public function getProduct()
     {
         $carts = Session::get('carts');
-        //$carts = session('carts');
         if (is_null($carts)) return [];
-
-        // $productIds = array_keys($carts);
         $product_carts = [];
 
         foreach($carts as $key => $cart_quantity){
-            $product = Product::where('id', $key)->first();
+            $product = Product::where('id', $key)->with('productImages')->first();
             if($product != null){
                 $product['quantity_cart'] = $cart_quantity;
                 array_push($product_carts, $product);
             }
-        // foreach($productIds as $productId){
 
         }
-        // }
-        // return Product::select('id', 'name', 'price')
-        //     ->whereIn('id', $productId)
-        //     ->get();
         Session::put('mini-carts', $product_carts);
-        // dd(Session::get('mini-carts'));
         return $product_carts;
     }
 
@@ -151,7 +191,7 @@ class CartService
     protected function infoProductCart($carts, $customer_id)
     {
         $productId = array_keys($carts);
-        $products = Product::select('id', 'name', 'price','img')
+        $products = Product::select('id', 'name', 'price')
             ->whereIn('id', $productId)
             ->get();
 

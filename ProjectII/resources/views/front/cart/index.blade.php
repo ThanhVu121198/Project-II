@@ -60,7 +60,7 @@
                                                 </td>
                                                 <td class="product-thumbnail">
                                                     <a href="#">
-                                                        <img style="max-height: 200px" src="front/images/product/{{ $product->img }}" alt="Cart Thumbnail">
+                                                        <img style="max-height: 200px" src="front/images/product/{{ $product->productImages[0]->path }}" alt="Cart Thumbnail">
                                                     </a>
                                                 </td>
                                                 <td class="product-name"><a href="#">{{ $product->name }}</a></td>
