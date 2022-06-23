@@ -13,6 +13,7 @@
            <tr>
                <th>id</th>
                <th>tilte</th>
+               <th>image</th>
                <th>category</th>
                <th>create at</th>
                <th class="text-right">actions</th>
@@ -23,6 +24,7 @@
                <tr>
                    <td>{{$blog->id}}</td>
                    <td>{{$blog->title}}</td>
+                   <td> <img style="width: 100px;height:80px;" src={{"/front/images/blog/medium-size/$blog->image"}}></td>
                    <td>{{$blog->category}}</td>
                    <td>
                        <?php
