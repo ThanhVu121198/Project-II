@@ -14,7 +14,7 @@ class Order extends Model
     protected $guarded = [];
 
     public function orderDetails() {
-        return $this->/(OrderDetail::class, 'order_id', 'id');
+        return $this->(OrderDetail::class, 'order_id', 'id');
     }
 
     public function paymentDetails() {
