@@ -13,9 +13,11 @@
           <img src="/front/images/avatar/{{Auth::user()->avatar}}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block"><span>Admin </span>{{Auth::user()->name}}</a>
+          <a href="#" class="d-block">{{Auth::user()->name}}</a>
         </div>
+      
       </div>
+    
 
       <!-- SidebarSearch Form -->
       {{-- <div class="form-inline">
@@ -142,14 +144,7 @@
             </a>
           </li>
 
-          <li class="nav-item">
-            <a href="/admin/logout" class="nav-link">
-          <i class="fas fa-sign-out-alt"></i>
-              <p>
-               Logout
-              </p>
-            </a>
-          </li>
+         
         </ul>
      
       </nav>
