@@ -151,7 +151,7 @@ class CartService
     protected function infoProductCart($carts, $customer_id)
     {
         $productId = array_keys($carts);
-        $products = Product::select('id', 'name', 'price','img')
+        $products = Product::select('id', 'name', 'price')
             ->whereIn('id', $productId)
             ->get();
 
