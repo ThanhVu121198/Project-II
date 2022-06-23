@@ -34,6 +34,13 @@
           <i class="fas fa-expand-arrows-alt"></i>
         </a>
       </li>
+      <li class="nav-item">
+        <a href="/admin/logout" class="nav-link">
+      <i class="fas fa-sign-out-alt"></i>
+           Logout   
+        </a>
+      </li>
+
       
     </ul>
   </nav>
