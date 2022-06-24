@@ -40,7 +40,7 @@ Route::prefix('shop')->group(function () {
     Route::get('/{categoryName}', [Front\ShopController::class, 'category']);
 });
 
-// admin 
+// admin
 Route::get('admin/users/login',[\App\Http\Controllers\Admin\User\loginController::class,'index'])->name('login');
 route::post('admin/users/login/store',[loginController::class,'store']);
 // route::get('admin/main',[Maincontroller::class,'index'])->name('admin')->middleware('aut');
@@ -84,7 +84,7 @@ Route::middleware(['auth'])->group(function() {
             route::get('cd/{id}',[OrderController::class,'confirmhandle']);
             route::get('pc/{id}',[OrderController::class,'paymentconfirmation']);
 
-          
+
         });
         // productget
         // blog
@@ -96,7 +96,7 @@ Route::middleware(['auth'])->group(function() {
             Route::get('edit/{blog}',[BlogAdmincontroller::class,'show']);
             Route::post('edit/{blog}',[BlogAdmincontroller::class,'update']);
         });
-        // 
+        //
 
          Route::get('logout',[loginController::class,'logout']);
          Route::get('register',[loginController::class,'create']);
@@ -111,8 +111,11 @@ Route::get('/about', [Front\AboutController::class, 'index']);
 
 Route::get('/faq', [Front\FAQController::class, 'index']);
 
+// Contatct
 Route::get('/contact', [Front\ContactController::class, 'index']);
+Route::post('/store', [Front\ContactController::class, 'storeNew']);
 
+//
 Route::get('/account', [Front\MyAccountController::class, 'index']);
 
 Route::get('/logout', [Front\LogoutController::class, 'index']);
@@ -128,5 +131,5 @@ Route::post('/update-cart', [Front\CartController::class, 'update']);
 Route::get('/cart/delete/{id}', [Front\CartController::class, 'remove']);
 Route::post('carts', [Front\CartController::class, 'addCart']);
 
-Route::get('/checkOut', [Front\CheckOutController::class, 'index']);
+Route::get('/checkOut', [Front\CheckOutController::class, 'index'])->name('checkout');
 Route::post('/checkout2', [Front\CheckOutController::class, 'addCart']);

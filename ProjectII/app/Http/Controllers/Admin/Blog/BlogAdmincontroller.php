@@ -60,9 +60,9 @@ class BlogAdmincontroller extends Controller
     }
     public function show(Blog $blog){
         // dd($blog);
-           return view('admin.blog.edit',[
-          'title'=>'edit blog',
-          'blog'=>$blog
+        return view('admin.blog.edit',[
+            'title'=>'edit blog',
+            'blog'=>$blog
         ]
         );
 
@@ -72,13 +72,12 @@ class BlogAdmincontroller extends Controller
             'title'=>'required',
             // 'img2'=> 'required',
             // 'img3'=> 'required',
-  
             'category'=>'required',
             'content'=>'required',
         ]);
         $blog = Blog::find($id);
         $image=request('img');
-        
+
         if($image){
             $destinal='front/images/blog/medium-size/'.$blog->image;
             if(file_exists($destinal)){
@@ -99,6 +98,6 @@ class BlogAdmincontroller extends Controller
         session()->flash('success','update success');
         // $this->blogservice->update($request,$blog);
         return redirect('admin/blog/list');
-       
+
     }
 }

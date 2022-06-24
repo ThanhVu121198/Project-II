@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\DB;
 class OrderController extends Controller
 {
     //
-    
+
 public function new(){
         $customer=Customer::orderBy('id','DESC')->where('status',0)->paginate(20);
         return view('admin.order.listorder',compact('customer'),[
@@ -47,7 +47,6 @@ public function orderdetail($id){
             'title'=>'Customer Detail'
         ]);
     }
-   
     }
     public function destroy($id){
         $carts=DB::table('carts')->where('customer_id',$id)->get();

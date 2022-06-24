@@ -31,6 +31,7 @@ class BlogRequest extends FormRequest
             // 'img3'=> 'required',
             'category'=>'required',
             'content'=>'required',
+            
         ];
     }
     public function messages()

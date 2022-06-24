@@ -3,7 +3,7 @@
 @section('title', 'Home')
 
 @section('body')
-@include('front.alert')
+
     {{-- <form action="/addCartHome" method="post">
         @csrf --}}
         <!-- Begin Slider Area -->

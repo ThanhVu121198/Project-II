@@ -18,21 +18,21 @@ class ProductController extends Controller
 {
     //
     public function index(){
-    
+
         $data= Product::orderBy('id','DESC')->with('productImages')->search()->paginate(20);
         return view('admin.product.list',compact('data'),[
             'title'=>'Product list'
         ]);
-        
+
     }
     public function create(){
         $cate = ProductCategory::all();
         return view('admin.product.add',compact('cate'),[
             'title'=>'Add a new product'
         ]);
-        
+
     }
-  
+
     public function store(ProductRequest $request){
         $product = new Product();
         $product->name=$request->name;
@@ -46,10 +46,10 @@ class ProductController extends Controller
         $product->tag=$request->desc;
         $product->featured=$request->featured;
         $product->status=$request->status;
-        $product->save(); 
+        $product->save();
         $product_id=$product->id;
         //
-  
+        
         $file_name1 = $request->file('img1')->getClientOriginalName();
         $product_img1= new ProductImage();
         $product_img1->product_id=$product_id;
@@ -68,7 +68,7 @@ class ProductController extends Controller
         // $request->file('img2')->move('public/front/images/product/small-size/',$file_name2);
         // $product_img2->save();
         // //
-        
+
         // $file_name3 = $request->file('img3')->getClientOriginalName();
         // $product_img3= new ProductImage();
         // $product_img3->product_id=$product_id;
@@ -119,7 +119,7 @@ class ProductController extends Controller
      }
         // $product_detail=Product::find($id)->productDetails;
         // foreach($product_detail as $detail){
-        //     ProductDetail::where('id', $detail->id)->delete();  
+        //     ProductDetail::where('id', $detail->id)->delete();
         // }
         $product=Product::find($id);
         session()->flash('success','delete product success');

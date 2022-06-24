@@ -18,11 +18,10 @@
             <p><span class="laber">status: </span>new order</p>
         @elseif($customer->status==1)
             <p><span class="laber">status: </span>Processing</p>
-        @elseif($customer->status==2){
+        @elseif($customer->status==2)
                 <p><span class="laber">status: </span>complete</p>
-            }
         @endif
-      
+
             <p>
                 <span class="laber">created at: </span><?php
                     echo \Carbon\Carbon::createFromTimeStamp(strtotime($customer->created_at))->diffForHumans()
@@ -41,7 +40,7 @@
                     <th>buy_price</th>
                 </tr>
             </thead>
-            <?php 
+            <?php
             $stt=1;
             $allprice=0;
             ?>
@@ -57,16 +56,16 @@
                     <td>{{$cart->product->name}}</td>
                     {{-- <td><img src="front\images\product\" alt=""> --}}
                        <td> <img style="width: 20vw;" src="/front/images/product/{{$cart->product->productImages[0]->path}}" alt=""></td>
-                </tr>   
+                </tr>
             @endforeach
         </tbody>
     </table>
     <h3>total money: {{number_format($allprice)}}<span>$</span></h3>
-                 
+
     </div>
 
- 
+
 
 <hr>
 
-@endsection 
+@endsection
