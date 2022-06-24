@@ -15,7 +15,7 @@ class ImageController extends Controller
 
     }
     public function store($id,ImageRequest $request){
-        $file_name= $request->file('img')->getClientOriginalName();
+        $file_name =time().$request->file('img')->getClientOriginalName();
         $product_img= new ProductImage();
         $product_img->product_id=$id;
         $product_img->path='small-size/'.$file_name;

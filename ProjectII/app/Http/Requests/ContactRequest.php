@@ -28,7 +28,7 @@ class ContactRequest extends FormRequest
             //
             'first_name'=>'required',
             'last_name'=> 'required',
-            'phone' => 'required|size:11|numeric',
+            'phone' => 'required|numeric',
             'email'=>'required|email',
             'mess'=> 'required'
         ];
@@ -40,7 +40,8 @@ class ContactRequest extends FormRequest
             'last_name.required'=>'please enter last name',
             'phone.required'=>'please enter phone',
             'phone.numeric'=>'please input number',
-            'phone.size'=>'please input 11 characters',
+            // 'phone.min'=>'please input min 10 characters',
+            // 'phone.max'=>'please input min 10 characters',
             'email.required'=>'please enter email',
             'email.email'=>'please enter email format(ex: abc@gmail.com)',
             'mess.required'=>'please enter mess'

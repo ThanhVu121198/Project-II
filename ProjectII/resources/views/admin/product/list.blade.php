@@ -74,7 +74,7 @@
                     </a>
                    </td>
                    <td class="text-right">
-                    <a  href="/admin/product/productget/{{$product->id}}"><i class="fas fa-eye"></i> See details</a></td>
+                    <a  href="/admin/product/productget/{{$product->id}}"><i class="fas fa-eye"></i>image</a></td>
                </tr>
            @endforeach
        </tbody>

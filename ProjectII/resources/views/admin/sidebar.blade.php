@@ -118,13 +118,13 @@
               <li class="nav-item">
                 <a href="/admin/order/new" class="nav-link">
                   <i class="fas fa-calendar-plus"></i>
-                  <p>New Order</p>
+                  <p>New order</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="/admin/order/handle" class="nav-link">
                   <i class="fas fa-shipping-fast"></i>
-                  <p>Order being processed</p>
+                  <p>Order Being pocessed</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -133,7 +133,21 @@
                   <p>Completed Order</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="/admin/order/cancels" class="nav-link">
+                  <i class="fas fa-window-close"></i>
+                  <p>Cancel Order</p>
+                </a>
+              </li>
             </ul>
+          </li>
+          <li class="nav-item">
+            <a href="/admin/contact" class="nav-link">
+              <i class="fas fa-mail-bulk"></i>
+              <p>
+                Suggestion Box
+              </p>
+            </a>
           </li>
           <li class="nav-item">
             <a href="/admin/register" class="nav-link">

@@ -27,8 +27,6 @@ class BlogRequest extends FormRequest
             //
             'title'=>'required|unique:blogs',
             'img'=> 'required',
-            // 'img2'=> 'required',
-            // 'img3'=> 'required',
             'category'=>'required',
             'content'=>'required',
             
