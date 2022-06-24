@@ -141,13 +141,31 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item">
-            <a href="/admin/contact" class="nav-link">
-              <i class="fas fa-mail-bulk"></i>
+          <li class="nav-item menu">
+            <a href="#" class="nav-link">
+              <i class="fas fa-paper-plane"></i>
               <p>
-                Suggestion Box
+                Suggestion Controll
+                <i class="right fas fa-angle-left"></i>
               </p>
             </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/admin/contact" class="nav-link">
+                  <i class="fas fa-comment-medical"></i>
+                  <p>
+                    Suggestion Box new
+                  </p>
+                </a>
+              <li class="nav-item">
+                <a href="/admin/ctread" class="nav-link">
+                  <i class="fas fa-comments"></i>
+                  <p>Suggestion Box Old</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          
           </li>
           <li class="nav-item">
             <a href="/admin/register" class="nav-link">

@@ -99,7 +99,10 @@ Route::middleware(['auth'])->group(function() {
             Route::post('edit/{blog}',[BlogAdmincontroller::class,'update']);
         });
         //contact
-        Route::get('contact',[AdminContactController::class,'index']);
+        Route::get('contact',[AdminContactController::class,'indexunread']);
+        Route::get('ctread',[AdminContactController::class,'indexread']);
+        Route::get('contactread/{id}',[AdminContactController::class,'get']);
+        Route::get('readctt/{id}',[AdminContactController::class,'read']);
 
         //user
          Route::get('logout',[loginController::class,'logout']);
