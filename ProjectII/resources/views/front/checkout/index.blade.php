@@ -140,13 +140,13 @@
                                             <div class="col-md-6">
                                                 <div class="checkout-form-list">
                                                     <label>Email Address <span class="required">*</span></label>
-                                                    <input placeholder="" type="email" name="email" id="email" required>
+                                                    <input placeholder="" type="email" name="email" id="email" pattern=".+@gmail\.com" size="30" required>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="checkout-form-list">
                                                     <label>Phone <span class="required">*</span></label>
-                                                    <input type="text" name="phone" id="phone" required>
+                                                    <input type="text" name="phone" id="phone" pattern="[0-9]{1}[0-9]{9}" required>
                                                 </div>
                                             </div>
                                             <!-- <div class="col-md-12">
