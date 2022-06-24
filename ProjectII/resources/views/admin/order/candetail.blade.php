@@ -17,10 +17,12 @@
         @if ($customer->status==0)
             <p><span class="laber">status: </span>new order</p>
         @elseif($customer->status==1)
-            <p><span class="laber">status: </span>Processing</p>
-        @elseif($customer->status==2){
+            <p><span class="laber">status: </span>processing</p>
+        @elseif($customer->status==2)
                 <p><span class="laber">status: </span>complete</p>
-            }
+        @elseif($customer->status==3)
+            <p><span class="laber">status: </span>cancel</p>
+            
         @endif
       
             <p>
@@ -61,19 +63,15 @@
             @endforeach
         </tbody>
     </table>
-    <h3 style="padding:30px ">total money: {{number_format($allprice)}}<span>$</span></h3>
-           <hr>      
+    <h3>total money: {{number_format($allprice)}}<span>$</span></h3>
+          <hr>       
     </div>
 
- 
-
-<hr>
-<div class="row" style="margin:30px"> 
-    <a href="/admin/order/pc/{{$customer->id}}" class="btn btn-primary btn-lg cm" id="confirn"><i class="fas fa-check"></i> completed order</a>
-    <a href="/admin/order/cs/{{$customer->id}}"
-        class="btn btn-danger btn-lg" id="btndelete" style="margin-left: 20px;"
-        onclick="return confirm('Do you want to cancel this order ?')" > 
-       <i class="fas fa-window-close"></i> cancel order</a> 
-    </div>
-
+    <div class="row" style="margin:30px"> 
+        <a href="/admin/order/uc/{{$customer->id}}" class="btn btn-success btn-lg cm" id="confirn"><i class="fas fa-undo"></i> undo cancel</a>
+        {{-- <a href="/admin/order/cs/{{$customer->id}}"
+            class="btn btn-danger btn-lg" id="btndelete" style="margin-left: 20px;"
+            onclick="return confirm('Do you want to cancel this order ?')" > 
+           <i class="fas fa-window-close"></i> cancel order</a> 
+        </div> --}}
 @endsection 

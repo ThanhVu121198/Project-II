@@ -12,15 +12,17 @@
         <p><span class="laber">Company name: </span>{{$customer->company_name}}</p>
         <p><span class="laber">address: </span>{{$customer->address}}</p>
         <p><span class="laber">town: </span>{{$customer->town}}</p>
-        <p><span class="laber">customer note: </span>{{$customer->checkout_mess}} kg</p>
+        <p><span class="laber">customer note: </span>{{$customer->checkout_mess}}</p>
         </div>
         @if ($customer->status==0)
             <p><span class="laber">status: </span>new order</p>
         @elseif($customer->status==1)
             <p><span class="laber">status: </span>Processing</p>
-        @elseif($customer->status==2){
+        @elseif($customer->status==2)
                 <p><span class="laber">status: </span>complete</p>
-            }
+        @elseif($customer->status==3)
+          < p><span class="laber">status: </span>cancel</>
+                 
         @endif
       
             <p>
@@ -37,8 +39,8 @@
                     <th>stt</th>
                     <th>quantity</th>
                     <th>buy_price</th>
-                    <th>buy_price</th>
-                    <th>buy_price</th>
+                    <th>product name</th>
+                    <th>image</th>
                 </tr>
             </thead>
             <?php 

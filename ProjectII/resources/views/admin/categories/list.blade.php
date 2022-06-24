@@ -41,7 +41,7 @@
                     href="/admin/menu/edit/{{$cat->id}}"> 
                         <i class="fas fa-edit"></i>
                     </a>
-                    <a href="#" class="btn btn-sm btn-danger" id="btndelete" onclick="removeRow({{$cat->id}},'/admin/menu/destroy')"> 
+                    <a href="/admin/menu/destroy/{{$cat->id}}" class="btn btn-sm btn-danger" id="btndelete" onclick="return confirm('Do you want to delete this product and all images without being able to recover ?')"> 
                          <i class="fas fa-trash"></i>
                     </a>
                    </td>

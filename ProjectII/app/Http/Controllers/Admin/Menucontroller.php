@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Http\Services\Menu\Menuservice;
 use App\Models\ProductCategory;
 use Illuminate\Foundation\Http\FormRequest;
+use App\Models\Product;
 
 class Menucontroller extends Controller
 
@@ -105,19 +106,22 @@ class Menucontroller extends Controller
      * @param  \App\Models\c  $c
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
-    {
-        $result = $this->menuService->destroy($request);
-
-        if ($result) {
-            return response()->json([
-                'error' => false,
-                'message' => 'delete success'
-            ]);
-        }
-
-        return response()->json([
-            'error' => true
-        ]);
+    public function destroy($id)
+    { 
+        $productcount=Product::where('product_category_id',$id)->count();
+        if($productcount==0){
+                $category = ProductCategory::where('id', $id)->first();  
+                $category->delete($id);
+                session()->flash('success','delete product success');
+                return redirect()->back();
+        }else{
+            $category = ProductCategory::where('id', $id)->first();
+                $category->status=1;
+                $category->save();
+                session()->flash('error','cant delete product if this product is have order, product is stopselling update');
+                return redirect()->back();
+            }
+        
+       
     }
 }
