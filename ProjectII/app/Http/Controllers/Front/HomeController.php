@@ -21,13 +21,13 @@ class HomeController extends Controller
 
     public function index() {
 
-        $featureProducts = Product::where('featured',0)->take(8)->get();
+        $featureProducts = Product::where('featured',0)->where('status','=', 0)->take(8)->get();
 
-        $bestSellerProducts = Product::where('best_seller',0)->take(8)->get();
+        $bestSellerProducts = Product::where('best_seller',0)->where('status','=', 0)->take(8)->get();
 
-        $latestProducts = Product::where('latest',0)->get();
+        $latestProducts = Product::where('latest',0)->where('status','=', 0)->get();
         
-        $newProducts = Product::orderBy('id', 'desc')->with('productImages')->take(10)->get();
+        $newProducts = Product::where('status','=', 0)->orderBy('id', 'desc')->with('productImages')->take(10)->get();
 
 
         $newBlogs = Blog::orderBy('id', 'desc')->take(6)->get();
