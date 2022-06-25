@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Front;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Blog;
 use App\Http\Services\CartService;
 use Illuminate\Support\Facades\Session;
 
@@ -20,14 +21,21 @@ class HomeController extends Controller
 
     public function index() {
 
-        $featureProducts = Product::where('featured',0)->get();
+        $featureProducts = Product::where('featured',0)->take(8)->get();
 
-        $bestSellerProducts = Product::where('best_seller',0)->get();
+        $bestSellerProducts = Product::where('best_seller',0)->take(8)->get();
 
         $latestProducts = Product::where('latest',0)->get();
-        // dd($featureProducts);
+        
+        $newProducts = Product::orderBy('id', 'desc')->with('productImages')->take(10)->get();
 
-        return view('front.index', compact('featureProducts','bestSellerProducts','latestProducts'));
+
+        $newBlogs = Blog::orderBy('id', 'desc')->take(6)->get();
+
+        // $categories = ProductCategory::where('status','=', 0)->get();
+        
+
+        return view('front.index', compact('featureProducts','bestSellerProducts','latestProducts','newProducts','newBlogs'));
     }
 
     public function addCart($id)

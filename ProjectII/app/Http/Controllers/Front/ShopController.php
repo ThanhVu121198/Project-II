@@ -11,7 +11,6 @@ class ShopController extends Controller
 {
     public function show($id) {
         $product = Product::findOrFail($id);
-
         $avgRating = 0;
         $sumRating = array_sum(array_column($product->productComments->toArray(), 'rating'));
         $countRating = count($product->productComments);
@@ -31,31 +30,30 @@ class ShopController extends Controller
         return redirect()->back();
     }
 
-
     public function index(Request $request) {
 
-        $categories = ProductCategory::all();
+        $categories = ProductCategory::where('status','=', 0)->get();
 
         $perPage = $request->show ?? 3;
         $sortBy = $request->sort_by ?? '1';
         $search = $request->search ?? '';
 
-        $products = Product::where('name', 'like', '%' . $search . '%');
+        $products = Product::where('name', 'like', '%' . $search . '%')->where('status','=', 0);
 
         $products = $this->sortAndPagination($products,$sortBy,$perPage);
 
         return view('front.shop.index', compact('categories','products'));
     }
 
-    public function category($categoryName, Request $request) {
-        $categories = ProductCategory::all();
-
+    public function category($id, Request $request) {
+        $categories = ProductCategory::where('status','=', 0)->get();
         $perPage = $request->show ?? 3;
         $sortBy = $request->sort_by ?? '1';
 
-        $products = ProductCategory::where('name', $categoryName)->first()->products->toQuery();
+        $products = Product::where('product_category_id', $id)->where('status','=', 0);
 
         $products = $this->sortAndPagination($products,$sortBy,$perPage);
+            
         return view('front.shop.index', compact('categories','products'));
     }
 
@@ -82,7 +80,7 @@ class ShopController extends Controller
         }
 
         
-        $products = $products->paginate(12);
+        $products = $products->paginate(9);
 
         $products->appends(['sort_by' => $sortBy, 'show' => $perPage]);
         return $products;

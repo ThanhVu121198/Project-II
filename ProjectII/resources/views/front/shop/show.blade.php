@@ -33,25 +33,13 @@
                                         @foreach($product->productImages as $productImage)
                                         <div class="swiper-slide">
                                             <a href="front/images/product/large-size/1-1-570x633.jpg" class="single-img gallery-popup">
+                                                
                                                 <img class="img-full" src="front/images/product/{{$productImage->path}}" alt="Product Image">
+                                                
                                             </a>
                                         </div>
                                         @endforeach
-                                        {{-- <div class="swiper-slide">
-                                            <a href="front/images/product/large-size/1-2-570x633.jpg" class="single-img gallery-popup">
-                                                <img class="img-full" src="front/images/product/large-size/1-2-570x633.jpg" alt="Product Image">
-                                            </a>
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <a href="front/images/product/large-size/1-3-570x633.jpg" class="single-img gallery-popup">
-                                                <img class="img-full" src="front/images/product/large-size/1-3-570x633.jpg" alt="Product Image">
-                                            </a>
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <a href="front/images/product/large-size/1-4-570x633.jpg" class="single-img gallery-popup">
-                                                <img class="img-full" src="front/images/product/large-size/1-4-570x633.jpg" alt="Product Image">
-                                            </a>
-                                        </div> --}}
+            
                                     </div>
                                 </div>
                                 <div class="thumbs-arrow-holder">
@@ -61,8 +49,8 @@
                                             <a class="swiper-slide">
                                                 <img class="img-full" src="front/images/product/{{$productImage->path}}" alt="Product Thumnail">
                                             </a>
-                                            @endforeach
-                                        </div>
+                                            @endforeach 
+                                         </div>
                                         <!-- Add Arrows -->
                                         <div class=" thumbs-button-wrap d-none d-md-block">
                                             <div class="thumbs-button-prev">
@@ -318,9 +306,9 @@
                                                         <input type="text" name="email" placeholder="Your Email*" class="input-field">
                                                     </div>
                                                 </div>
-                                                <div class="form-field mt-30">
+                                                {{-- <div class="form-field mt-30">
                                                     <input type="text" name="subject" placeholder="Subject (Optinal)" class="input-field">
-                                                </div>
+                                                </div> --}}
                                                 <div class="form-field mt-30">
                                                     <textarea name="messages" placeholder="Message" class="textarea-field"></textarea>
                                                 </div>
@@ -371,12 +359,20 @@
                         <div class="col-lg-12">
                             <div class="swiper-container product-slider">
                                 <div class="swiper-wrapper">
-                                    @foreach($relatedProducts as $relatedProduct)
+                                    @foreach($relatedProducts as $i => $relatedProduct)
+                
                                     <div class="swiper-slide product-item">
                                         <div class="product-img">
-                                            <a href="shop/product/{{ $relatedProduct->id }}">
-                                                <img class="primary-img" src="front/images/product/{{ $relatedProduct->productImages[0]->path }}" alt="Product Images">
-                                                <img class="secondary-img" src="front/images/product/{{ $relatedProduct->productImages[1]->path }}" alt="Product Images">
+                                            <a href="shop/product/{{ $relatedProduct }}">
+                                                @if(isset($relatedProduct->productImages))
+                                                    @if(count($relatedProduct->productImages) == 1)
+                                                    <img class="primary-img" src="front/images/product/{{ $relatedProduct->productImages[0]->path }}" alt="Product Images">
+                                                    <img class="secondary-img" src="front/images/product/{{ $relatedProduct->productImages[0]->path }}" alt="Product Images">
+                                                    @elseif(count($relatedProduct->productImages) >= 2)
+                                                    <img class="primary-img" src="front/images/product/{{ $relatedProduct->productImages[0]->path }}" alt="Product Images">
+                                                    <img class="secondary-img" src="front/images/product/{{ $relatedProduct->productImages[1]->path }}" alt="Product Images">
+                                                   @endif
+                                                @endif
                                             </a>
                                             <div class="product-add-action">
                                                 <ul>
@@ -414,6 +410,7 @@
                                             </div>
                                         </div>
                                     </div>
+                            
                                     @endforeach
                                 </div>
                             </div>

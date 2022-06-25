@@ -20,14 +20,11 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Paginator::useBootstrap();
-        // $categoryProducts =  \DB::table('products_categories')->where('status', '=', 0)->get();
-    
-        view()->composer(
+        view()->composer (
             'front.layout.master',
             function ($view) {
                 $view->with('categoryProducts', \DB::table('products_categories')->where('status', '=', 0)->get());
             }
         );
-
     }
 }

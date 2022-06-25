@@ -335,10 +335,10 @@
                                         </a>
                                         <ul class="sub-menu">
                                             @foreach($categoryProducts as $categoryProduct)
-                                            <li>
-                                                <a href="shop.html">{{$categoryProduct->name}}</a>
-                                            </li>
-                                        @endforeach
+                                                <li>
+                                                    <a href="shop.html">{{$categoryProduct->name}}</a>
+                                                </li>
+                                            @endforeach
                                         </ul>
                                     </li>
                                     <li class="{{ (request()->segment(1) == 'blog') ? 'menu-item-has-children' : '' }}">

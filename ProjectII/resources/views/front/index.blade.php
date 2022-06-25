@@ -141,11 +141,11 @@
                                     Bestseller
                                 </a>
                             </li>
-                            <li class="nav-item" role="presentation">
+                            {{-- <li class="nav-item" role="presentation">
                                 <a id="latest-tab" data-bs-toggle="tab" href="#latest" role="tab" aria-controls="latest" aria-selected="false">
                                     Latest
                                 </a>
-                            </li>
+                            </li> --}}
                         </ul>
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade show active" id="featured" role="tabpanel" aria-labelledby="featured-tab">
@@ -211,7 +211,7 @@
                                     <div class="col-xl-3 col-md-4 col-sm-6">
                                         <div class="product-item">
                                             <div class="product-img">
-                                                <a href="shop.html">
+                                                <a href="shop/product/{{$bestSellerProduct->id }}">
                                                     <img class="primary-img" src="front/images/product/{{ $bestSellerProduct->productImages[0]->path }}" alt="Product Images">
                                                     <img class="secondary-img" src="front/images/product/{{ $bestSellerProduct->productImages[1]->path }}" alt="Product Images">
                                                 </a>
@@ -259,7 +259,7 @@
                                     @endforeach
                                 </div>
                             </div>
-                            <div class="tab-pane fade" id="latest" role="tabpanel" aria-labelledby="latest-tab">
+                            {{-- <div class="tab-pane fade" id="latest" role="tabpanel" aria-labelledby="latest-tab">
                                 <div class="product-item-wrap row">
                                     @foreach($latestProducts as $latestProduct)
                                     <div class="col-xl-3 col-md-4 col-sm-6">
@@ -312,7 +312,7 @@
                                     </div>
                                     @endforeach
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>
@@ -333,7 +333,7 @@
                                 <span class="collection">Collection Of Cactus</span>
                                 <h3 class="title">Pottery Pots & <br> Plant</h3>
                                 <div class="button-wrap">
-                                    <a class="btn btn-custom-size btn-pronia-primary" href="shop.html">Shop
+                                    <a class="btn btn-custom-size btn-pronia-primary" href="shop/1">Shop
                                         Now</a>
                                 </div>
                             </div>
@@ -348,7 +348,7 @@
                                 <span class="collection">New Collection</span>
                                 <h3 class="title">Plant Port</h3>
                                 <div class="button-wrap">
-                                    <a class="btn btn-custom-size lg-size btn-pronia-primary" href="shop.html">Shop
+                                    <a class="btn btn-custom-size lg-size btn-pronia-primary" href="shop/2">Shop
                                         Now</a>
                                 </div>
                             </div>
@@ -363,7 +363,7 @@
                                 <span class="collection">New Collection</span>
                                 <h3 class="title">Plant Port</h3>
                                 <div class="button-wrap">
-                                    <a class="btn btn-custom-size lg-size btn-pronia-primary" href="shop.html">Shop
+                                    <a class="btn btn-custom-size lg-size btn-pronia-primary" href="shop/3">Shop
                                         Now</a>
                                 </div>
                             </div>
@@ -378,7 +378,7 @@
                                 <span class="collection">Collection Of Cactus</span>
                                 <h3 class="title">Hanging Pots & <br> Plant</h3>
                                 <div class="button-wrap">
-                                    <a class="btn btn-custom-size lg-size btn-pronia-primary" href="shop.html">Shop
+                                    <a class="btn btn-custom-size lg-size btn-pronia-primary" href="shop/4">Shop
                                         Now</a>
                                 </div>
                             </div>
@@ -403,12 +403,17 @@
                         <div class="col-lg-12">
                             <div class="swiper-container product-slider">
                                 <div class="swiper-wrapper">
-                                    @foreach($featureProducts as $featureProduct)
+                                    @foreach($newProducts as $featureProduct)
                                     <div class="swiper-slide product-item">
                                         <div class="product-img">
                                             <a href="shop.html">
-                                                <img class="primary-img" src="front/images/product/{{ $featureProduct->productImages[0]->path }}" alt="Product Images">
-                                                        <img class="secondary-img" src="front/images/product/{{ $featureProduct->productImages[1]->path }}" alt="Product Images">
+                                                @if(count($featureProduct->productImages) == 1) 
+                                                    <img class="primary-img" src="front/images/product/{{ $featureProduct->productImages[0]->path }}" alt="Product Images">
+                                                    <img class="secondary-img" src="front/images/product/{{ $featureProduct->productImages[0]->path }}" alt="Product Images">
+                                                @elseif(count($featureProduct->productImages) >= 2)
+                                                    <img class="primary-img" src="front/images/product/{{ $featureProduct->productImages[0]->path }}" alt="Product Images">
+                                                    <img class="secondary-img" src="front/images/product/{{ $featureProduct->productImages[1]->path }}" alt="Product Images">
+                                                @endif
                                             </a>
                                             <div class="product-add-action">
                                                 <ul>
@@ -455,132 +460,6 @@
                                         </div>
                                     </div>
                                     @endforeach
-                                    {{-- <div class="swiper-slide product-item">
-                                        <div class="product-img">
-                                            <a href="shop.html">
-                                                <img class="primary-img" src="front/images/product/medium-size/1-10-270x300.jpg" alt="Product Images">
-                                                <img class="secondary-img" src="front/images/product/medium-size/1-11-270x300.jpg" alt="Product Images">
-                                            </a>
-                                            <div class="product-add-action">
-                                                <ul>
-                                                    <li>
-                                                        <a href="wishlist.html" data-tippy="Add to wishlist" data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder">
-                                                            <i class="pe-7s-like"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li class="quuickview-btn" data-bs-toggle="modal" data-bs-target="#quickModal">
-                                                        <a href="#" data-tippy="Quickview" data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder">
-                                                            <i class="pe-7s-look"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="cart.html" data-tippy="Add to cart" data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder">
-                                                            <i class="pe-7s-cart"></i>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="product-content">
-                                            <a class="product-name" href="shop.html">Black Eyed Susan</a>
-                                            <div class="price-box pb-1">
-                                                <span class="new-price">$25.45</span>
-                                            </div>
-                                            <div class="rating-box">
-                                                <ul>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="swiper-slide product-item">
-                                        <div class="product-img">
-                                            <a href="shop.html">
-                                                <img class="primary-img" src="front/images/product/medium-size/1-11-270x300.jpg" alt="Product Images">
-                                                <img class="secondary-img" src="front/images/product/medium-size/1-4-270x300.jpg" alt="Product Images">
-                                            </a>
-                                            <div class="product-add-action">
-                                                <ul>
-                                                    <li>
-                                                        <a href="wishlist.html" data-tippy="Add to wishlist" data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder">
-                                                            <i class="pe-7s-like"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li class="quuickview-btn" data-bs-toggle="modal" data-bs-target="#quickModal">
-                                                        <a href="#" data-tippy="Quickview" data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder">
-                                                            <i class="pe-7s-look"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="cart.html" data-tippy="Add to cart" data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder">
-                                                            <i class="pe-7s-cart"></i>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="product-content">
-                                            <a class="product-name" href="shop.html">Bleeding Heart</a>
-                                            <div class="price-box pb-1">
-                                                <span class="new-price">$30.45</span>
-                                            </div>
-                                            <div class="rating-box">
-                                                <ul>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="swiper-slide product-item">
-                                        <div class="product-img">
-                                            <a href="shop.html">
-                                                <img class="primary-img" src="front/images/product/medium-size/1-7-270x300.jpg" alt="Product Images">
-                                                <img class="secondary-img" src="front/images/product/medium-size/1-8-270x300.jpg" alt="Product Images">
-                                            </a>
-                                            <div class="product-add-action">
-                                                <ul>
-                                                    <li>
-                                                        <a href="wishlist.html" data-tippy="Add to wishlist" data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder">
-                                                            <i class="pe-7s-like"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li class="quuickview-btn" data-bs-toggle="modal" data-bs-target="#quickModal">
-                                                        <a href="#" data-tippy="Quickview" data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder">
-                                                            <i class="pe-7s-look"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="cart.html" data-tippy="Add to cart" data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder">
-                                                            <i class="pe-7s-cart"></i>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="product-content">
-                                            <a class="product-name" href="shop.html">Bloody Cranesbill</a>
-                                            <div class="price-box pb-1">
-                                                <span class="new-price">$45.00</span>
-                                            </div>
-                                            <div class="rating-box">
-                                                <ul>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div> --}}
                                 </div>
                             </div>
                         </div>
@@ -719,93 +598,33 @@
                     <div class="col-lg-12">
                         <div class="swiper-container blog-slider">
                             <div class="swiper-wrapper">
+                                @foreach($newBlogs as $newBlog)
                                 <div class="swiper-slide">
-                                    <div class="blog-item">
-                                        <div class="blog-content">
-                                            <div class="blog-meta">
-                                                <ul>
-                                                    <li class="author">
-                                                        <a href="#">By: Admin</a>
-                                                    </li>
-                                                    <li class="date">24 April 2021</li>
-                                                </ul>
+                    
+                                        <div class="blog-item">
+                                            <div class="blog-content">
+                                                <div class="blog-meta">
+                                                    <ul>
+                                                        <li class="author">
+                                                            <a href="#">By: Admin</a>
+                                                        </li>
+                                                        <li class="date">{{$newBlog->created_at}}</li>
+                                                    </ul>
+                                                </div>
+                                                <h2 class="title">
+                                                    <a href="/blog/{{$newBlog->id}}">{{$newBlog->title}}</a>
+                                                </h2>
+                                                {{-- <p class="short-desc mb-7">{{$newBlog->category}}</p> --}}
                                             </div>
-                                            <h2 class="title">
-                                                <a href="blog.html">There Many Variations</a>
-                                            </h2>
-                                            <p class="short-desc mb-7">Lorem ipsum dolor sit amet, consecteturl adipisl elit,
-                                                sed do eiusmod tempor incidio ut labore et dolore magna aliqua.</p>
-                                        </div>
-                                        <div class="blog-img img-hover-effect">
-                                            <a href="blog.html">
-                                                <img class="img-full" src="front/images/blog/medium-size/1-1-310x220.jpg" alt="Blog Image">
-                                            </a>
-                                            <div class="inner-btn-wrap">
-                                                <a class="inner-btn" href="blog.html">
-                                                    <i class="pe-7s-link"></i>
+                                            <div class="blog-img img-hover-effect">
+                                                <a href="/blog/{{$newBlog->id}}">
+                                                    <img class="img-full" src="front/images/blog/medium-size/{{$newBlog->image}}" alt="Blog Image">
                                                 </a>
                                             </div>
                                         </div>
-                                    </div>
+                                    
                                 </div>
-                                <div class="swiper-slide">
-                                    <div class="blog-item">
-                                        <div class="blog-content">
-                                            <div class="blog-meta">
-                                                <ul>
-                                                    <li class="author">
-                                                        <a href="#">By: Admin</a>
-                                                    </li>
-                                                    <li class="date">24 April 2021</li>
-                                                </ul>
-                                            </div>
-                                            <h2 class="title">
-                                                <a href="blog.html">Maecenas Laoreet Massa</a>
-                                            </h2>
-                                            <p class="short-desc mb-7">Lorem ipsum dolor sit amet, consecteturl adipisl elit,
-                                                sed do eiusmod tempor incidio ut labore et dolore magna aliqua.</p>
-                                        </div>
-                                        <div class="blog-img img-hover-effect">
-                                            <a href="blog.html">
-                                                <img class="img-full" src="front/images/blog/medium-size/1-2-310x220.jpg" alt="Blog Image">
-                                            </a>
-                                            <div class="inner-btn-wrap">
-                                                <a class="inner-btn" href="blog.html">
-                                                    <i class="pe-7s-link"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide">
-                                    <div class="blog-item">
-                                        <div class="blog-content">
-                                            <div class="blog-meta">
-                                                <ul>
-                                                    <li class="author">
-                                                        <a href="#">By: Admin</a>
-                                                    </li>
-                                                    <li class="date">24 April 2021</li>
-                                                </ul>
-                                            </div>
-                                            <h2 class="title">
-                                                <a href="blog.html">Aenean Vulputate Lorem</a>
-                                            </h2>
-                                            <p class="short-desc mb-7">Lorem ipsum dolor sit amet, consecteturl adipisl elit,
-                                                sed do eiusmod tempor incidio ut labore et dolore magna aliqua.</p>
-                                        </div>
-                                        <div class="blog-img img-hover-effect">
-                                            <a href="blog.html">
-                                                <img class="img-full" src="front/images/blog/medium-size/1-3-310x220.jpg" alt="Blog Image">
-                                            </a>
-                                            <div class="inner-btn-wrap">
-                                                <a class="inner-btn" href="blog.html">
-                                                    <i class="pe-7s-link"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                @endforeach
                             </div>
                             <!-- Add Arrows -->
                             <div class="swiper-button-next"></div>

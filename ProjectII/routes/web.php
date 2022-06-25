@@ -37,7 +37,7 @@ Route::prefix('shop')->group(function () {
 
     Route::post('/product/{id}', [Front\ShopController::class,'postComment']);
 
-    Route::get('/{categoryName}', [Front\ShopController::class, 'category']);
+    Route::get('/{id}', [Front\ShopController::class, 'category']);
 });
 
 // admin 
@@ -106,6 +106,8 @@ Route::middleware(['auth'])->group(function() {
 //end admin
 
 Route::get('/blog', [Front\BlogController::class, 'index']);
+
+Route::get('/blog/{id}', [Front\BlogController::class, 'show']);
 
 Route::get('/about', [Front\AboutController::class, 'index']);
 
