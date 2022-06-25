@@ -32,21 +32,19 @@
                        ?>
                        </td>
                    <td class="text-right">
-                    <a class="btn btn-sm btn-primary" 
-                 href="/admin/order/detail/{{$cs->id}}"> 
-                 <i class="fas fa-eye"></i>
-                    </a>
-
-                    <a href="/admin/order/delete/{{$cs->id}}" 
-                        class="btn btn-sm btn-danger" id="btndelete"
-                         onclick="return confirm('Do you want to delete this invoice and related information ?')" > 
-                         <i class="fas fa-trash"></i>
-                     </a>
-                     <a href="/admin/order/cs/{{$cs->id}}"
-                         class="btn btn-sm btn-danger" id="btndelete" 
-                         onclick="return confirm('Do you want to cancel this order ?')" > 
-                        <i class="fas fa-window-close"></i>
-                    </a>
+                        <a class="btn btn-sm btn-primary" 
+                            href="/admin/order/detail/{{$cs->id}}"> 
+                             <i class="fas fa-eye"></i>
+                        </a>
+                        <a href="/admin/order/delete/{{$cs->id}}" 
+                            class="btn btn-sm btn-danger" id="btndelete"
+                             onclick="return confirm('Do you want to delete this invoice and related information ?')" > 
+                             <i class="fas fa-trash"></i>
+                         </a>
+                         <a class="btn btn-sm btn-success" 
+                            href="/admin/order/uc/{{$cs->id}}"  onclick="return confirm('Do you want to undo your order cancellation?')" > 
+                            <i class="fas fa-undo"></i>
+                        </a>
                    </td>
                </tr>
            @endforeach

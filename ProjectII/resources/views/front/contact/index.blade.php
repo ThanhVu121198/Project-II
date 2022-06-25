@@ -3,6 +3,7 @@
 @section('title', 'Contact')
 
 @section('body')
+@include('front.alert')
         <!-- Main Header Area End Here -->
 
         <!-- Begin Main Content Area -->
@@ -49,29 +50,31 @@
                                         </li>
                                     </ul>
                                 </div>
-                                <form id="contact-form" class="contact-form" action="https://htmlmail.hasthemes.com/mamunur/pronia.php">
+
+                                <form action="/store" id="contact-formf" class="contact-form" method="POST">
+                                    @csrf
                                     <div class="group-input">
                                         <div class="form-field me-lg-30 mb-35 mb-lg-0">
-                                            <input type="text" name="con_firstName" id="con_firstName" placeholder="First Name*" class="input-field" autocomplete="off">
+                                            <input type="text" name="first_name" id="con_firstName" placeholder="First Name*" class="input-field" autocomplete="off" >
                                         </div>
                                         <div class="form-field mb-35">
-                                            <input type="text" name="con_lastName" id="con_lastName" placeholder="Last Name*" class="input-field" autocomplete="off">
+                                            <input type="text" name="last_name" id="con_lastName" placeholder="Last Name*" class="input-field" autocomplete="off" >
                                         </div>
                                     </div>
                                     <div class="group-input mb-35">
                                         <div class="form-field me-lg-30 mb-35 mb-lg-0">
-                                            <input type="text" name="con_phone" id="con_phone" placeholder="Phone*" class="input-field" autocomplete="off">
+                                            <input type="text" name="phone" id="con_phone" placeholder="Phone*" class="input-field" autocomplete="off" >
                                         </div>
                                         <div class="form-field">
-                                            <input type="text" name="con_email" id="con_email" placeholder="Email*" class="input-field" autocomplete="off">
+                                            <input type="text" name="email" id="con_email" placeholder="Email*" class="input-field" autocomplete="off" >
                                         </div>
                                     </div>
                                     <div class="form-field mb-5">
-                                        <textarea name="con_message" id="con_message" placeholder="Message" class="textarea-field"></textarea>
+                                        <textarea name="mess" id="con_message" placeholder="Message" class="textarea-field"></textarea>
                                     </div>
                                     <div class="contact-button-wrap">
                                         <button type="submit" value="submit" class="btn btn btn-custom-size xl-size btn-pronia-primary" name="submit">Post
-                                            Comment</button>
+                                            Message</button>
                                         <p class="form-messege mb-0"></p>
                                     </div>
                                 </form>
@@ -90,4 +93,4 @@
         <!-- Main Content Area End Here -->
 
         <!-- Begin Footer Area -->
-@endsection  
+@endsection

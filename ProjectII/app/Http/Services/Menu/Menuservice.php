@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Services\Menu;
 
+use App\Models\Product;
 use App\Models\ProductCategory;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Support\Facades\Session as FacadesSession;
@@ -29,13 +30,29 @@ class Menuservice{
     // }
     public function destroy($request) {
         $id = $request->input('id');
-        $category = ProductCategory::where('id', $id)->first();
+        $productcount=Product::where('product_category_id',$id)->count();
+        if($productcount==0){
+            $category = ProductCategory::where('id', $id)->first();
 
-        if ($category) {
-            return ProductCategory::where('id', $id)->delete();
+            if ($category) {
+                ProductCategory::where('id', $id)->delete();
+                return true;
+            }
+        }else{
+            $category = ProductCategory::where('id', $id)->first();
+
+            if ($category) {
+                $category->status=1;
+                $category->save();
+                redirect()->back();
+                return false;
+            }
+         
         }
 
-        return false;
+       
+
+       
     }
     public function update($request,$menu):bool{
         $menu->name=(String) $request->input('categories_name');

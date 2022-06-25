@@ -17,14 +17,14 @@
         @if ($customer->status==0)
             <p><span class="laber">status: </span>new order</p>
         @elseif($customer->status==1)
-            <p><span class="laber">status: </span>Processing</p>
+            <p><span class="laber">status: </span>processing</p>
         @elseif($customer->status==2)
                 <p><span class="laber">status: </span>complete</p>
         @elseif($customer->status==3)
-          < p><span class="laber">status: </span>cancel</>
-                 
+            <p><span class="laber">status: </span>cancel</p>
+            
         @endif
-
+      
             <p>
                 <span class="laber">created at: </span><?php
                     echo \Carbon\Carbon::createFromTimeStamp(strtotime($customer->created_at))->diffForHumans()
@@ -43,7 +43,7 @@
                     <th>image</th>
                 </tr>
             </thead>
-            <?php
+            <?php 
             $stt=1;
             $allprice=0;
             ?>
@@ -59,16 +59,19 @@
                     <td>{{$cart->product->name}}</td>
                     {{-- <td><img src="front\images\product\" alt=""> --}}
                        <td> <img style="width: 20vw;" src="/front/images/product/{{$cart->product->productImages[0]->path}}" alt=""></td>
-                </tr>
+                </tr>   
             @endforeach
         </tbody>
     </table>
     <h3>total money: {{number_format($allprice)}}<span>$</span></h3>
-
+          <hr>       
     </div>
 
-
-
-<hr>
-
-@endsection
+    <div class="row" style="margin:30px"> 
+        <a href="/admin/order/uc/{{$customer->id}}" class="btn btn-success btn-lg cm" id="confirn"><i class="fas fa-undo"></i> undo cancel</a>
+        {{-- <a href="/admin/order/cs/{{$customer->id}}"
+            class="btn btn-danger btn-lg" id="btndelete" style="margin-left: 20px;"
+            onclick="return confirm('Do you want to cancel this order ?')" > 
+           <i class="fas fa-window-close"></i> cancel order</a> 
+        </div> --}}
+@endsection 

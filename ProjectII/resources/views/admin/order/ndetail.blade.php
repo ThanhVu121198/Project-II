@@ -12,15 +12,18 @@
         <p><span class="laber">Company name: </span>{{$customer->company_name}}</p>
         <p><span class="laber">address: </span>{{$customer->address}}</p>
         <p><span class="laber">town: </span>{{$customer->town}}</p>
-        <p><span class="laber">customer note: </span>{{$customer->checkout_mess}} kg</p>
+        <p><span class="laber">customer note: </span>{{$customer->checkout_mess}}</p>
         </div>
         @if ($customer->status==0)
             <p><span class="laber">status: </span>new order</p>
         @elseif($customer->status==1)
             <p><span class="laber">status: </span>Processing</p>
-        @elseif($customer->status==2){
-                <p><span class="laber">status: </span>complete</p>
-            }
+        @elseif($customer->status==2)
+            <p><span class="laber">status: </span>complete</p>
+            
+        @elseif($customer->status==2)
+            <p><span class="laber">status: </span>cancel</p>
+            
         @endif
       
             <p>
@@ -37,8 +40,8 @@
                     <th>stt</th>
                     <th>quantity</th>
                     <th>buy_price</th>
-                    <th>buy_price</th>
-                    <th>buy_price</th>
+                    <th>product name</th>
+                    <th>image</th>
                 </tr>
             </thead>
             <?php 
@@ -61,14 +64,17 @@
             @endforeach
         </tbody>
     </table>
-    <h3>total money: {{number_format($allprice)}}<span>$</span></h3>
+    <hr>
+    <h3 style="padding: 30px">total money: {{number_format($allprice)}}<span>$</span></h3>
                  
     </div>
-
- 
-
-<hr>
-<div class="row"> 
-    <a href="/admin/order/cd/{{$customer->id}}" class="btn btn-primary btn-lg cm col-12" id="confirn">processing confirmation</a></div>
+<div class="row" style="padding:30px"> 
+    <hr>
+    <a href="/admin/order/cd/{{$customer->id}}" class="btn btn-primary btn-lg" id="confirn"><i class="fas fa-shipping-fast"></i> confirmation</a>
+    <a href="/admin/order/cs/{{$customer->id}}"
+        class="btn btn-danger btn-lg" id="btndelete" style="margin-left: 20px;"
+        onclick="return confirm('Do you want to cancel this order ?')" > 
+       <i class="fas fa-window-close"></i> cancel order</a>
+</div>
 
 @endsection 

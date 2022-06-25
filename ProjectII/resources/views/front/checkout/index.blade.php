@@ -3,6 +3,7 @@
 @section('title', 'CheckOut')
 
 @section('body')
+@include('front.alert')
         <!-- Main Header Area End Here -->
 
         <!-- Begin Main Content Area -->
@@ -26,7 +27,7 @@
                 </div>
             </div>
             <form action="/checkout2" method="post">
-            
+
             @csrf
                 <div class="checkout-area section-space-y-axis-100">
                     <div class="container">
@@ -92,25 +93,25 @@
                                             <div class="col-md-6">
                                                 <div class="checkout-form-list">
                                                     <label>First Name <span class="required">*</span></label>
-                                                    <input placeholder="" type="text" name="first_name" value="">
+                                                    <input placeholder="" type="text" name="first_name" value="" required>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="checkout-form-list">
                                                     <label>Last Name <span class="required">*</span></label>
-                                                    <input placeholder="" type="text" name="last_name">
+                                                    <input placeholder="" type="text" name="last_name" required>
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
                                                 <div class="checkout-form-list">
                                                     <label>Company Name</label>
-                                                    <input placeholder="" type="text" name="company_name">
+                                                    <input placeholder="" type="text" name="company_name" required>
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
                                                 <div class="checkout-form-list">
                                                     <label>Address <span class="required">*</span></label>
-                                                    <input placeholder="Street address" type="text" name="address" >
+                                                    <input placeholder="Street address" type="text" name="address" required>
                                                 </div>
                                             </div>
                                             <!-- <div class="col-md-12">
@@ -121,7 +122,7 @@
                                             <div class="col-md-12">
                                                 <div class="checkout-form-list">
                                                     <label>Town / City <span class="required">*</span></label>
-                                                    <input type="text" name="town" id="town">
+                                                    <input type="text" name="town" id="town" required>
                                                 </div>
                                             </div>
                                             <!-- <div class="col-md-6">
@@ -139,13 +140,13 @@
                                             <div class="col-md-6">
                                                 <div class="checkout-form-list">
                                                     <label>Email Address <span class="required">*</span></label>
-                                                    <input placeholder="" type="email" name="email" id="email">
+                                                    <input placeholder="" type="email" name="email" id="email" pattern=".+@gmail\.com" size="30" required>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="checkout-form-list">
                                                     <label>Phone <span class="required">*</span></label>
-                                                    <input type="text" name="phone" id="phone">
+                                                    <input type="text" name="phone" id="phone" pattern="[0-9]{1}[0-9]{9}" required>
                                                 </div>
                                             </div>
                                             <!-- <div class="col-md-12">

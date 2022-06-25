@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminContactController;
 use App\Http\Controllers\Admin\Blog\BlogAdmincontroller;
 use App\Http\Controllers\Admin\ImageController;
 use App\Http\Controllers\Admin\Maincontroller;
@@ -40,7 +41,7 @@ Route::prefix('shop')->group(function () {
     Route::get('/{id}', [Front\ShopController::class, 'category']);
 });
 
-// admin 
+// admin
 Route::get('admin/users/login',[\App\Http\Controllers\Admin\User\loginController::class,'index'])->name('login');
 route::post('admin/users/login/store',[loginController::class,'store']);
 // route::get('admin/main',[Maincontroller::class,'index'])->name('admin')->middleware('aut');
@@ -54,7 +55,7 @@ Route::middleware(['auth'])->group(function() {
             Route::get('add',[Menucontroller::class,'create']);
             Route::post('add',[Menucontroller::class,'store']);
             Route::get('list',[Menucontroller::class,'index']);
-            Route::DELETE('destroy',[Menucontroller::class,'destroy']);
+            Route::get('destroy/{id}',[Menucontroller::class,'destroy']);
             Route::get('edit/{menu}',[Menucontroller::class,'show']);
             Route::post('edit/{menu}',[Menucontroller::class,'update']);
         });
@@ -72,19 +73,20 @@ Route::middleware(['auth'])->group(function() {
             Route::post('addimg/{id}',[ImageController::class,'store']);
             Route::get('deleteimg/{id}',[ImageController::class,'destroy']);
             //detail
-            Route::post('adddetail/{id}',[DetailController::class,'store']);
-            Route::get('deletedetail/{id}',[DetailController::class,'destroy']);
         });
         route::prefix('order')->group(function(){
             route::get('new',[OrderController::class,'new']);
             route::get('handle',[OrderController::class,'handle']);
             route::get('complete',[OrderController::class,'complete']);
+            route::get('cancels',[OrderController::class,'cancels']);
             route::get('detail/{id}',[OrderController::class,'orderdetail']);
             route::get('delete/{id}',[OrderController::class,'destroy']);
             route::get('cd/{id}',[OrderController::class,'confirmhandle']);
             route::get('pc/{id}',[OrderController::class,'paymentconfirmation']);
+            route::get('cs/{id}',[OrderController::class,'cancel']);
+            route::get('uc/{id}',[OrderController::class,'undocansel']);
 
-          
+
         });
         // productget
         // blog
@@ -96,8 +98,13 @@ Route::middleware(['auth'])->group(function() {
             Route::get('edit/{blog}',[BlogAdmincontroller::class,'show']);
             Route::post('edit/{blog}',[BlogAdmincontroller::class,'update']);
         });
-        // 
+        //contact
+        Route::get('contact',[AdminContactController::class,'indexunread']);
+        Route::get('ctread',[AdminContactController::class,'indexread']);
+        Route::get('contactread/{id}',[AdminContactController::class,'get']);
+        Route::get('readctt/{id}',[AdminContactController::class,'read']);
 
+        //user
          Route::get('logout',[loginController::class,'logout']);
          Route::get('register',[loginController::class,'create']);
          Route::post('register',[loginController::class,'request']);
@@ -113,8 +120,11 @@ Route::get('/about', [Front\AboutController::class, 'index']);
 
 Route::get('/faq', [Front\FAQController::class, 'index']);
 
+// Contatct
 Route::get('/contact', [Front\ContactController::class, 'index']);
+Route::post('/store', [Front\ContactController::class, 'storeNew']);
 
+//
 Route::get('/account', [Front\MyAccountController::class, 'index']);
 
 Route::get('/logout', [Front\LogoutController::class, 'index']);
@@ -130,5 +140,5 @@ Route::post('/update-cart', [Front\CartController::class, 'update']);
 Route::get('/cart/delete/{id}', [Front\CartController::class, 'remove']);
 Route::post('carts', [Front\CartController::class, 'addCart']);
 
-Route::get('/checkOut', [Front\CheckOutController::class, 'index']);
+Route::get('/checkOut', [Front\CheckOutController::class, 'index'])->name('checkout');
 Route::post('/checkout2', [Front\CheckOutController::class, 'addCart']);

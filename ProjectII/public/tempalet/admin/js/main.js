@@ -15,7 +15,7 @@ function removeRow(id, url) {
                     alert(result.message);
                     location.reload();
                 } else {
-                    alert('cant delete this categories');
+                    alert('you cannot delete this category because it still has products. the status of categories has changed to stop selling');
                 }
             }
         })

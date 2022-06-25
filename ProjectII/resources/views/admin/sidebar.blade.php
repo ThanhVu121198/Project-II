@@ -118,13 +118,13 @@
               <li class="nav-item">
                 <a href="/admin/order/new" class="nav-link">
                   <i class="fas fa-calendar-plus"></i>
-                  <p>New Order</p>
+                  <p>New order</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="/admin/order/handle" class="nav-link">
                   <i class="fas fa-shipping-fast"></i>
-                  <p>Order being processed</p>
+                  <p>Order Being pocessed</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -133,7 +133,39 @@
                   <p>Completed Order</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="/admin/order/cancels" class="nav-link">
+                  <i class="fas fa-window-close"></i>
+                  <p>Cancel Order</p>
+                </a>
+              </li>
             </ul>
+          </li>
+          <li class="nav-item menu">
+            <a href="#" class="nav-link">
+              <i class="fas fa-paper-plane"></i>
+              <p>
+                Suggestion Controll
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/admin/contact" class="nav-link">
+                  <i class="fas fa-comment-medical"></i>
+                  <p>
+                    Suggestion Box new
+                  </p>
+                </a>
+              <li class="nav-item">
+                <a href="/admin/ctread" class="nav-link">
+                  <i class="fas fa-comments"></i>
+                  <p>Suggestion Box Old</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          
           </li>
           <li class="nav-item">
             <a href="/admin/register" class="nav-link">

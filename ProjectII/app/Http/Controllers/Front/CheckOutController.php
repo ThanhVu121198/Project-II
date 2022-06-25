@@ -25,6 +25,6 @@ class CheckOutController extends Controller
     {
         // dd($request->all());
         $this->cartService->addCart($request);
-        return redirect()->route('home');
+        return redirect()->route('checkout');
     }
 }

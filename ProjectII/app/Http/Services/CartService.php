@@ -23,7 +23,7 @@ class CartService
         $product_id = (int)$request->input('product_id');
 
         if ($qty <= 0 || $product_id <= 0) {
-            Session::flash('error', 'Số lượng hoặc Sản phẩm không chính xác');
+            Session::flash('error', 'Incorrect Quantity or Product');
             return false;
         }
 
@@ -71,7 +71,7 @@ class CartService
         $product_id = (int)$data[0];
 
         if ($qty <= 0 || $product_id <= 0) {
-            Session::flash('error', 'Số lượng hoặc Sản phẩm không chính xác');
+            Session::flash('error', 'Incorrect Quantity or Product');
             return false;
         }
 
@@ -171,7 +171,7 @@ class CartService
             $this->infoProductCart($carts, $customer->id);
 
             DB::commit();
-            Session::flash('success', 'Đặt Hàng Thành Công');
+            Session::flash('success', 'Order Success');
 
             #Queue
             // SendMail::dispatch($request->input('email'))->delay(now()->addSeconds(2));
@@ -181,7 +181,7 @@ class CartService
 
         } catch (\Exception $err) {
             DB::rollBack();
-            Session::flash('error', 'Đặt Hàng Lỗi, Vui lòng thử lại sau');
+            Session::flash('error', 'Order Error, Please try again later');
             return false;
         }
 
